@@ -1,0 +1,35 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "greeting": "Hi, I'm",
+      "name": "Alex Bao",
+      "role": "AI & Full-Stack Developer",
+      "tagline": "I build systems that learn, warehouses that think, and ideas that scale.",
+      "cta": "View My Work",
+      "secondaryCta": "Download CV"
+    }
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "Student · Builder · Problem Solver"
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Real work, real impact"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Thoughts on AI, learning, and growth"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Open to opportunities, collaborations, and conversations"
+  }
+}

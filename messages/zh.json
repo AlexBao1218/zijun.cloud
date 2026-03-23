@@ -1,0 +1,47 @@
+{
+  "nav": {
+    "home": "首页",
+    "about": "关于",
+    "projects": "项目",
+    "blog": "博客",
+    "contact": "联系"
+  },
+  "home": {
+    "hero": {
+      "greeting": "你好，我是",
+      "name": "Alex Bao",
+      "role": "AI 与全栈开发者",
+      "tagline": "构建能学习的系统、能思考的仓库，以及能规模化落地的想法",
+      "cta": "查看我的作品",
+      "secondaryCta": "下载简历"
+    }
+  },
+  "about": {
+    "title": "关于我",
+    "subtitle": "学生 · 创造者 · 问题解决者"
+  },
+  "projects": {
+    "title": "项目作品",
+    "subtitle": "真实的项目，真正的价值",
+    "neochain": {
+      "title": "NeoChain WMS",
+      "tagline": "AI 驱动的仓储管理系统"
+    },
+    "cathay": {
+      "title": "国泰货运 ULD 配载优化",
+      "tagline": "2D ULD 智能配载平台"
+    },
+    "igc": {
+      "title": "IGC — 数字孪生与 AI 集成",
+      "tagline": "Building OS、RAG 知识库与 ESG 分析"
+    }
+  },
+  "blog": {
+    "title": "博客",
+    "subtitle": "关于 AI、学习与成长的思考"
+  },
+  "contact": {
+    "title": "联系我",
+    "subtitle": "欢迎机会、合作与交流"
+  }
+}
