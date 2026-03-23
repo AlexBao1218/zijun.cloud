@@ -11,11 +11,11 @@ export default async function CathayHackathonPage({ params }: Props) {
   const isEN = locale === "en";
 
   return (
-    <main className="pt-32 px-8 md:px-20 pb-24">
+    <main className="pt-24 md:pt-32 px-6 md:px-20 pb-16 md:pb-24">
       <div className="max-w-2xl mx-auto">
         <Link
           href="/projects"
-          className="inline-flex items-center gap-2 text-sm text-[#3d2b1f]/30 hover:text-[#3d2b1f]/55 transition-colors mb-12"
+          className="inline-flex items-center gap-2 text-sm text-[#3d2b1f]/30 hover:text-[#3d2b1f]/55 transition-colors mb-8 md:mb-12"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="m15 18-6-6 6-6"/>
@@ -29,7 +29,7 @@ export default async function CathayHackathonPage({ params }: Props) {
             <span className="text-[#3d2b1f]/15">·</span>
             <span className="text-[#b85c38]/50">Hackathon · Finalist</span>
           </div>
-          <h1 className="font-serif text-4xl md:text-5xl font-medium text-[#3d2b1f] mb-4">Cathay Cargo ULD Optimizer</h1>
+          <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium text-[#3d2b1f] mb-4">Cathay Cargo ULD Optimizer</h1>
           <p className="text-lg text-[#3d2b1f]/45 leading-relaxed max-w-lg">
             {isEN
               ? "A 2D drag-and-drop ULD load planning platform for air cargo. Built in 24 hours during the Cathay Cargo Hackathon final at Cathay City."
@@ -48,7 +48,7 @@ export default async function CathayHackathonPage({ params }: Props) {
             <p>
               {isEN
                 ? "Our team of HKU Industrial Engineering students pitched an idea we knew well from the IGC internship: the predictive maintenance model applied to cargo logistics. We extended this with IoT sensors on high-value cargo (pharmaceuticals, special declarations) to detect anomalies in real-time and trigger early warnings."
-                : "我们团队由港大工业工程学生组成，在 IGC 实习中接触过预测性维护模型，我们把这个思路延伸到货运物流：对高价值货物（医药、特殊报备货物）加装 IoT 传感器，实时检测��常并提前预警。"}
+                : "我们团队由港大工业工程学生组成，在 IGC 实习中接触过预测性维护模型，我们把这个思路延伸到货运物流：对高价值货物（医药、特殊报备货物）加装 IoT 传感器，实时检测异常并提前预警。"}
             </p>
           </div>
         </section>
