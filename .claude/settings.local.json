@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(gh repo:*)",
+      "Bash(gh api:*)",
+      "Bash(gh search:*)",
+      "Bash(for repo:*)",
+      "Bash(do echo:*)",
+      "Bash(done)",
+      "Bash(while read:*)",
+      "Bash(do gh:*)",
+      "Bash('$\\(basename $url\\)')",
+      "Bash(mv *.md *.txt ~/Desktop/zijun.cloud/skills/frontend-design/)",
+      "Bash(curl -sL \"https://raw.githubusercontent.com/OthmanAdi/planning-with-files/master/skills/planning-with-files/SKILL.md\" -o planning-with-files/SKILL.md)",
+      "Bash(curl -sL \"https://raw.githubusercontent.com/OthmanAdi/planning-with-files/master/skills/planning-with-files/examples.md\" -o planning-with-files/examples.md)",
+      "Bash(curl -sL \"https://raw.githubusercontent.com/OthmanAdi/planning-with-files/master/skills/planning-with-files/reference.md\" -o planning-with-files/reference.md)",
+      "Bash(npm install:*)",
+      "Bash(npx --yes vercel --version)",
+      "Bash(npx:*)",
+      "Bash(mkdir -p ../zijun.skills)",
+      "Bash(mv skills:*)"
+    ]
+  }
+}
