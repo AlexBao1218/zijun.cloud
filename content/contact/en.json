@@ -1,0 +1,23 @@
+{
+  "eyebrow": "Contact",
+  "links": [
+    {
+      "type": "email",
+      "label": "Email",
+      "value": "zijun.bao@outlook.com"
+    },
+    {
+      "type": "external",
+      "label": "GitHub",
+      "value": "@AlexBao1218",
+      "url": "https://github.com/AlexBao1218"
+    },
+    {
+      "type": "download",
+      "label": "Resume / CV",
+      "value": "PDF · Bao Zijun · HKU",
+      "url": "/cv.pdf"
+    }
+  ],
+  "tagline": "Let's build something together"
+}

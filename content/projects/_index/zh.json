@@ -1,0 +1,29 @@
+{
+  "eyebrow": "项目",
+  "projects": [
+    {
+      "slug": "neochain",
+      "title": "NeoChain WMS",
+      "tagline": "AI 驱动的仓储管理系统",
+      "tags": ["Next.js", "TypeScript", "AI", "PDA", "Python"],
+      "year": "2025—Present",
+      "type": "Co-founder"
+    },
+    {
+      "slug": "igc",
+      "title": "IGC — 数字孪生与 AI 集成",
+      "tagline": "Building OS、RAG 知识库与 ESG 分析",
+      "tags": ["RAG", "API Design", "Digital Twin", "ESG"],
+      "year": "2025",
+      "type": "Intern"
+    },
+    {
+      "slug": "cathay-hackathon",
+      "title": "国泰货运 ULD 配载优化",
+      "tagline": "2D ULD 智能配载平台 · 决赛选手",
+      "tags": ["AI", "MILP", "Operations Research", "Vibe Coding"],
+      "year": "2025",
+      "type": "Hackathon"
+    }
+  ]
+}

@@ -1,5 +1,11 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { loadContent } from "@/lib/content";
 import { Link } from "@/i18n/routing";
+
+type HomeContent = {
+  eyebrow: string;
+  tagline: string;
+};
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -9,6 +15,7 @@ export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("home.hero");
+  const content = await loadContent<HomeContent>("home", locale);
 
   return (
     <main className="min-h-screen flex flex-col">
@@ -17,7 +24,7 @@ export default async function HomePage({ params }: Props) {
         <div className="w-full max-w-3xl mx-auto text-center px-8">
           {/* Label */}
           <p className="text-[13px] tracking-[0.3em] uppercase text-[#b85c38]/60 mb-10 animate-fade-in">
-            {locale === "en" ? "Currently Open to Opportunities" : "目前接受机会中"}
+            {content.eyebrow}
           </p>
 
           {/* Name */}
@@ -32,9 +39,7 @@ export default async function HomePage({ params }: Props) {
 
           {/* Tagline */}
           <p className="text-base md:text-xl text-[#3d2b1f]/50 leading-relaxed max-w-4xl mx-auto mb-10 md:mb-14 animate-fade-in-delay-3">
-            {locale === "en"
-              ? "Building systems that learn, warehouses that think, ideas that scale"
-              : "构建能学习的系统、能思考的仓库，能规模化落地的想法"}
+            {content.tagline}
           </p>
 
           {/* CTAs */}

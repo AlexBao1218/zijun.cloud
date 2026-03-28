@@ -1,0 +1,25 @@
+{
+  "eyebrow": "我",
+  "paragraphs": [
+    "我是香港大学工业工程与物流管理专业的学生。我热爱 AI 与现实运营的交汇处——构建不仅在演示中令人印象深刻，而且能在实际生产环境中运行的系统。",
+    "我做过 AI Agent 的 RAG 知识库，也做过在真实工厂运行的仓储管理系统。我经历了完整的弧线：从创业路演到工厂实地考察，从黑客松决赛到企业级 API 集成。",
+    "目前我正在构建 NeoChain —— 一个为华南中小型工厂带来智能运营的 WMS 系统。从通用 ERP 的失败教训，到专注于人机协作的仓储系统，这个过程让我受益匪浅。",
+    "我对 AI 辅助开发工作流、生产系统的 Prompt 工程，以及在资源受限环境中部署 ML 的实际挑战特别感兴趣。"
+  ],
+  "skillsLabel": "技能",
+  "skills": [
+    "Next.js",
+    "TypeScript",
+    "Python",
+    "AI / LLM",
+    "Prompt Engineering",
+    "Cursor / Claude",
+    "Vercel",
+    "React",
+    "Node.js",
+    "Digital Twin",
+    "WMS",
+    "RAG",
+    "Git"
+  ]
+}

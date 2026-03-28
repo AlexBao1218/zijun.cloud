@@ -1,0 +1,29 @@
+{
+  "eyebrow": "Work",
+  "projects": [
+    {
+      "slug": "neochain",
+      "title": "NeoChain WMS",
+      "tagline": "AI-Powered Warehouse Management System",
+      "tags": ["Next.js", "TypeScript", "AI", "PDA", "Python"],
+      "year": "2025—Present",
+      "type": "Co-founder"
+    },
+    {
+      "slug": "igc",
+      "title": "IGC — Digital Twin & AI Integration",
+      "tagline": "Building OS, RAG Knowledge Bases & ESG Analytics",
+      "tags": ["RAG", "API Design", "Digital Twin", "ESG"],
+      "year": "2025",
+      "type": "Intern"
+    },
+    {
+      "slug": "cathay-hackathon",
+      "title": "Cathay Cargo ULD Optimizer",
+      "tagline": "2D ULD Load Planning Platform · Finalist",
+      "tags": ["AI", "MILP", "Operations Research", "Vibe Coding"],
+      "year": "2025",
+      "type": "Hackathon"
+    }
+  ]
+}

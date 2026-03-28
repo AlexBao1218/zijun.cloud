@@ -1,0 +1,33 @@
+{
+  "title": "Cathay Cargo ULD Optimizer",
+  "meta": {
+    "year": "2025",
+    "role": "Hackathon · Finalist"
+  },
+  "description": "A 2D drag-and-drop ULD load planning platform for air cargo. Built in 24 hours during the Cathay Cargo Hackathon final at Cathay City.",
+  "sections": [
+    {
+      "heading": "The Challenge",
+      "paragraphs": [
+        "Cathay Cargo Terminal aspires to set the global benchmark for air cargo excellence through cutting-edge technology. The challenge: how might we harness AI, computer vision, and emerging technologies to enhance cargo handling with efficiency and sustainability?",
+        "Our team of HKU Industrial Engineering students pitched an idea we knew well from the IGC internship: the predictive maintenance model applied to cargo logistics. We extended this with IoT sensors on high-value cargo (pharmaceuticals, special declarations) to detect anomalies in real-time and trigger early warnings."
+      ]
+    },
+    {
+      "heading": "The Product",
+      "paragraphs": [
+        "A 2D ULD (Unit Load Device) intelligent load planning platform. The UI mimics a Tetris-like packing game: the left panel shows a top-down view of an empty cargo plane with ULD positions marked; the right panel shows weighed and packed cargo. Users drag items from right to left, and a data bar at the top displays the real-time Center of Gravity (CG) position.",
+        "The backend runs a MILP (Mixed Integer Linear Programming) algorithm based on academic research — the system calculates the optimal arrangement that keeps the aircraft's CG in the ideal range. CG has a massive impact on fuel consumption, and Cathay's current load planning is surprisingly informal — a genuine pain point with real business value.",
+        "The platform is human-in-the-loop: unexpected events and multi-leg journeys require human judgment. This is the key area for future optimization."
+      ]
+    },
+    {
+      "heading": "What We Learned",
+      "paragraphs": [
+        "Going off-prompt on the final day was a risky decision driven by our confidence in our preliminary round work. It consumed hours of discussion time and left us without a dedicated cargo judge for feedback. Next time: time-box decisions and prepare parallel pitch decks.",
+        "In a 24-hour hackathon, presentation prep should happen during the build phase — not after. We ran vibe coding right up to the wire, leaving too little time to polish our pitch. Even great work needs a great story."
+      ]
+    }
+  ],
+  "tags": ["Vibe Coding", "MILP", "Operations Research", "2D Visualization", "Python", "AI", "Computer Vision"]
+}

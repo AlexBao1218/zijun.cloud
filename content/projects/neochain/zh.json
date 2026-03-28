@@ -1,0 +1,40 @@
+{
+  "title": "NeoChain WMS",
+  "meta": {
+    "year": "2025—Present",
+    "role": "Co-founder",
+    "url": "https://neochainhk.com",
+    "urlLabel": "neochainhk.com"
+  },
+  "description": "为华南中小型工厂打造的 AI 驱动仓储管理系统。基于 PDA 设备的人机协作、防错机制 UI。",
+  "sections": [
+    {
+      "heading": "痛点",
+      "paragraphs": [
+        "我们团队实地走访了温州的工厂，发现了一个残酷的现实：仓库还在用纸质清单。国产大品牌的通用化 ERP 系统（用友、金蝶）并不能适配这些工厂的实际工作流程。纸质表单导致数据缺失和运营盲区——没有数据就无法预测，无法优化订货。"
+      ]
+    },
+    {
+      "heading": "解决方案",
+      "paragraphs": [
+        "基于 PDA 的 WMS 系统，包含七个核心模块：收货、上架、拣货、产线入库、生产结案、产线包装、销售出库。每个流程都采用状态机逻辑（X 状态），确保每一步都被确认后才能进入下一流程——形成完整的操作追溯链。",
+        "系统为真实场景而设计：工人在嘈杂的工厂车间里用 PDA 操作，光线差、交接急促。UI 采用防错设计——不能跳过步骤，不能错误确认。积累的数据为后续的库存优化和智能补货算法奠定基础。"
+      ]
+    },
+    {
+      "heading": "技术栈与 AI 工作流",
+      "paragraphs": [
+        "前端使用 Next.js + TypeScript，后端使用 Python 优化算法。AI 在开发流程本身就扮演核心角色：",
+        "最宝贵的教训：最初按前端/后端分工后发现，大家对彼此的部分都缺乏深入理解。现在每个人负责一个完整模块。这大幅提升了代码一致性，减少了集成摩擦。"
+      ],
+      "bullets": [
+        "Gemini 作为技术决策的编程顾问",
+        "Cursor + Plan 模式进行任务分解",
+        "自定义 Skills/SOP 加速模块开发",
+        "AI 记忆系统追踪 bug 修复和设计决策",
+        "苏格拉底式提问优化主提示词"
+      ]
+    }
+  ],
+  "tags": ["Next.js", "TypeScript", "Python", "AI-Assisted Dev", "WMS", "PDA", "State Machine", "Vercel"]
+}

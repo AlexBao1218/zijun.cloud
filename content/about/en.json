@@ -1,0 +1,25 @@
+{
+  "eyebrow": "Me",
+  "paragraphs": [
+    "I'm a student at the University of Hong Kong studying Industrial Engineering and Logistics Management. My passion lies at the intersection of AI and real-world operations — building systems that don't just look impressive in demos, but actually work in production environments.",
+    "I've worked on everything from AI agents with RAG knowledge bases to warehouse management systems running in real factories. I've experienced the full arc: from startup pitches to factory floor research, from hackathon finals to enterprise API integrations.",
+    "Currently, I'm building NeoChain — a WMS system that brings intelligent operations to small and medium factories across China. The journey from generic ERP failures to focused, human-in-the-loop warehouse systems has been incredibly instructive.",
+    "I'm particularly interested in AI-assisted development workflows, prompt engineering for production systems, and the practical challenges of deploying ML in resource-constrained environments."
+  ],
+  "skillsLabel": "Skills",
+  "skills": [
+    "Next.js",
+    "TypeScript",
+    "Python",
+    "AI / LLM",
+    "Prompt Engineering",
+    "Cursor / Claude",
+    "Vercel",
+    "React",
+    "Node.js",
+    "Digital Twin",
+    "WMS",
+    "RAG",
+    "Git"
+  ]
+}

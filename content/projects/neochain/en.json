@@ -1,0 +1,40 @@
+{
+  "title": "NeoChain WMS",
+  "meta": {
+    "year": "2025—Present",
+    "role": "Co-founder",
+    "url": "https://neochainhk.com",
+    "urlLabel": "neochainhk.com"
+  },
+  "description": "An AI-powered Warehouse Management System designed for small and medium factories across China. Human-in-the-loop, error-proof UI running on PDA devices.",
+  "sections": [
+    {
+      "heading": "The Problem",
+      "paragraphs": [
+        "Our team visited factories in Wenzhou and discovered a painful reality: warehouses were still running on paper checklists. Generic ERP systems from major Chinese brands (Yonyou, Kingdee) don't fit the actual workflows of these businesses. Paper forms lead to data gaps and operational blind spots — no data means no forecasting, no reorder optimization."
+      ]
+    },
+    {
+      "heading": "The Solution",
+      "paragraphs": [
+        "A PDA-based WMS with seven core modules: Receiving, Put-away, Pick-up, Line Inbound, Production Closing, Line Packaging, and Sales Outbound. Each workflow uses state machine logic (X-state) to ensure every step is confirmed before proceeding — creating a complete audit trail.",
+        "The system is built for the real world: workers using PDAs in noisy factory floors, with poor lighting and rushed handoffs. The UI is designed to be error-proof — you can't skip a step, you can't misconfirm a package. The data accumulated over time enables inventory optimization and predictive reorder algorithms."
+      ]
+    },
+    {
+      "heading": "Tech Stack & AI Workflow",
+      "paragraphs": [
+        "Built with Next.js + TypeScript on the frontend, Python backend for optimization algorithms. AI plays a central role in our development process itself:",
+        "The most valuable lesson: after initially splitting work by UI/backend, we realized everyone needed end-to-end understanding. Now each person owns a complete module. This dramatically improved code consistency and reduced integration friction."
+      ],
+      "bullets": [
+        "Gemini as coding advisor for tech decisions",
+        "Cursor + Plan mode for task decomposition",
+        "Custom skills/SOPs for rapid module development",
+        "AI memory system for tracking bug fixes and design decisions",
+        "Socratic prompting for master prompt refinement"
+      ]
+    }
+  ],
+  "tags": ["Next.js", "TypeScript", "Python", "AI-Assisted Dev", "WMS", "PDA", "State Machine", "Vercel"]
+}

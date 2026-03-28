@@ -1,0 +1,36 @@
+{
+  "title": "IGC — Digital Twin & AI Integration",
+  "meta": {
+    "year": "2025",
+    "role": "Intern"
+  },
+  "description": "Summer internship at a prop-tech company building digital twin systems for buildings. Worked on AI knowledge bases, API design, ESG reporting, and user documentation.",
+  "sections": [
+    {
+      "heading": "RAG Knowledge Bases",
+      "paragraphs": [
+        "Built 6 RAG (Retrieval-Augmented Generation) knowledge bases from 1,000+ building documents covering MVAC, Electrical, Plumbing, Fire Services, Lift systems, and more. The pain point: building maintenance requires specialized engineers for even minor issues, creating slow response times. The solution: an AI Agent that can answer questions by referencing the actual documentation.",
+        "My role was to organize and upload these documents into the AI system. I wrote Python scripts to scan the 1,000+ files, identify their category by filename, organize them into the correct folders, then batch-upload them to the agent. I tested the agent by crafting domain-specific questions to verify it could accurately locate the right documents and cite them correctly."
+      ]
+    },
+    {
+      "heading": "API Design & PRD Writing",
+      "paragraphs": [
+        "Contributed to API design for the Henderson Digital Twin project. For each feature update, I needed to understand the purpose, identify which API endpoints to use, determine polling frequency, decide how many data points to display, and specify the UI placement — essentially acting as a product manager."
+      ]
+    },
+    {
+      "heading": "Building OS & Smart Housing",
+      "paragraphs": [
+        "Contributed to a smart transformation proposal for HK Housing Authority, researching technologies like NFC access control, fall detection sensors, overhead object detection, and parking space monitoring. The proposal centered on Building OS — a unified interface integrating all building management data, resident management, predictive maintenance, and energy optimization."
+      ]
+    },
+    {
+      "heading": "ESG Energy-Saving Model",
+      "paragraphs": [
+        "When IGC needed compelling ESG data for an ICT Awards application but had no historical baseline (the system was just launched), I designed a 'horizontal benchmarking' approach: comparing theoretical energy consumption from EMSD benchmarks against actual electricity bills, adjusted for real occupancy rates (73%). This model was iteratively refined through consultation with senior PMs and successfully defended to both internal teams and clients."
+      ]
+    }
+  ],
+  "tags": ["RAG", "AI Agent", "Python", "API Design", "Digital Twin", "ESG", "PRD Writing", "User Documentation"]
+}
