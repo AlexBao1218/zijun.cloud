@@ -12,12 +12,14 @@ export default async function HomePage({ params }: Props) {
   setRequestLocale(locale);
 
   return (
-    <main>
-      <Hero locale={locale} />
-      <WorkGrid locale={locale} />
-      <SkillsSection locale={locale} />
-      <AboutSection locale={locale} />
+    <>
+      <main>
+        <Hero locale={locale} />
+        <WorkGrid locale={locale} />
+        <SkillsSection locale={locale} />
+        <AboutSection locale={locale} />
+      </main>
       <ContactSection locale={locale} />
-    </main>
+    </>
   );
 }

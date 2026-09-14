@@ -6,7 +6,7 @@ import { BG_CLASS, type WorkCardData } from "@/lib/projects";
 export default function WorkCard({ card }: { card: WorkCardData }) {
   return (
     <OffsetBox blockClass={BG_CLASS[card.colour]}>
-      <Link href={`/projects/${card.slug}`} className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-ink">
+      <Link href={`/projects/${card.slug}`} className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
         <div className="px-3 py-2.5 border-b border-ink text-[12px]">{card.duration}</div>
         <div className="relative aspect-[16/10] border-b border-ink overflow-hidden">
           {card.cover ? (
