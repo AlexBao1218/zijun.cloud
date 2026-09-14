@@ -15,7 +15,7 @@ export default function DemoRecording({ video, poster, url, note, openLabel }: P
   return (
     <div className="border border-ink">
       <div className="relative aspect-[16/10] border-b border-ink overflow-hidden">
-        {poster ? <Image src={poster} alt="" fill sizes="100vw" className="object-cover object-top" /> : <div className="hatch absolute inset-0" />}
+        {poster ? <Image src={poster} alt="" fill sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover object-top" /> : <div className="hatch absolute inset-0" />}
       </div>
       <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 text-[12px]">
         <span className="text-ink/70">{note}</span>

@@ -3,7 +3,7 @@ import path from "path";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { loadContent } from "@/lib/content";
-import { Link } from "@/i18n/routing";
+import { Link, routing } from "@/i18n/routing";
 import OffsetBox from "@/app/components/OffsetBox";
 import DemoFrame from "@/app/components/project/DemoFrame";
 import DemoRecording from "@/app/components/project/DemoRecording";
@@ -17,14 +17,15 @@ export async function generateStaticParams() {
   const dir = path.join(process.cwd(), "content", "projects");
   const entries = await fs.readdir(dir, { withFileTypes: true });
   const slugs = entries.filter((e) => e.isDirectory() && !e.name.startsWith("_")).map((e) => e.name);
-  return ["en", "zh"].flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
+  return routing.locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
 }
 
 async function loadProject(slug: string, locale: string): Promise<ProjectContent> {
   try {
     return await loadContent<ProjectContent>(`projects/${slug}`, locale);
-  } catch {
-    notFound();
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code === "ENOENT") notFound();
+    throw e;
   }
 }
 
@@ -39,7 +40,8 @@ export default async function ProjectPage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("project");
   const p = await loadProject(slug, locale);
-  const demoLink = p.links[0];
+  const demoHref = p.demo.mode !== "static" ? p.demo.url ?? p.links[0]?.url : undefined;
+  const otherLinks = p.links.filter((l) => l.url !== demoHref);
 
   return (
     <main className="pt-14 md:pt-16">
@@ -73,16 +75,16 @@ export default async function ProjectPage({ params }: Props) {
         <p className="max-w-[68ch] text-[15px] md:text-[16px] leading-relaxed">{p.summary}</p>
 
         {/* Links row */}
-        {p.links.length > 0 && (
+        {(demoHref || otherLinks.length > 0) && (
           <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-            {demoLink && p.demo.mode !== "static" && (
+            {demoHref && (
               <OffsetBox blockClass="bg-ink" offset={8} className="inline-block">
-                <a href={demoLink.url} target="_blank" rel="noopener noreferrer" className="block bg-fill px-4 py-2.5 text-[13px] font-medium">
+                <a href={demoHref} target="_blank" rel="noopener noreferrer" className="block bg-fill px-4 py-2.5 text-[13px] font-medium">
                   {t("openDemo")}
                 </a>
               </OffsetBox>
             )}
-            {p.links.slice(p.demo.mode !== "static" ? 1 : 0).map((l) => (
+            {otherLinks.map((l) => (
               <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="text-[13px] underline underline-offset-4 decoration-1 hover:decoration-2">
                 {l.label}
               </a>
@@ -111,8 +113,8 @@ export default async function ProjectPage({ params }: Props) {
 
         {/* Facts */}
         <dl className="grid sm:grid-cols-2 border border-ink">
-          {p.facts.map((f) => (
-            <div key={f.label} className="px-4 py-3 border-b border-ink last:border-b-0 sm:odd:border-r sm:[&:nth-last-child(-n+2)]:border-b-0">
+          {p.facts.map((f, i) => (
+            <div key={i} className="px-4 py-3 border-b border-ink last:border-b-0 sm:odd:border-r sm:[&:nth-last-child(-n+2)]:border-b-0">
               <dt className="text-[10px] uppercase tracking-[0.14em] text-ink/60">{f.label}</dt>
               <dd className="mt-1 text-[13px]">{f.value}</dd>
             </div>
@@ -121,15 +123,15 @@ export default async function ProjectPage({ params }: Props) {
 
         {/* Sections */}
         <div className="grid gap-12 max-w-[70ch]">
-          {p.sections.map((s) => (
-            <section key={s.heading} className="grid gap-4">
+          {p.sections.map((s, i) => (
+            <section key={i} className="grid gap-4">
               <h2 className="font-serif text-3xl leading-none">{s.heading}</h2>
               {s.paragraphs.map((para, j) => (
                 <p key={j} className="text-[14px] md:text-[15px] leading-relaxed">{para}</p>
               ))}
               {s.bullets && (
                 <ul className="grid gap-1.5 pl-5 list-disc text-[14px] leading-relaxed">
-                  {s.bullets.map((b) => <li key={b}>{b}</li>)}
+                  {s.bullets.map((b, k) => <li key={k}>{b}</li>)}
                 </ul>
               )}
               {s.quote && (
@@ -143,8 +145,8 @@ export default async function ProjectPage({ params }: Props) {
         <div className="border-t border-ink pt-6 grid gap-3">
           <h2 className="text-[11px] tracking-[0.14em] uppercase text-ink/60">{t("stack")}</h2>
           <ul className="flex flex-wrap gap-2">
-            {p.tags.map((tag) => (
-              <li key={tag} className="border border-ink bg-fill px-2.5 py-1.5 text-[12px] font-medium">{tag}</li>
+            {p.tags.map((tag, i) => (
+              <li key={i} className="border border-ink bg-fill px-2.5 py-1.5 text-[12px] font-medium">{tag}</li>
             ))}
           </ul>
         </div>
