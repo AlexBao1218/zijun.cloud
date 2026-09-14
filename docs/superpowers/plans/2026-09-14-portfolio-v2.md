@@ -10,6 +10,8 @@
 
 **Branch:** `feat/portfolio-v2` (already created; spec committed). All commits go here. `main` stays untouched.
 
+**Never run bare `git add -A` or `git add .`:** the repo root holds untracked files that belong to Alex (`SKILL.md`, `examples.md`, `reference.md`, `skills/`, `.claude-design/`, a modified `README.md` and `.claude/settings.local.json`). Always add explicit paths.
+
 **Read before coding:** `node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/proxy.md`, `.../01-getting-started/13-fonts.md`, `.../03-api-reference/02-components/image.md`. AGENTS.md says this Next.js differs from training data.
 
 ---
@@ -454,7 +456,7 @@ Expected: one error, `Cannot find module '@/app/components/TopBar'`. Everything 
 - [ ] **Step 7: Commit**
 
 ```bash
-git add -A
+git add app lib proxy.ts next.config.ts package.json package-lock.json
 git commit -m "feat(v2): paper/ink tokens, Instrument Serif + Geist Mono, proxy.ts
 
 Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
@@ -2027,7 +2029,7 @@ Dev server via `preview_start` (name `web`). Check at desktop width and 375 px:
 - [ ] **Step 3: Fix anything found, re-run Step 1, commit**
 
 ```bash
-git add -A
+git add app lib content messages public tests docs .claude/launch.json
 git commit -m "fix(v2): verification pass
 
 Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
