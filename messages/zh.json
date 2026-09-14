@@ -1,5 +1,10 @@
 {
-  "nav": { "work": "作品", "skills": "技能", "about": "关于", "resume": "简历" },
+  "nav": {
+    "work": "作品",
+    "skills": "技能",
+    "about": "关于",
+    "resume": "简历"
+  },
   "project": {
     "back": "← 返回作品",
     "openDemo": "打开在线 demo ↗",
@@ -7,6 +12,8 @@
     "mobileNote": "在线 demo 为桌面屏幕设计，请在新标签页打开。",
     "recordingNote": "录屏即将上线，可先打开 demo 体验完整流程。",
     "guideFallback": "怎么试用",
-    "stack": "技术栈"
+    "stack": "技术栈",
+    "when": "时间",
+    "role": "角色"
   }
 }

@@ -1,5 +1,10 @@
 {
-  "nav": { "work": "work", "skills": "skills", "about": "about", "resume": "resume" },
+  "nav": {
+    "work": "work",
+    "skills": "skills",
+    "about": "about",
+    "resume": "resume"
+  },
   "project": {
     "back": "← back to work",
     "openDemo": "open live demo ↗",
@@ -7,6 +12,8 @@
     "mobileNote": "The live demo is built for a desktop screen — open it in a new tab.",
     "recordingNote": "Recording coming soon — open the demo to try the full flow.",
     "guideFallback": "how to try it",
-    "stack": "stack"
+    "stack": "stack",
+    "when": "when",
+    "role": "role"
   }
 }

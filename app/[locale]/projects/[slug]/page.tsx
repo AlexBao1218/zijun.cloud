@@ -1,123 +1,154 @@
-import { setRequestLocale } from "next-intl/server";
-import { loadContent } from "@/lib/content";
-import { Link } from "@/i18n/routing";
-import SectionContainer from "@/app/components/SectionContainer";
-import TagList from "@/app/components/TagList";
 import fs from "fs/promises";
 import path from "path";
+import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { loadContent } from "@/lib/content";
+import { Link } from "@/i18n/routing";
+import OffsetBox from "@/app/components/OffsetBox";
+import DemoFrame from "@/app/components/project/DemoFrame";
+import DemoRecording from "@/app/components/project/DemoRecording";
+import DemoStatic from "@/app/components/project/DemoStatic";
+import GuideSteps from "@/app/components/project/GuideSteps";
+import { BG_CLASS, BORDER_CLASS, UNDERLINE_CLASS, type ProjectContent } from "@/lib/projects";
 
-type ProjectSection = {
-  heading: string;
-  paragraphs: string[];
-  bullets?: string[];
-};
-
-type ProjectContent = {
-  title: string;
-  meta: {
-    year: string;
-    role: string;
-    url?: string;
-    urlLabel?: string;
-  };
-  description: string;
-  sections: ProjectSection[];
-  tags: string[];
-};
-
-type Props = {
-  params: Promise<{ locale: string; slug: string }>;
-};
+type Props = { params: Promise<{ locale: string; slug: string }> };
 
 export async function generateStaticParams() {
-  const projectsDir = path.join(process.cwd(), "content", "projects");
-  const entries = await fs.readdir(projectsDir, { withFileTypes: true });
-  const slugs = entries
-    .filter((e) => e.isDirectory() && e.name !== "_index")
-    .map((e) => e.name);
-
-  const locales = ["en", "zh"];
-  return locales.flatMap((locale) =>
-    slugs.map((slug) => ({ locale, slug }))
-  );
+  const dir = path.join(process.cwd(), "content", "projects");
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  const slugs = entries.filter((e) => e.isDirectory() && !e.name.startsWith("_")).map((e) => e.name);
+  return ["en", "zh"].flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
 }
 
-export default async function ProjectDetailPage({ params }: Props) {
+async function loadProject(slug: string, locale: string): Promise<ProjectContent> {
+  try {
+    return await loadContent<ProjectContent>(`projects/${slug}`, locale);
+  } catch {
+    notFound();
+  }
+}
+
+export async function generateMetadata({ params }: Props) {
+  const { locale, slug } = await params;
+  const p = await loadProject(slug, locale);
+  return { title: `${p.title} — Alex Bao`, description: p.summary };
+}
+
+export default async function ProjectPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const isEN = locale === "en";
-  const content = await loadContent<ProjectContent>(`projects/${slug}`, locale);
+  const t = await getTranslations("project");
+  const p = await loadProject(slug, locale);
+  const demoLink = p.links[0];
 
   return (
-    <SectionContainer>
-      {/* Back */}
-      <Link
-        href="/projects"
-        className="inline-flex items-center gap-2 text-sm text-[#3d2b1f]/30 hover:text-[#3d2b1f]/55 transition-colors mb-8 md:mb-12"
-      >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="m15 18-6-6 6-6"/>
-        </svg>
-        {isEN ? "Back to Projects" : "返回项目列表"}
-      </Link>
+    <main className="pt-14 md:pt-16">
+      <div className="px-5 md:px-10 pt-8 md:pt-12 pb-16 md:pb-24 max-w-5xl mx-auto grid gap-10 md:gap-14">
+        <Link href={{ pathname: "/", hash: "work" }} className="text-[12px] underline underline-offset-4 justify-self-start">
+          {t("back")}
+        </Link>
 
-      {/* Header */}
-      <div className="mb-12">
-        <div className="flex items-center gap-3 text-sm text-[#3d2b1f]/35 mb-6">
-          <span>{content.meta.year}</span>
-          <span className="text-[#3d2b1f]/15">·</span>
-          <span className="text-[#b85c38]/50">{content.meta.role}</span>
-        </div>
-        <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium text-[#3d2b1f] mb-4">
-          {content.title}
-        </h1>
-        <p className="text-lg text-[#3d2b1f]/45 leading-relaxed max-w-lg">
-          {content.description}
-        </p>
-      </div>
-
-      {/* Project Link */}
-      {content.meta.url && (
-        <a
-          href={content.meta.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-base text-[#b85c38]/60 hover:text-[#b85c38]/80 transition-colors mb-16"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-            <polyline points="15 3 21 3 21 9"/>
-            <line x1="10" y1="14" x2="21" y2="3"/>
-          </svg>
-          {content.meta.urlLabel}
-        </a>
-      )}
-
-      {/* Sections */}
-      {content.sections.map((section, i) => (
-        <section key={i} className="mb-12">
-          <h2 className="text-xl font-medium text-[#3d2b1f]/80 mb-5">
-            {section.heading}
-          </h2>
-          <div className="space-y-5 text-base text-[#3d2b1f]/55 leading-relaxed">
-            {section.paragraphs.map((p, j) => (
-              <p key={j}>{p}</p>
-            ))}
-            {section.bullets && (
-              <ul className="space-y-2 list-disc list-inside text-base text-[#3d2b1f]/55 pl-2">
-                {section.bullets.map((b, k) => (
-                  <li key={k}>{b}</li>
-                ))}
-              </ul>
-            )}
+        {/* Header card */}
+        <OffsetBox blockClass={BG_CLASS[p.colour]}>
+          <div className="grid md:grid-cols-[minmax(0,1fr)_auto]">
+            <div className="px-5 md:px-8 py-6 md:py-8 border-b md:border-b-0 md:border-r border-ink">
+              <h1 className={`font-serif text-4xl md:text-6xl leading-none underline decoration-[6px] underline-offset-[10px] ${UNDERLINE_CLASS[p.colour]}`}>
+                {p.title}
+              </h1>
+              <p className="mt-6 text-[13px]">{p.org}</p>
+            </div>
+            <dl className="grid grid-cols-2 md:grid-cols-1 text-[12px]">
+              <div className="px-5 py-3 border-b border-ink md:min-w-[220px]">
+                <dt className="text-ink/60 uppercase tracking-[0.14em] text-[10px]">{t("when")}</dt>
+                <dd className="mt-1">{p.duration}</dd>
+              </div>
+              <div className="px-5 py-3 border-b border-ink border-l md:border-l-0">
+                <dt className="text-ink/60 uppercase tracking-[0.14em] text-[10px]">{t("role")}</dt>
+                <dd className="mt-1">{p.role}</dd>
+              </div>
+            </dl>
           </div>
-        </section>
-      ))}
+        </OffsetBox>
 
-      {/* Tags */}
-      <div className="pt-10 border-t border-[#3d2b1f]/5">
-        <TagList tags={content.tags} size="base" />
+        <p className="max-w-[68ch] text-[15px] md:text-[16px] leading-relaxed">{p.summary}</p>
+
+        {/* Links row */}
+        {p.links.length > 0 && (
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+            {demoLink && p.demo.mode !== "static" && (
+              <OffsetBox blockClass="bg-ink" offset={8} className="inline-block">
+                <a href={demoLink.url} target="_blank" rel="noopener noreferrer" className="block bg-fill px-4 py-2.5 text-[13px] font-medium">
+                  {t("openDemo")}
+                </a>
+              </OffsetBox>
+            )}
+            {p.links.slice(p.demo.mode !== "static" ? 1 : 0).map((l) => (
+              <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="text-[13px] underline underline-offset-4 decoration-1 hover:decoration-2">
+                {l.label}
+              </a>
+            ))}
+          </div>
+        )}
+
+        {/* Demo */}
+        {p.demo.mode === "embed" && p.demo.url && (
+          <DemoFrame
+            url={p.demo.url}
+            title={p.title}
+            height={p.demo.height}
+            poster={p.demo.poster}
+            activateLabel={t("activate")}
+            openLabel={t("openDemo")}
+            mobileNote={t("mobileNote")}
+          />
+        )}
+        {p.demo.mode === "recording" && (
+          <DemoRecording video={p.demo.video} poster={p.demo.poster} url={p.demo.url} note={t("recordingNote")} openLabel={t("openDemo")} />
+        )}
+        {p.demo.mode === "static" && <DemoStatic poster={p.demo.poster} alt={p.title} />}
+
+        {p.guide && <GuideSteps heading={p.guide.heading} steps={p.guide.steps} />}
+
+        {/* Facts */}
+        <dl className="grid sm:grid-cols-2 border border-ink">
+          {p.facts.map((f) => (
+            <div key={f.label} className="px-4 py-3 border-b border-ink last:border-b-0 sm:odd:border-r sm:[&:nth-last-child(-n+2)]:border-b-0">
+              <dt className="text-[10px] uppercase tracking-[0.14em] text-ink/60">{f.label}</dt>
+              <dd className="mt-1 text-[13px]">{f.value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        {/* Sections */}
+        <div className="grid gap-12 max-w-[70ch]">
+          {p.sections.map((s) => (
+            <section key={s.heading} className="grid gap-4">
+              <h2 className="font-serif text-3xl leading-none">{s.heading}</h2>
+              {s.paragraphs.map((para, j) => (
+                <p key={j} className="text-[14px] md:text-[15px] leading-relaxed">{para}</p>
+              ))}
+              {s.bullets && (
+                <ul className="grid gap-1.5 pl-5 list-disc text-[14px] leading-relaxed">
+                  {s.bullets.map((b) => <li key={b}>{b}</li>)}
+                </ul>
+              )}
+              {s.quote && (
+                <blockquote className={`border-l-4 pl-4 py-1 text-[13px] text-ink/80 ${BORDER_CLASS[p.colour]}`}>{s.quote}</blockquote>
+              )}
+            </section>
+          ))}
+        </div>
+
+        {/* Tags */}
+        <div className="border-t border-ink pt-6 grid gap-3">
+          <h2 className="text-[11px] tracking-[0.14em] uppercase text-ink/60">{t("stack")}</h2>
+          <ul className="flex flex-wrap gap-2">
+            {p.tags.map((tag) => (
+              <li key={tag} className="border border-ink bg-fill px-2.5 py-1.5 text-[12px] font-medium">{tag}</li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </SectionContainer>
+    </main>
   );
 }
