@@ -98,6 +98,7 @@ export default async function ProjectPage({ params }: Props) {
             url={p.demo.url}
             title={p.title}
             height={p.demo.height}
+            width={p.demo.width}
             poster={p.demo.poster}
             activateLabel={t("activate")}
             openLabel={t("openDemo")}

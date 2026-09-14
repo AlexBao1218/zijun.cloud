@@ -5,15 +5,36 @@
   "role": "Industrial trainee — sole builder",
   "colour": "towngas",
   "summary": "Fourteen years of corporate insurance records — 34 classes of cover, 201 policies, 767 claims — lived in a broker workbook, three claims ledgers and folders of PDFs. I digitised them into a policy-linked database with dashboards, trend and loss-ratio views, and a RAG agent that answers questions in chat.",
-  "demo": { "mode": "embed", "url": "https://insurance-demo.zijun.cloud", "height": 720, "poster": "/projects/insurance-program/cover.png" },
+  "demo": {
+    "mode": "embed",
+    "url": "https://insurance-demo.zijun.cloud",
+    "height": 940,
+    "poster": "/projects/insurance-program/cover.png",
+    "width": 1280
+  },
   "links": [
-    { "label": "open live demo ↗", "url": "https://insurance-demo.zijun.cloud" }
+    {
+      "label": "open live demo ↗",
+      "url": "https://insurance-demo.zijun.cloud"
+    }
   ],
   "facts": [
-    { "label": "Timeline", "value": "Jun – Dec 2026" },
-    { "label": "Role", "value": "PRD, data model, frontend, backend, AI integration" },
-    { "label": "Stack", "value": "React 19 · TypeScript · Vite · Tailwind · shadcn/ui · ECharts · NestJS · Feishu Bitable / Spark / Aily" },
-    { "label": "Public demo", "value": "Same code on synthetic aggregates; record-level fields redacted; AI panel simulated" }
+    {
+      "label": "Timeline",
+      "value": "Jun – Dec 2026"
+    },
+    {
+      "label": "Role",
+      "value": "PRD, data model, frontend, backend, AI integration"
+    },
+    {
+      "label": "Stack",
+      "value": "React 19 · TypeScript · Vite · Tailwind · shadcn/ui · ECharts · NestJS · Feishu Bitable / Spark / Aily"
+    },
+    {
+      "label": "Public demo",
+      "value": "Same code on synthetic aggregates; record-level fields redacted; AI panel simulated"
+    }
   ],
   "guide": {
     "heading": "how to try it (2 minutes)",
@@ -58,5 +79,14 @@
       ]
     }
   ],
-  "tags": ["React 19", "TypeScript", "NestJS", "ECharts", "Feishu Spark", "Feishu Aily", "RAG", "docx"]
+  "tags": [
+    "React 19",
+    "TypeScript",
+    "NestJS",
+    "ECharts",
+    "Feishu Spark",
+    "Feishu Aily",
+    "RAG",
+    "docx"
+  ]
 }

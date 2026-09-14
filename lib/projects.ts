@@ -54,6 +54,8 @@ export type ProjectContent = {
     video?: string;
     poster?: string;
     height?: number;
+    /** Native layout width; DemoFrame scales the iframe down when the box is narrower. */
+    width?: number;
   };
   links: { label: string; url: string }[];
   facts: { label: string; value: string }[];

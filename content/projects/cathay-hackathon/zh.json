@@ -5,16 +5,40 @@
   "role": "Team lead",
   "colour": "cathay",
   "summary": "Where the containers go on a freighter decides where its centre of gravity sits, and CG drives fuel burn. In the 24-hour final at Cathay City we built a drag-and-drop ULD planner backed by a MILP. The 2026 rebuild runs that solver as WebAssembly in your browser, with weight limits, type compatibility, lateral balance and lockable positions.",
-  "demo": { "mode": "embed", "url": "https://cargo-demo.zijun.cloud", "height": 760, "poster": "/projects/cathay-hackathon/cover.png" },
+  "demo": {
+    "mode": "embed",
+    "url": "https://cargo-demo.zijun.cloud",
+    "height": 900,
+    "poster": "/projects/cathay-hackathon/cover.png",
+    "width": 1100
+  },
   "links": [
-    { "label": "open live demo ↗", "url": "https://cargo-demo.zijun.cloud" },
-    { "label": "original hackathon repo ↗", "url": "https://github.com/AlexBao1218/cxhack25" }
+    {
+      "label": "open live demo ↗",
+      "url": "https://cargo-demo.zijun.cloud"
+    },
+    {
+      "label": "original hackathon repo ↗",
+      "url": "https://github.com/AlexBao1218/cxhack25"
+    }
   ],
   "facts": [
-    { "label": "Timeline", "value": "Sep – Nov 2025 (hackathon) · 2026 (rebuild)" },
-    { "label": "Role", "value": "Team lead — MILP research, interface, pitch" },
-    { "label": "Stack", "value": "Vite · React 19 · TypeScript · Tailwind v4 · zustand · dnd-kit · GLPK 5 via glpk.js (wasm, Web Worker)" },
-    { "label": "Data", "value": "Hackathon's synthetic scenarios, re-scaled to plausible freighter magnitudes — not airline data" }
+    {
+      "label": "Timeline",
+      "value": "Sep – Nov 2025 (hackathon) · 2026 (rebuild)"
+    },
+    {
+      "label": "Role",
+      "value": "Team lead — MILP research, interface, pitch"
+    },
+    {
+      "label": "Stack",
+      "value": "Vite · React 19 · TypeScript · Tailwind v4 · zustand · dnd-kit · GLPK 5 via glpk.js (wasm, Web Worker)"
+    },
+    {
+      "label": "Data",
+      "value": "Hackathon's synthetic scenarios, re-scaled to plausible freighter magnitudes — not airline data"
+    }
   ],
   "guide": {
     "heading": "how to try it (2 minutes)",
@@ -57,5 +81,13 @@
       ]
     }
   ],
-  "tags": ["MILP", "GLPK", "WebAssembly", "Operations Research", "React 19", "dnd-kit", "Vibe Coding"]
+  "tags": [
+    "MILP",
+    "GLPK",
+    "WebAssembly",
+    "Operations Research",
+    "React 19",
+    "dnd-kit",
+    "Vibe Coding"
+  ]
 }

@@ -73,6 +73,7 @@ for (const locale of LOCALES) {
       assert.ok(COLOURS.includes(p.colour), "colour");
       assert.ok(DEMO_MODES.includes(p.demo?.mode), "demo.mode");
       if (p.demo.mode === "embed") assert.ok(isStr(p.demo.url), "embed needs url");
+      for (const k of ["height", "width"]) if (p.demo[k] !== undefined) assert.ok(Number.isInteger(p.demo[k]) && p.demo[k] > 0, `demo.${k} positive integer`);
       if (p.demo.poster) assert.ok(fs.existsSync(path.join("public", p.demo.poster)), "poster exists");
       assert.ok(Array.isArray(p.links), "links");
       for (const l of p.links) assert.ok(isStr(l.label) && isStr(l.url), "link");

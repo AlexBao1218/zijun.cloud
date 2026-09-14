@@ -5,16 +5,40 @@
   "role": "Industrial trainee — sole builder",
   "colour": "towngas",
   "summary": "Vehicle changes used to arrive by email, get typed into a draft table, then re-typed into an Excel master so a macro could produce the logbook. I built a fleet workspace with plate and parking-site lookup, a change-request cart, and an admin console that approves requests and writes the new value back to the fleet record on its effective date.",
-  "demo": { "mode": "embed", "url": "https://fleet-demo.zijun.cloud", "height": 720, "poster": "/projects/vehicle-parking/cover.png" },
+  "demo": {
+    "mode": "embed",
+    "url": "https://fleet-demo.zijun.cloud",
+    "height": 960,
+    "poster": "/projects/vehicle-parking/cover.png",
+    "width": 1100
+  },
   "links": [
-    { "label": "open live demo ↗", "url": "https://fleet-demo.zijun.cloud" },
-    { "label": "source on github ↗", "url": "https://github.com/AlexBao1218/vehicle-parking-demo" }
+    {
+      "label": "open live demo ↗",
+      "url": "https://fleet-demo.zijun.cloud"
+    },
+    {
+      "label": "source on github ↗",
+      "url": "https://github.com/AlexBao1218/vehicle-parking-demo"
+    }
   ],
   "facts": [
-    { "label": "Timeline", "value": "Jun – Dec 2026" },
-    { "label": "Role", "value": "Process mapping, data model, frontend, backend, rollout" },
-    { "label": "Stack", "value": "React 19 · TypeScript · Vite · Tailwind · shadcn/ui · NestJS · PostgreSQL · Drizzle · Feishu Bitable / Spark" },
-    { "label": "Public demo", "value": "Synthetic fleet (DEMO 101–136), in-browser backend, identity fields redacted" }
+    {
+      "label": "Timeline",
+      "value": "Jun – Dec 2026"
+    },
+    {
+      "label": "Role",
+      "value": "Process mapping, data model, frontend, backend, rollout"
+    },
+    {
+      "label": "Stack",
+      "value": "React 19 · TypeScript · Vite · Tailwind · shadcn/ui · NestJS · PostgreSQL · Drizzle · Feishu Bitable / Spark"
+    },
+    {
+      "label": "Public demo",
+      "value": "Synthetic fleet (DEMO 101–136), in-browser backend, identity fields redacted"
+    }
   ],
   "guide": {
     "heading": "how to try it (2 minutes)",
@@ -59,5 +83,13 @@
       ]
     }
   ],
-  "tags": ["React 19", "TypeScript", "NestJS", "PostgreSQL", "Drizzle", "Feishu Spark", "Process design"]
+  "tags": [
+    "React 19",
+    "TypeScript",
+    "NestJS",
+    "PostgreSQL",
+    "Drizzle",
+    "Feishu Spark",
+    "Process design"
+  ]
 }
