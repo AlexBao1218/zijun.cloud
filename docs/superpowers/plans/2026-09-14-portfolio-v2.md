@@ -1098,8 +1098,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
   "summary": "Fourteen years of corporate insurance records — 34 classes of cover, 201 policies, 767 claims — lived in a broker workbook, three claims ledgers and folders of PDFs. I digitised them into a policy-linked database with dashboards, trend and loss-ratio views, and a RAG agent that answers questions in chat.",
   "demo": { "mode": "embed", "url": "https://insurance-demo.zijun.cloud", "height": 720, "poster": "/projects/insurance-program/cover.png" },
   "links": [
-    { "label": "open live demo ↗", "url": "https://insurance-demo.zijun.cloud" },
-    { "label": "source on github ↗", "url": "https://github.com/AlexBao1218/insurance-program-demo" }
+    { "label": "open live demo ↗", "url": "https://insurance-demo.zijun.cloud" }
   ],
   "facts": [
     { "label": "Timeline", "value": "Jun – Dec 2026" },
@@ -1295,7 +1294,6 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
   "demo": { "mode": "embed", "url": "https://cargo-demo.zijun.cloud", "height": 760, "poster": "/projects/cathay-hackathon/cover.png" },
   "links": [
     { "label": "open live demo ↗", "url": "https://cargo-demo.zijun.cloud" },
-    { "label": "rebuild source ↗", "url": "https://github.com/AlexBao1218/cargo-load-demo" },
     { "label": "original hackathon repo ↗", "url": "https://github.com/AlexBao1218/cxhack25" }
   ],
   "facts": [
@@ -2046,6 +2044,8 @@ Vercel builds a preview URL for the branch; report it. Merging to `main` waits f
 ---
 
 ## Deferred (not in this plan)
+
+- GitHub links for `insurance-program-demo` and `cargo-load-demo` — repos stay private until their commit history / docs are scrubbed (per deploy session 2026-09-14); add the links once public
 
 - zh translations of every content file
 - Meeting-minutes recording (`demo.video` mp4) — record once `minutes-demo.zijun.cloud` is live
