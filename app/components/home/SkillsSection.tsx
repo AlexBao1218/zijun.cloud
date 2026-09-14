@@ -14,22 +14,22 @@ export default async function SkillsSection({ locale }: { locale: string }) {
   return (
     <section>
       <SectionStarter id="skills" title={c.title} subtitle={c.subtitle} />
-      <div className="px-5 md:px-10 py-12 md:py-16 max-w-6xl mx-auto grid gap-10">
+      <div className="px-6 md:px-20 py-16 md:py-24 max-w-[1100px] mx-auto grid gap-14">
         {c.groups.map((g) => (
-          <div key={g.name} className="grid md:grid-cols-[160px_minmax(0,1fr)] gap-3 md:gap-8 items-start">
-            <h3 className="text-[11px] tracking-[0.14em] uppercase text-ink/60 pt-2">{g.name}</h3>
-            <ul className="flex flex-wrap gap-2">
+          <div key={g.name} className="grid gap-5 justify-items-center">
+            <h3 className="font-serif text-3xl leading-none">{g.name}</h3>
+            <ul className="flex flex-wrap justify-center gap-3">
               {g.items.map((item) => (
-                <li key={item} className="border border-ink bg-fill px-2.5 py-1.5 text-[12px] font-medium">
+                <li key={item} className="border border-ink bg-fill px-3 py-2 text-[13px] font-medium">
                   {item}
                 </li>
               ))}
             </ul>
           </div>
         ))}
-        <div className="grid md:grid-cols-[160px_minmax(0,1fr)] gap-3 md:gap-8 items-baseline border-t border-ink pt-6">
-          <h3 className="text-[11px] tracking-[0.14em] uppercase text-ink/60">{c.languagesLabel}</h3>
-          <p className="text-[13px]">{c.languages}</p>
+        <div className="grid gap-3 justify-items-center border-t border-ink pt-10">
+          <h3 className="font-serif text-3xl leading-none">{c.languagesLabel}</h3>
+          <p className="text-[14px] text-center">{c.languages}</p>
         </div>
       </div>
     </section>

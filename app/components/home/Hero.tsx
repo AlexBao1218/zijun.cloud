@@ -11,29 +11,25 @@ type HomeContent = {
 
 export default async function Hero({ locale }: { locale: string }) {
   const c = await loadContent<HomeContent>("home", locale);
-  // "conjunction"/"narrow" separates without a conjunction in both locales:
-  // en -> "a, b, c", zh -> "a、b、c". ("unit" joins with no separator at all in zh.)
-  const list = new Intl.ListFormat(locale, { type: "conjunction", style: "narrow" }).format(
-    c.identities
-  );
+  // conjunction/narrow gives "a, b, c" in en and "a、b、c" in zh — a separator without a conjunction.
+  const list = new Intl.ListFormat(locale, { type: "conjunction", style: "narrow" }).format(c.identities);
 
   return (
-    <section className="grid md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] gap-10 md:gap-16 items-center px-5 md:px-10 pt-28 md:pt-40 pb-16 md:pb-24">
-      <div className="max-w-[60ch]">
-        <p className="text-[11px] md:text-[12px] tracking-[0.14em] uppercase mb-5">{c.availability}</p>
-        <h1 className="text-[15px] md:text-[17px] leading-relaxed font-normal">
-          <span className="font-serif italic text-[1.35em] leading-none">{c.lead}</span>{" "}
-          {list}
+    <section className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24 px-6 md:px-20 pt-36 md:pt-56 pb-24 md:pb-40">
+      <div className="max-w-[44ch]">
+        <p className="text-[12px] md:text-[13px] tracking-[0.14em] uppercase mb-6">{c.availability}</p>
+        <h1 className="text-[17px] md:text-[20px] leading-relaxed font-normal">
+          <span className="font-serif italic text-[1.35em] leading-none">{c.lead}</span> {list}
           {c.closing}
         </h1>
       </div>
       {c.image?.src ? (
-        <div className="relative border border-ink aspect-[2/3] w-full max-w-[300px] md:justify-self-end overflow-hidden">
-          <Image src={c.image.src} alt={c.image.alt} fill preload sizes="(min-width: 768px) 300px, 100vw" className="object-cover" />
+        <div className="relative border border-ink aspect-[2/3] w-[260px] md:w-[340px] shrink-0 overflow-hidden">
+          <Image src={c.image.src} alt={c.image.alt} fill preload sizes="340px" className="object-cover" />
         </div>
       ) : (
         /* Intro image slot — hatch placeholder until content/home.image is set. */
-        <div aria-hidden="true" className="hidden md:block hatch border border-ink aspect-[4/5] w-full max-w-[280px] justify-self-end" />
+        <div aria-hidden="true" className="hidden md:block hatch border border-ink aspect-[2/3] w-[340px] shrink-0" />
       )}
     </section>
   );

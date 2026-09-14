@@ -16,25 +16,22 @@ export default function TopBar() {
   ];
 
   const toggleLocale = () => {
-    // next-intl's router href is `string | { pathname, query }` — no `hash` field —
-    // so the hash is kept by appending it to the pathname string.
-    router.replace(pathname + window.location.hash, {
-      locale: locale === "en" ? "zh" : "en",
-    });
+    // useRouter().replace only accepts { pathname, query } as an object, so keep the hash via the string form.
+    router.replace(pathname + window.location.hash, { locale: locale === "en" ? "zh" : "en" });
   };
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-paper border-b border-ink">
-      <div className="flex items-center justify-between gap-3 px-5 md:px-10 h-14 md:h-16">
-        <Link href="/" className="font-serif text-xl md:text-[28px] leading-none whitespace-nowrap">
+      <div className="flex items-center justify-between gap-4 px-6 md:px-12 h-16 md:h-20">
+        <Link href="/" className="font-serif text-[28px] md:text-[36px] leading-none whitespace-nowrap">
           alex bao
         </Link>
-        <nav aria-label="Primary" className="flex items-center gap-3 md:gap-7 text-[13px]">
+        <nav aria-label="Primary" className="flex items-center gap-5 md:gap-10">
           {anchors.map((a) => (
             <Link
               key={a.hash}
               href={{ pathname: "/", hash: a.hash }}
-              className="underline decoration-1 underline-offset-4 hover:decoration-2"
+              className="font-serif text-xl md:text-[26px] leading-none hover:underline decoration-1 underline-offset-[6px]"
             >
               {a.label}
             </Link>
@@ -43,14 +40,14 @@ export default function TopBar() {
             href="/cv.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline underline decoration-1 underline-offset-4 hover:decoration-2"
+            className="hidden sm:inline font-serif text-xl md:text-[26px] leading-none hover:underline decoration-1 underline-offset-[6px]"
           >
             {t("resume")}
           </a>
           <button
             type="button"
             onClick={toggleLocale}
-            className="border border-ink px-2 py-1.5 text-[12px] hover:bg-fill focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+            className="border border-ink px-2.5 py-1.5 text-[12px] hover:bg-fill focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
             aria-label={locale === "en" ? "切换到中文" : "Switch to English"}
           >
             {locale === "en" ? "中文" : "EN"}

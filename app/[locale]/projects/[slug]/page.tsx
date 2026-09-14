@@ -44,8 +44,8 @@ export default async function ProjectPage({ params }: Props) {
   const otherLinks = p.links.filter((l) => l.url !== demoHref);
 
   return (
-    <main className="pt-14 md:pt-16">
-      <div className="px-5 md:px-10 pt-8 md:pt-12 pb-16 md:pb-24 max-w-5xl mx-auto grid gap-10 md:gap-14">
+    <main className="pt-16 md:pt-20">
+      <div className="px-6 md:px-16 pt-10 md:pt-16 pb-20 md:pb-32 max-w-[1240px] mx-auto grid gap-12 md:gap-16">
         <Link href={{ pathname: "/", hash: "work" }} className="text-[12px] underline underline-offset-4 justify-self-start">
           {t("back")}
         </Link>
@@ -72,7 +72,7 @@ export default async function ProjectPage({ params }: Props) {
           </div>
         </OffsetBox>
 
-        <p className="max-w-[68ch] text-[15px] md:text-[16px] leading-relaxed">{p.summary}</p>
+        <p className="max-w-[70ch] text-[16px] md:text-[17px] leading-relaxed">{p.summary}</p>
 
         {/* Links row */}
         {(demoHref || otherLinks.length > 0) && (

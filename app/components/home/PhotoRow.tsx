@@ -30,9 +30,9 @@ export default function PhotoRow({ photos }: { photos: Photo[] }) {
 
   return (
     <>
-      <ul className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 md:mx-0 md:px-0 md:grid md:grid-cols-6 md:overflow-visible">
+      <ul className="flex gap-4 overflow-x-auto pb-2 -mx-6 px-6 md:mx-0 md:px-0 md:grid md:grid-cols-4 lg:grid-cols-7 md:overflow-visible">
         {photos.map((p, i) => (
-          <li key={`${p.src}-${i}`} className="shrink-0 w-36 md:w-auto">
+          <li key={`${p.src}-${i}`} className="shrink-0 w-44 md:w-auto">
             {p.src ? (
               <button
                 type="button"
@@ -40,7 +40,7 @@ export default function PhotoRow({ photos }: { photos: Photo[] }) {
                 aria-label={`open photo: ${p.alt}`}
                 className="relative block w-full aspect-[4/5] border border-ink overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
               >
-                <Image src={p.src} alt={p.alt} fill sizes="(min-width: 768px) 16vw, 144px" className="object-cover" />
+                <Image src={p.src} alt={p.alt} fill sizes="(min-width: 1024px) 14vw, (min-width: 768px) 25vw, 176px" className="object-cover" />
               </button>
             ) : (
               <div className="hatch block w-full aspect-[4/5] border border-ink" />

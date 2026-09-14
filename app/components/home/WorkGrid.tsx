@@ -10,9 +10,9 @@ export default async function WorkGrid({ locale }: { locale: string }) {
   return (
     <section>
       <SectionStarter id="work" title={c.title} subtitle={c.subtitle} />
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12 px-5 md:px-10 py-12 md:py-16 max-w-6xl mx-auto">
+      <ul className="flex flex-wrap justify-evenly gap-x-8 gap-y-16 px-6 md:px-16 py-16 md:py-24 max-w-[1400px] mx-auto">
         {c.cards.map((card) => (
-          <li key={card.slug}>
+          <li key={card.slug} className="w-full max-w-[22rem]">
             <WorkCard card={card} />
           </li>
         ))}
