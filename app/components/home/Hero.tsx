@@ -1,6 +1,13 @@
+import Image from "next/image";
 import { loadContent } from "@/lib/content";
 
-type HomeContent = { availability: string; lead: string; identities: string[]; closing: string };
+type HomeContent = {
+  availability: string;
+  lead: string;
+  identities: string[];
+  closing: string;
+  image?: { src: string; alt: string };
+};
 
 export default async function Hero({ locale }: { locale: string }) {
   const c = await loadContent<HomeContent>("home", locale);
@@ -20,8 +27,14 @@ export default async function Hero({ locale }: { locale: string }) {
           {c.closing}
         </h1>
       </div>
-      {/* Intro image slot — intentionally empty until Alex picks an image. */}
-      <div aria-hidden="true" className="hidden md:block hatch border border-ink aspect-[4/5] w-full max-w-[280px] justify-self-end" />
+      {c.image?.src ? (
+        <div className="relative border border-ink aspect-[2/3] w-full max-w-[300px] md:justify-self-end overflow-hidden">
+          <Image src={c.image.src} alt={c.image.alt} fill preload sizes="(min-width: 768px) 300px, 100vw" className="object-cover" />
+        </div>
+      ) : (
+        /* Intro image slot — hatch placeholder until content/home.image is set. */
+        <div aria-hidden="true" className="hidden md:block hatch border border-ink aspect-[4/5] w-full max-w-[280px] justify-self-end" />
+      )}
     </section>
   );
 }
