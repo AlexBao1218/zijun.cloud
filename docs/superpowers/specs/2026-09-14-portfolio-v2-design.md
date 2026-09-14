@@ -45,7 +45,7 @@ Site chrome is ink-only; colour belongs to projects. Paper lifted to near-white 
 | `--proj-towngas` | `#1f57d6` | Insurance / Fleet / Meeting minutes / (future GPS) card shadow blocks, detail-page side rules |
 | `--proj-cathay` | `#0e8f7e` | 747-8F Load Planner |
 | `--proj-neochain` | `#e0a020` | NeoChain WMS |
-| `--proj-igc` | TBD, pick a fourth hue distinct from the above (violet/plum range) | IGC Digital Twin |
+| `--proj-igc` | `#7b4bc4` | IGC Digital Twin |
 
 Rules: no gradients; project colour appears only as the offset block behind a card, the underline on the project's name, and the pull-quote side rule on its detail page. Text never sits on a project colour except the white-on-blue variant if contrast ≥ 4.5:1.
 
@@ -54,4 +54,4 @@ Rules: no gradients; project colour appears only as the offset block behind a ca
 - Display: Instrument Serif (Google), weight 400, used for name, section H1s, card titles.
 - Body / labels / nav: Geist Mono (Google), 400/500.
 - zh: Noto Serif SC (existing).
-- Existing local Geist sans stays available but is not used in the v2 layout.
+- The local Geist sans woff2 files and the unused MDX/blog dependencies are removed; nothing in v2 uses them.
