@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Owner's untracked scratch directories at the repo root — not site code.
+    "skills/**",
+    ".claude-design/**",
+    ".claude/worktrees/**",
   ]),
 ]);
 
