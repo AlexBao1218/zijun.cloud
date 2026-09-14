@@ -7,5 +7,9 @@
     "photographer",
     "[TO FILL: two more identities, e.g. hiker / film watcher]"
   ],
-  "closing": ", and currently an industrial trainee at Towngas."
+  "closing": ", and currently an industrial trainee at Towngas.",
+  "image": {
+    "src": "/photos/hero.jpg",
+    "alt": "Alex photographing himself in a mirror, camera raised to one eye"
+  }
 }

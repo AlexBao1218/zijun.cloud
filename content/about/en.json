@@ -6,11 +6,33 @@
   ],
   "photosIntro": "when i'm not at a desk i'm usually behind a camera — a few frames:",
   "photos": [
-    { "src": "", "alt": "placeholder — photo 1" },
-    { "src": "", "alt": "placeholder — photo 2" },
-    { "src": "", "alt": "placeholder — photo 3" },
-    { "src": "", "alt": "placeholder — photo 4" },
-    { "src": "", "alt": "placeholder — photo 5" },
-    { "src": "", "alt": "placeholder — photo 6" }
+    {
+      "src": "/photos/01.jpg",
+      "alt": "Checking a shot on the camera with the Hong Kong skyline behind"
+    },
+    {
+      "src": "/photos/02.jpg",
+      "alt": "Playing classical guitar on a sofa"
+    },
+    {
+      "src": "/photos/03.jpg",
+      "alt": "Mid-rally on a badminton court"
+    },
+    {
+      "src": "/photos/04.jpg",
+      "alt": "Arms crossed in an orange shell jacket and beanie on a rocky ridge"
+    },
+    {
+      "src": "/photos/05.jpg",
+      "alt": "A glacial valley under snow-capped peaks"
+    },
+    {
+      "src": "/photos/06.jpg",
+      "alt": "A grey-and-white cat lying between patterned cushions"
+    },
+    {
+      "src": "/photos/07.jpg",
+      "alt": "A print reading 'get that camera, it's worth it'"
+    }
   ]
 }
