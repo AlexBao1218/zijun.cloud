@@ -14,7 +14,7 @@ export default async function SkillsSection({ locale }: { locale: string }) {
   return (
     <section>
       <SectionStarter id="skills" title={c.title} subtitle={c.subtitle} />
-      <div className="px-6 md:px-20 py-16 md:py-24 max-w-[1100px] mx-auto grid gap-14">
+      <div className="px-6 md:px-20 py-20 md:py-32 max-w-[1100px] mx-auto grid gap-14">
         {c.groups.map((g) => (
           <div key={g.name} className="grid gap-5 justify-items-center">
             <h3 className="font-serif text-3xl leading-none">{g.name}</h3>

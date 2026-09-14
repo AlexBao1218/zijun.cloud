@@ -20,17 +20,14 @@ type Props = {
   /** The demo's native layout width in px. When the box is narrower, the iframe renders at this width and is scaled down to fit. */
   width?: number;
   poster?: string;
-  activateLabel: string;
   openLabel: string;
   mobileNote: string;
 };
 
-export default function DemoFrame({ url, title, height = 720, width, poster, activateLabel, openLabel, mobileNote }: Props) {
+export default function DemoFrame({ url, title, height = 720, width, poster, openLabel, mobileNote }: Props) {
   const isDesktop = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-  const [active, setActive] = useState(false);
   const [scale, setScale] = useState(1);
   const boxRef = useRef<HTMLDivElement>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   // Scale the iframe down when the box is narrower than the demo's native width.
   useEffect(() => {
@@ -42,10 +39,6 @@ export default function DemoFrame({ url, title, height = 720, width, poster, act
     ro.observe(el);
     return () => ro.disconnect();
   }, [isDesktop, width]);
-
-  useEffect(() => {
-    if (active) iframeRef.current?.focus();
-  }, [active]);
 
   const style = { "--demo-h": `${height}px` } as React.CSSProperties;
 
@@ -80,27 +73,15 @@ export default function DemoFrame({ url, title, height = 720, width, poster, act
     <div className="min-w-0 w-full md:h-[var(--demo-h)] md:max-h-[80vh]" style={style}>
       <div ref={boxRef} className="relative h-full w-full max-w-full border border-ink overflow-hidden">
         <iframe
-          ref={iframeRef}
           src={url}
           title={title}
-          loading="lazy"
+          loading="eager"
           sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
           allow=""
           referrerPolicy="strict-origin-when-cross-origin"
-          inert={!active}
           style={frameStyle}
-          className={`block w-full h-full bg-paper ${active ? "" : "pointer-events-none"}`}
+          className="block w-full h-full bg-paper"
         />
-        {!active && (
-          <button
-            type="button"
-            onClick={() => setActive(true)}
-            className="absolute inset-0 flex items-end p-4 cursor-pointer"
-            aria-label={activateLabel}
-          >
-            <span className="border border-ink bg-paper px-3 py-1.5 text-[12px] font-medium">{activateLabel}</span>
-          </button>
-        )}
       </div>
     </div>
   );

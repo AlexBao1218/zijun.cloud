@@ -10,7 +10,7 @@ export default async function WorkGrid({ locale }: { locale: string }) {
   return (
     <section>
       <SectionStarter id="work" title={c.title} subtitle={c.subtitle} />
-      <ul className="flex flex-wrap justify-evenly gap-x-8 gap-y-16 px-6 md:px-16 py-16 md:py-24 max-w-[1400px] mx-auto">
+      <ul className="flex flex-wrap justify-evenly gap-x-8 gap-y-16 px-6 md:px-16 py-20 md:py-32 max-w-[1400px] mx-auto">
         {c.cards.map((card) => (
           <li key={card.slug} className="w-full max-w-[22rem]">
             <WorkCard card={card} />
