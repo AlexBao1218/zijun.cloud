@@ -16,6 +16,14 @@ export const BORDER_CLASS: Record<ProjectColour, string> = {
   igc: "border-igc",
 };
 
+/** Light tint of the project colour for card media backgrounds. */
+export const TINT_CLASS: Record<ProjectColour, string> = {
+  towngas: "bg-[color-mix(in_srgb,var(--proj-towngas)_22%,var(--paper))]",
+  cathay: "bg-[color-mix(in_srgb,var(--proj-cathay)_22%,var(--paper))]",
+  neochain: "bg-[color-mix(in_srgb,var(--proj-neochain)_22%,var(--paper))]",
+  igc: "bg-[color-mix(in_srgb,var(--proj-igc)_22%,var(--paper))]",
+};
+
 export const UNDERLINE_CLASS: Record<ProjectColour, string> = {
   towngas: "decoration-towngas",
   cathay: "decoration-cathay",

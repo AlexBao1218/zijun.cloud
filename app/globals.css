@@ -51,3 +51,18 @@ body {
   html { scroll-behavior: auto; }
   * { transition-duration: 0.01ms !important; }
 }
+
+/* Film sprocket holes for the contact-sheet photo strip */
+.sprockets {
+  height: 14px;
+  margin: 0 8px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 10px,
+    var(--paper) 10px 22px,
+    transparent 22px 32px
+  );
+  background-size: 32px 8px;
+  background-repeat: repeat-x;
+  background-position: 0 3px;
+}
