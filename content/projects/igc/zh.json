@@ -1,36 +1,44 @@
 {
-  "title": "IGC — 数字孪生与 AI 集成",
-  "meta": {
-    "year": "2025",
-    "role": "Intern"
-  },
-  "description": "在一家房产科技公司暑期实习，为建筑数字孪生系统工作。负责 AI 知识库、API 设计、ESG 报告撰写和用户文档编写。",
+  "title": "BuildingOS Digital Twin",
+  "org": "Intelli Global Corporation (IGC) — smart building management platform",
+  "duration": "Jun – Aug 2025",
+  "role": "Product intern",
+  "colour": "igc",
+  "summary": "Product internship on BuildingOS, IGC's platform for property and facility operators. I authored PRDs for The Henderson's digital twin, classified 1,000+ building documents into six RAG knowledge bases, built the energy-saving model that proved the platform's ESG value for the HKICT Awards, and presented IoT proposals to the Hong Kong Housing Authority.",
+  "demo": { "mode": "static" },
+  "links": [],
+  "facts": [
+    { "label": "Timeline", "value": "Jun – Aug 2025" },
+    { "label": "Role", "value": "Product intern — PRDs, API specs, RAG data pipeline, ESG model" },
+    { "label": "Stack", "value": "Python · RAG agent platform · IoT / government data APIs · Excel modelling" },
+    { "label": "Outputs", "value": "Digital-twin PRDs · 6 knowledge bases · ESG model · Housing Authority proposal" }
+  ],
   "sections": [
     {
-      "heading": "RAG 知识库",
+      "heading": "RAG knowledge bases",
       "paragraphs": [
-        "从1,000多份建筑文档中构建了6个 RAG（检索增强生成）知识库，覆盖暖通、电气、管道、消防、电梯等专业领域。痛点：建筑维护即使是小问题也需要专业工程师介入，响应速度慢。解决方案：一个能通过引用实际文档回答问题的 AI Agent。",
-        "我的职责是将这些文档整理并上传到 AI 系统。我写 Python 脚本扫描1,000多份文件，通过文件名识别类别，归档到对应文件夹，然后批量上传到 Agent。我通过设计专业问题来测试 Agent 是否能准确找到正确文档并正确引用。"
+        "Building maintenance needed a specialist engineer for even minor questions. I wrote Python scripts to scan 1,000+ documents (MVAC, electrical, plumbing, fire services, lifts), classify them by filename, organise and batch-upload them into six knowledge bases, then tested retrieval with domain questions to confirm the agent cited the right document."
+      ],
+      "quote": "Classified 1,000+ documents via Python into 6 RAG knowledge bases, then tuned and tested retrieval."
+    },
+    {
+      "heading": "PRDs for The Henderson's digital twin",
+      "paragraphs": [
+        "For each feature I specified the purpose, the API endpoints to source (IoT and government data), polling frequency, how many data points to show and where in the UI — product-manager work with an engineering spine."
       ]
     },
     {
-      "heading": "API 设计与 PRD 撰写",
+      "heading": "ESG energy-saving model",
       "paragraphs": [
-        "参与 The Henderson 数字孪生项目的 API 设计。每个功能更新都需要理解目的、选择 API 端点、确定调用频率、决定展示几条数据、指定 UI 位置——本质上是在做产品经理的工作。"
+        "IGC needed convincing ESG numbers for an ICT Awards application but had no historical baseline. I designed a horizontal benchmark: theoretical consumption from EMSD benchmarks against actual bills, adjusted for a 73% occupancy rate, refined with senior PMs and defended to clients."
       ]
     },
     {
-      "heading": "Building OS 与智慧房屋",
+      "heading": "Public housing IoT proposal",
       "paragraphs": [
-        "为香港房屋委员会撰写智慧改造方案，研究了 NFC 门禁、跌倒检测传感器、高空抛物检测、车位监测等技术。方案核心是 Building OS——一个整合所有建筑管理数据、住户管理、预测性维护和节能优化的统一平台。"
-      ]
-    },
-    {
-      "heading": "ESG 节能模型",
-      "paragraphs": [
-        "当 IGC 需要为 ICT Awards 申请提供有说服力的 ESG 数据，但系统刚上线没有历史基线时，我设计了一套「横向对标」方案：结合 EMSD 官方基准与实际入住率（73%），将理论能耗与实际电费单对比。这个模型经过与资深 PM 的多轮咨询迭代后，成功向内部团队和客户双方达成认可。"
+        "Researched NFC access, fall-detection sensors, overhead-object detection and parking monitoring for a smart-estate proposal centred on BuildingOS, and presented it to the Hong Kong Housing Authority."
       ]
     }
   ],
-  "tags": ["RAG", "AI Agent", "Python", "API Design", "Digital Twin", "ESG", "PRD Writing", "User Documentation"]
+  "tags": ["PRD Writing", "RAG", "Python", "API Design", "Digital Twin", "ESG", "IoT"]
 }

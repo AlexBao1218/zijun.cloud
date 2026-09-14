@@ -1,0 +1,62 @@
+{
+  "title": "Insurance Programme",
+  "org": "Towngas · Corporate Supplies & Administration",
+  "duration": "Jun – Dec 2026",
+  "role": "Industrial trainee — sole builder",
+  "colour": "towngas",
+  "summary": "Fourteen years of corporate insurance records — 34 classes of cover, 201 policies, 767 claims — lived in a broker workbook, three claims ledgers and folders of PDFs. I digitised them into a policy-linked database with dashboards, trend and loss-ratio views, and a RAG agent that answers questions in chat.",
+  "demo": { "mode": "embed", "url": "https://insurance-demo.zijun.cloud", "height": 720, "poster": "/projects/insurance-program/cover.png" },
+  "links": [
+    { "label": "open live demo ↗", "url": "https://insurance-demo.zijun.cloud" }
+  ],
+  "facts": [
+    { "label": "Timeline", "value": "Jun – Dec 2026" },
+    { "label": "Role", "value": "PRD, data model, frontend, backend, AI integration" },
+    { "label": "Stack", "value": "React 19 · TypeScript · Vite · Tailwind · shadcn/ui · ECharts · NestJS · Feishu Bitable / Spark / Aily" },
+    { "label": "Public demo", "value": "Same code on synthetic aggregates; record-level fields redacted; AI panel simulated" }
+  ],
+  "guide": {
+    "heading": "how to try it (2 minutes)",
+    "steps": [
+      "Start on the Dashboard: annual premium, trend and loss ratio for the whole programme. The \"Synthetic data\" badge means the numbers are generated, not the company's.",
+      "Open Classes and page through the 34 classes of cover. Click one to see its policy chain — note how back-to-back 18-month policies contribute exactly one year of premium to each year.",
+      "Open Claims: every record-level field (policy number, insurer, claimant) is a grey \"Redacted for public demo\" bar — the layout is real, the values are withheld.",
+      "Open Assistant and send any message. This panel is a visual replica of the Aily agent and answers with an explicit \"not available in public demo\" notice rather than a made-up reply.",
+      "Open Reports and generate the narrative — the section structure, the re-inserted live charts and the Word / Markdown export are the real pipeline on canned text."
+    ]
+  },
+  "sections": [
+    {
+      "heading": "The problem",
+      "paragraphs": [
+        "A simple question such as \"what did we pay for property cover in 2021 and what came back in claims?\" took hours of manual arithmetic across a broker's Excel, three claims ledgers and PDFs. Nobody could see a loss ratio by class or by year without rebuilding the numbers by hand."
+      ]
+    },
+    {
+      "heading": "What I built",
+      "paragraphs": [
+        "A Feishu Spark app that reads three Bitable tables through the platform's capabilities, joins them in the browser, caches with schema and version guards, and computes premium, trend and loss-ratio views with a pro-rata monthly rule that handles 18-month policy chains without double counting.",
+        "An Aily agent answers questions in chat. For reports, a server-side proxy calls one Aily skill per section with a pinned output structure, the client re-inserts live dashboard charts into the model's Markdown, and the result exports to Word with embedded figures, PDF or a Feishu Doc."
+      ],
+      "bullets": [
+        "Pro-rata monthly attribution of annualised premium to policy years",
+        "Tolerant extractors for every Bitable value shape; loader falls back to a bundled dataset so every page renders outside Feishu",
+        "AI report generation that stays honest: full class names beside every code, an IBNR caveat on immature years"
+      ],
+      "quote": "Digitized 14 years of insurance records into a policy-linked database with dashboards and a RAG agent."
+    },
+    {
+      "heading": "Outcome",
+      "paragraphs": [
+        "[TO FILL: hours saved per query / who uses it weekly / one sentence from the department on what changed.]"
+      ]
+    },
+    {
+      "heading": "What the public demo withholds",
+      "paragraphs": [
+        "The employer is not named. Aggregates are synthetic and badged as such; claim counts, loss ratios, per-layer shares, day-level dates and broker names are withheld; charts keep axes without numeric values; record-level fields render as explicit \"Redacted\" bars. Nothing is replaced with an invented stand-in."
+      ]
+    }
+  ],
+  "tags": ["React 19", "TypeScript", "NestJS", "ECharts", "Feishu Spark", "Feishu Aily", "RAG", "docx"]
+}

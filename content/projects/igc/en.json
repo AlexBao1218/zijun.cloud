@@ -1,36 +1,44 @@
 {
-  "title": "IGC — Digital Twin & AI Integration",
-  "meta": {
-    "year": "2025",
-    "role": "Intern"
-  },
-  "description": "Summer internship at a prop-tech company building digital twin systems for buildings. Worked on AI knowledge bases, API design, ESG reporting, and user documentation.",
+  "title": "BuildingOS Digital Twin",
+  "org": "Intelli Global Corporation (IGC) — smart building management platform",
+  "duration": "Jun – Aug 2025",
+  "role": "Product intern",
+  "colour": "igc",
+  "summary": "Product internship on BuildingOS, IGC's platform for property and facility operators. I authored PRDs for The Henderson's digital twin, classified 1,000+ building documents into six RAG knowledge bases, built the energy-saving model that proved the platform's ESG value for the HKICT Awards, and presented IoT proposals to the Hong Kong Housing Authority.",
+  "demo": { "mode": "static" },
+  "links": [],
+  "facts": [
+    { "label": "Timeline", "value": "Jun – Aug 2025" },
+    { "label": "Role", "value": "Product intern — PRDs, API specs, RAG data pipeline, ESG model" },
+    { "label": "Stack", "value": "Python · RAG agent platform · IoT / government data APIs · Excel modelling" },
+    { "label": "Outputs", "value": "Digital-twin PRDs · 6 knowledge bases · ESG model · Housing Authority proposal" }
+  ],
   "sections": [
     {
-      "heading": "RAG Knowledge Bases",
+      "heading": "RAG knowledge bases",
       "paragraphs": [
-        "Built 6 RAG (Retrieval-Augmented Generation) knowledge bases from 1,000+ building documents covering MVAC, Electrical, Plumbing, Fire Services, Lift systems, and more. The pain point: building maintenance requires specialized engineers for even minor issues, creating slow response times. The solution: an AI Agent that can answer questions by referencing the actual documentation.",
-        "My role was to organize and upload these documents into the AI system. I wrote Python scripts to scan the 1,000+ files, identify their category by filename, organize them into the correct folders, then batch-upload them to the agent. I tested the agent by crafting domain-specific questions to verify it could accurately locate the right documents and cite them correctly."
+        "Building maintenance needed a specialist engineer for even minor questions. I wrote Python scripts to scan 1,000+ documents (MVAC, electrical, plumbing, fire services, lifts), classify them by filename, organise and batch-upload them into six knowledge bases, then tested retrieval with domain questions to confirm the agent cited the right document."
+      ],
+      "quote": "Classified 1,000+ documents via Python into 6 RAG knowledge bases, then tuned and tested retrieval."
+    },
+    {
+      "heading": "PRDs for The Henderson's digital twin",
+      "paragraphs": [
+        "For each feature I specified the purpose, the API endpoints to source (IoT and government data), polling frequency, how many data points to show and where in the UI — product-manager work with an engineering spine."
       ]
     },
     {
-      "heading": "API Design & PRD Writing",
+      "heading": "ESG energy-saving model",
       "paragraphs": [
-        "Contributed to API design for the Henderson Digital Twin project. For each feature update, I needed to understand the purpose, identify which API endpoints to use, determine polling frequency, decide how many data points to display, and specify the UI placement — essentially acting as a product manager."
+        "IGC needed convincing ESG numbers for an ICT Awards application but had no historical baseline. I designed a horizontal benchmark: theoretical consumption from EMSD benchmarks against actual bills, adjusted for a 73% occupancy rate, refined with senior PMs and defended to clients."
       ]
     },
     {
-      "heading": "Building OS & Smart Housing",
+      "heading": "Public housing IoT proposal",
       "paragraphs": [
-        "Contributed to a smart transformation proposal for HK Housing Authority, researching technologies like NFC access control, fall detection sensors, overhead object detection, and parking space monitoring. The proposal centered on Building OS — a unified interface integrating all building management data, resident management, predictive maintenance, and energy optimization."
-      ]
-    },
-    {
-      "heading": "ESG Energy-Saving Model",
-      "paragraphs": [
-        "When IGC needed compelling ESG data for an ICT Awards application but had no historical baseline (the system was just launched), I designed a 'horizontal benchmarking' approach: comparing theoretical energy consumption from EMSD benchmarks against actual electricity bills, adjusted for real occupancy rates (73%). This model was iteratively refined through consultation with senior PMs and successfully defended to both internal teams and clients."
+        "Researched NFC access, fall-detection sensors, overhead-object detection and parking monitoring for a smart-estate proposal centred on BuildingOS, and presented it to the Hong Kong Housing Authority."
       ]
     }
   ],
-  "tags": ["RAG", "AI Agent", "Python", "API Design", "Digital Twin", "ESG", "PRD Writing", "User Documentation"]
+  "tags": ["PRD Writing", "RAG", "Python", "API Design", "Digital Twin", "ESG", "IoT"]
 }

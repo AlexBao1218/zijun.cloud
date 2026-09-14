@@ -1,33 +1,61 @@
 {
-  "title": "Cathay Cargo ULD Optimizer",
-  "meta": {
-    "year": "2025",
-    "role": "Hackathon · Finalist"
+  "title": "747-8F Load Planner",
+  "org": "Cathay Hackathon 2025 · Top 50 finalist of 1,500+ teams",
+  "duration": "Sep – Nov 2025 · rebuilt 2026",
+  "role": "Team lead",
+  "colour": "cathay",
+  "summary": "Where the containers go on a freighter decides where its centre of gravity sits, and CG drives fuel burn. In the 24-hour final at Cathay City we built a drag-and-drop ULD planner backed by a MILP. The 2026 rebuild runs that solver as WebAssembly in your browser, with weight limits, type compatibility, lateral balance and lockable positions.",
+  "demo": { "mode": "embed", "url": "https://cargo-demo.zijun.cloud", "height": 760, "poster": "/projects/cathay-hackathon/cover.png" },
+  "links": [
+    { "label": "open live demo ↗", "url": "https://cargo-demo.zijun.cloud" },
+    { "label": "original hackathon repo ↗", "url": "https://github.com/AlexBao1218/cxhack25" }
+  ],
+  "facts": [
+    { "label": "Timeline", "value": "Sep – Nov 2025 (hackathon) · 2026 (rebuild)" },
+    { "label": "Role", "value": "Team lead — MILP research, interface, pitch" },
+    { "label": "Stack", "value": "Vite · React 19 · TypeScript · Tailwind v4 · zustand · dnd-kit · GLPK 5 via glpk.js (wasm, Web Worker)" },
+    { "label": "Data", "value": "Hackathon's synthetic scenarios, re-scaled to plausible freighter magnitudes — not airline data" }
+  ],
+  "guide": {
+    "heading": "how to try it (2 minutes)",
+    "steps": [
+      "Pick a scenario at the top — Full (34 ULDs), Partial (24) or Light (16). The 747 is drawn nose-up on the left; unassigned ULDs wait on the right.",
+      "Drag a ULD onto a position. Invalid targets (over the weight limit, wrong type for a nose position) are flagged before you drop; the CG gauge and score update live.",
+      "Lock a position you want to keep, then press Solve. The MILP treats locked pairs as fixed and plans everything else around them — usually in under half a second.",
+      "Open the How-it-works drawer to see the actual variables, constraints and objective, plus the size and time of the last solve."
+    ]
   },
-  "description": "A 2D drag-and-drop ULD load planning platform for air cargo. Built in 24 hours during the Cathay Cargo Hackathon final at Cathay City.",
   "sections": [
     {
-      "heading": "The Challenge",
+      "heading": "The problem",
       "paragraphs": [
-        "Cathay Cargo Terminal aspires to set the global benchmark for air cargo excellence through cutting-edge technology. The challenge: how might we harness AI, computer vision, and emerging technologies to enhance cargo handling with efficiency and sustainability?",
-        "Our team of HKU Industrial Engineering students pitched an idea we knew well from the IGC internship: the predictive maintenance model applied to cargo logistics. We extended this with IoT sensors on high-value cargo (pharmaceuticals, special declarations) to detect anomalies in real-time and trigger early warnings."
+        "The load planning we saw during the hackathon was surprisingly informal for a decision with that much money behind it. A planner needs to see the aircraft, move things by hand, and have a machine handle the arithmetic of where the rest should go so the CG lands on target."
       ]
     },
     {
-      "heading": "The Product",
+      "heading": "What we built in 24 hours",
       "paragraphs": [
-        "A 2D ULD (Unit Load Device) intelligent load planning platform. The UI mimics a Tetris-like packing game: the left panel shows a top-down view of an empty cargo plane with ULD positions marked; the right panel shows weighed and packed cargo. Users drag items from right to left, and a data bar at the top displays the real-time Center of Gravity (CG) position.",
-        "The backend runs a MILP (Mixed Integer Linear Programming) algorithm based on academic research — the system calculates the optimal arrangement that keeps the aircraft's CG in the ideal range. CG has a massive impact on fuel consumption, and Cathay's current load planning is surprisingly informal — a genuine pain point with real business value.",
-        "The platform is human-in-the-loop: unexpected events and multi-leg journeys require human judgment. This is the key area for future optimization."
+        "A 2D planner that plays like a packing game: top-down aircraft on the left, weighed cargo on the right, live CG bar on top. Behind it, a MILP from the load-planning literature — binary variables for \"this ULD in that position\", each ULD placed once, each position used at most once, objective minimising CG deviation from target."
+      ],
+      "quote": "Researched MILP algorithms to compute CG-balanced ULD layouts for a Boeing 747; Top 50 Finalist out of 1,500+ teams."
+    },
+    {
+      "heading": "What the rebuild changed",
+      "paragraphs": [
+        "The hackathon model was smaller than the pitch implied — no weight limits, no lateral balance, no locks, and a bug that used lateral positions to compute longitudinal CG. The rebuild adds position weight limits, ULD-type compatibility, a lateral balance penalty and user locks, and shows the formulation on screen. The solver is GLPK compiled to WebAssembly in a Web Worker: nothing leaves the browser. A ±1 cm / ±200 kg dead zone was necessary for branch-and-bound to converge."
+      ],
+      "bullets": [
+        "All three scenarios solve to optimal in 40–360 ms in the browser",
+        "Lock / pin any position; the solver plans around it",
+        "Sticky CG gauge with target band, 0–100 score, per-tile capacity bar"
       ]
     },
     {
-      "heading": "What We Learned",
+      "heading": "What we learned",
       "paragraphs": [
-        "Going off-prompt on the final day was a risky decision driven by our confidence in our preliminary round work. It consumed hours of discussion time and left us without a dedicated cargo judge for feedback. Next time: time-box decisions and prepare parallel pitch decks.",
-        "In a 24-hour hackathon, presentation prep should happen during the build phase — not after. We ran vibe coding right up to the wire, leaving too little time to polish our pitch. Even great work needs a great story."
+        "Going off-prompt on the final day was a risky call made on the strength of our preliminary-round work; it cost hours of discussion and left us without a dedicated cargo judge for feedback. In a 24-hour hackathon, presentation prep has to happen during the build, not after it."
       ]
     }
   ],
-  "tags": ["Vibe Coding", "MILP", "Operations Research", "2D Visualization", "Python", "AI", "Computer Vision"]
+  "tags": ["MILP", "GLPK", "WebAssembly", "Operations Research", "React 19", "dnd-kit", "Vibe Coding"]
 }
