@@ -1,27 +1,7 @@
 @../../CLAUDE.md
 
-# Home / Hero Section
+# Home (single page)
 
-## Content Source
-- Eyebrow + tagline: `content/home/{en,zh}.json`
-- Name, role, CTA labels: `messages/{en,zh}.json` under `home.hero`
+`page.tsx` composes five async Server Components from `app/components/home/`, each loading its own content file. Section anchors (`work`, `skills`, `about`) live on `SectionStarter` and are targeted by `TopBar` links as `{ pathname: "/", hash }`.
 
-## Content Schema (`content/home/en.json`)
-```json
-{
-  "eyebrow": "Currently Open to Opportunities",
-  "tagline": "Building systems that learn, warehouses that think, ideas that scale"
-}
-```
-
-## Structure
-- Full-screen hero with centered content
-- Does NOT use SectionContainer (unique layout)
-- Staggered fade-in animations (delay-1 through delay-5)
-- Corner decorations: fixed L-shaped borders (desktop only concept, but visible on mobile too)
-- Scroll indicator: gradient vertical line at bottom
-
-## Design Notes
-- Hero name: `font-serif text-6xl md:text-8xl font-medium tracking-tight`
-- Role: `text-[#b85c38]/70 tracking-wide`
-- CTAs: primary (filled accent) + secondary (ghost border), `rounded-full`
+Hero image comes from `content/home.image` (`{ src, alt }`, file under `public/photos/`); when absent the slot renders a hatch placeholder. About photos come from `content/about.photos`; an empty `src` renders a hatch placeholder.
