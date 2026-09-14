@@ -1,27 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Noto_Serif_SC } from "next/font/google";
+import { Instrument_Serif, Geist_Mono, Noto_Serif_SC } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
-import { routing } from "@/i18n/routing";
-import Navigation from "@/app/components/Navigation";
-import "../globals.css";
 import { notFound } from "next/navigation";
-import localFont from "next/font/local";
+import { routing } from "@/i18n/routing";
+import TopBar from "@/app/components/TopBar";
+import "../globals.css";
 
-const geist = localFont({
-  src: [
-    { path: "../fonts/Geist-Regular.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/Geist-Medium.woff2", weight: "500", style: "normal" },
-    { path: "../fonts/Geist-Light.woff2", weight: "300", style: "normal" },
-  ],
-  variable: "--font-geist",
+const instrument = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  variable: "--font-cormorant",
+  variable: "--font-geist-mono",
   display: "swap",
 });
 
@@ -37,14 +34,14 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: "Alex Bao — AI & Full-Stack Developer",
+  title: "Alex Bao",
   description:
-    "Personal website of Alex Bao (Zijun). HKU student, AI & Full-Stack Developer, building systems that learn and warehouses that think.",
-  keywords: ["Alex Bao", "Zijun Bao", "HKU", "AI Developer", "Full-Stack", "WMS", "NeoChain"],
+    "Alex (Zijun) Bao — HKU engineering student who turns operational pain points into deployed systems. Portfolio: insurance, fleet and meeting-minutes tools, a 747-8F load planner, NeoChain WMS.",
+  keywords: ["Alex Bao", "Zijun Bao", "HKU", "operations", "AI tooling", "portfolio"],
 };
 
 export const viewport: Viewport = {
-  themeColor: "#faf9f7",
+  themeColor: "#fcfbf7",
 };
 
 type Props = {
@@ -54,22 +51,15 @@ type Props = {
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
-
-  if (!routing.locales.includes(locale as "en" | "zh")) {
-    notFound();
-  }
-
+  if (!routing.locales.includes(locale as "en" | "zh")) notFound();
   setRequestLocale(locale);
   const messages = await getMessages();
 
   return (
-    <html
-      lang={locale}
-      className={`${geist.variable} ${cormorant.variable} ${notoSerif.variable}`}
-    >
-      <body className="antialiased min-h-screen flex flex-col bg-[#faf9f7]">
+    <html lang={locale} className={`${instrument.variable} ${geistMono.variable} ${notoSerif.variable}`}>
+      <body className="min-h-screen bg-paper text-ink">
         <NextIntlClientProvider messages={messages}>
-          <Navigation />
+          <TopBar />
           {children}
         </NextIntlClientProvider>
       </body>
