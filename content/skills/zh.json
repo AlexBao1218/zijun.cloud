@@ -1,0 +1,11 @@
+{
+  "title": "skills",
+  "subtitle": "in order of relevance / proficiency",
+  "groups": [
+    { "name": "Methods", "items": ["Data-Driven Optimization", "MILP / Operations Research", "System Simulation", "PRD Writing", "Process Mapping", "RAG Pipeline Design", "Prompt Engineering"] },
+    { "name": "Tools", "items": ["Claude Code", "Lark (Feishu) / Spark", "Excel", "Power BI", "Power Automate", "Power Apps", "SAP", "FlexSim", "Figma", "Vercel"] },
+    { "name": "Technical", "items": ["Python", "SQL", "TypeScript", "React / Next.js", "Tailwind CSS", "Node.js", "Git"] }
+  ],
+  "languagesLabel": "Languages",
+  "languages": "English (professional working) · Mandarin (native) · Cantonese (limited working)"
+}

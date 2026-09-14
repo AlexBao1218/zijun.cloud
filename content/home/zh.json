@@ -1,4 +1,11 @@
 {
-  "eyebrow": "目前接受机会中",
-  "tagline": "构建能学习的系统、能思考的仓库，能规模化落地的想法"
+  "availability": "available jan – sep 2027 for internships",
+  "lead": "i'm alex —",
+  "identities": [
+    "an engineering student at HKU",
+    "builder of operations tools",
+    "photographer",
+    "[TO FILL: two more identities, e.g. hiker / film watcher]"
+  ],
+  "closing": "and currently an industrial trainee at Towngas."
 }

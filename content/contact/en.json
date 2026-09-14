@@ -1,23 +1,9 @@
 {
-  "eyebrow": "Contact",
-  "links": [
-    {
-      "type": "email",
-      "label": "Email",
-      "value": "zijun.bao@outlook.com"
-    },
-    {
-      "type": "external",
-      "label": "GitHub",
-      "value": "@AlexBao1218",
-      "url": "https://github.com/AlexBao1218"
-    },
-    {
-      "type": "download",
-      "label": "Resume / CV",
-      "value": "PDF · Bao Zijun · HKU",
-      "url": "/cv.pdf"
-    }
-  ],
-  "tagline": "Let's build something together"
+  "mailLabel": "say hi →",
+  "email": "zijun.bao@outlook.com",
+  "githubLabel": "github ↗",
+  "githubUrl": "https://github.com/AlexBao1218",
+  "cvLabel": "resume (pdf) ↓",
+  "cvUrl": "/cv.pdf",
+  "footer": "© 2026 alex bao · built with next.js, set in instrument serif + geist mono"
 }

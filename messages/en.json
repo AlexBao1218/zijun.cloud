@@ -1,35 +1,12 @@
 {
-  "nav": {
-    "home": "Home",
-    "about": "About",
-    "projects": "Projects",
-    "blog": "Blog",
-    "contact": "Contact"
-  },
-  "home": {
-    "hero": {
-      "greeting": "Hi, I'm",
-      "name": "Alex Bao",
-      "role": "AI & Full-Stack Developer",
-      "tagline": "I build systems that learn, warehouses that think, and ideas that scale.",
-      "cta": "View My Work",
-      "secondaryCta": "Download CV"
-    }
-  },
-  "about": {
-    "title": "About Me",
-    "subtitle": "Student · Builder · Problem Solver"
-  },
-  "projects": {
-    "title": "Projects",
-    "subtitle": "Real work, real impact"
-  },
-  "blog": {
-    "title": "Blog",
-    "subtitle": "Thoughts on AI, learning, and growth"
-  },
-  "contact": {
-    "title": "Get in Touch",
-    "subtitle": "Open to opportunities, collaborations, and conversations"
+  "nav": { "work": "work", "skills": "skills", "about": "about", "resume": "resume" },
+  "project": {
+    "back": "← back to work",
+    "openDemo": "open live demo ↗",
+    "activate": "click to interact",
+    "mobileNote": "The live demo is built for a desktop screen — open it in a new tab.",
+    "recordingNote": "Recording coming soon — open the demo to try the full flow.",
+    "guideFallback": "how to try it",
+    "stack": "stack"
   }
 }

@@ -1,4 +1,11 @@
 {
-  "eyebrow": "Currently Open to Opportunities",
-  "tagline": "Building systems that learn, warehouses that think, ideas that scale"
+  "availability": "available jan – sep 2027 for internships",
+  "lead": "i'm alex —",
+  "identities": [
+    "an engineering student at HKU",
+    "builder of operations tools",
+    "photographer",
+    "[TO FILL: two more identities, e.g. hiker / film watcher]"
+  ],
+  "closing": "and currently an industrial trainee at Towngas."
 }
