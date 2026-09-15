@@ -26,14 +26,16 @@ export default async function SkillsSection({ locale }: { locale: string }) {
                 {c.ledger.rows.map((r) => (
                   <tr key={r.course} className="border-b border-ink last:border-b-0">
                     <td className="px-4 py-2.5">{r.course}</td>
-                    <td className="px-4 py-2.5 w-20 text-center font-serif text-[20px] leading-none border-l border-ink tabular-nums">{r.grade}</td>
+                    <td className="pl-6 pr-4 py-2.5 w-20 text-left font-serif text-[20px] leading-none border-l border-ink">{r.grade}</td>
                   </tr>
                 ))}
               </tbody>
               <tfoot>
                 <tr className="border-t border-ink bg-fill">
-                  <td colSpan={2} className="px-4 py-3 text-[12px]">
-                    {c.ledger.footer.join(" · ")}
+                  <td colSpan={2} className="px-4 py-3 text-[12px] leading-relaxed">
+                    {c.ledger.footer.map((line) => (
+                      <span key={line} className="block">{line}</span>
+                    ))}
                   </td>
                 </tr>
               </tfoot>

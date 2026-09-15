@@ -34,7 +34,7 @@
   "languages": "English (professional working) · Mandarin (native) · Cantonese (limited working)",
   "ledger": {
     "name": "coursework",
-    "subtitle": "beng (ielm), the university of hong kong",
+    "subtitle": "industrial engineering, the university of hong kong",
     "rows": [
       {
         "course": "Operations Planning and Control",
@@ -74,7 +74,7 @@
       }
     ],
     "footer": [
-      "Major GPA · BEng (IELM) · 3.73",
+      "Major GPA: 3.73 / 4.3",
       "Dean’s Honours List 2024–2025, 2025–2026"
     ]
   }
