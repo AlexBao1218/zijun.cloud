@@ -1,23 +1,25 @@
 {
   "title": "about",
   "subtitle": "a little bit more about me :)",
-  "paragraphs": [
-    "born in inner mongolia. kindergarten in beijing, primary school in chengdu, middle and high school in shanghai, university and now work in hong kong — five cities, one habit of noticing how things are run.",
-    "off the clock: badminton and tennis, pour-over coffee, classical guitar, and a camera on most days. at home, a blue-and-white british shorthair called zai zai (崽崽) supervises all of the above."
-  ],
+  "paragraphs": [],
   "photosIntro": "the film strips are the evidence.",
   "strips": [
     {
       "name": "outdoors",
       "photos": [
         {
-          "src": "/photos/outdoors-01.jpg",
-          "alt": "Alone in a meadow below a snow mountain, arms out"
-        },
-        {
           "src": "/photos/outdoors-02.jpg",
           "alt": "A glacial valley under snow-capped peaks"
         },
+        {
+          "src": "/photos/outdoors-01.jpg",
+          "alt": "Alone in a meadow below a snow mountain, arms out"
+        }
+      ]
+    },
+    {
+      "name": "people",
+      "photos": [
         {
           "src": "/photos/outdoors-03.jpg",
           "alt": "Arms crossed in an orange shell jacket on a rocky ridge"
@@ -29,23 +31,10 @@
         {
           "src": "/photos/outdoors-05.jpg",
           "alt": "Two friends in front of a temple gate"
-        }
-      ]
-    },
-    {
-      "name": "city",
-      "photos": [
+        },
         {
           "src": "/photos/city-01.jpg",
           "alt": "Checking a shot on the camera with the Hong Kong skyline behind"
-        },
-        {
-          "src": "/photos/city-02.jpg",
-          "alt": "Looking back and smiling on a lit street at night"
-        },
-        {
-          "src": "/photos/city-03.jpg",
-          "alt": "Standing at a railing as a red taxi blurs past"
         },
         {
           "src": "/photos/city-04.jpg",
@@ -71,16 +60,13 @@
         {
           "src": "/photos/home-03.jpg",
           "alt": "A grey-and-white cat lying between patterned cushions"
-        },
-        {
-          "src": "/photos/home-04.jpg",
-          "alt": "A print reading 'get that camera, it's worth it'"
         }
       ]
     }
   ],
   "map": {
     "title": "where i've lived",
+    "lede": "five cities before twenty-two. each one ran differently, and i kept notes.",
     "stops": [
       {
         "name": "inner mongolia",
@@ -108,10 +94,11 @@
       },
       {
         "name": "hong kong",
-        "stage": "university · work",
+        "stage": "university, now work",
         "lon": 114.2,
         "lat": 22.3
       }
-    ]
+    ],
+    "aside": "evenings go to badminton or tennis, mornings to a pour-over. there is a classical guitar that gets played, a camera that gets carried, and a blue-and-white british shorthair, zai zai (崽崽), who supervises all of it."
   }
 }
