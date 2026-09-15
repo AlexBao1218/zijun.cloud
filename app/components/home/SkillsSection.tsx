@@ -26,7 +26,7 @@ export default async function SkillsSection({ locale }: { locale: string }) {
                 {c.ledger.rows.map((r) => (
                   <tr key={r.course} className="border-b border-ink last:border-b-0">
                     <td className="px-4 py-2.5">{r.course}</td>
-                    <td className="px-4 py-2.5 w-20 text-right font-serif text-[20px] leading-none border-l border-ink">{r.grade}</td>
+                    <td className="px-4 py-2.5 w-20 text-center font-serif text-[20px] leading-none border-l border-ink tabular-nums">{r.grade}</td>
                   </tr>
                 ))}
               </tbody>
