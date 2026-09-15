@@ -7,84 +7,79 @@ type Props = { title: string; lede: string; text: string; stops: Stop[] };
 type Pt = readonly [number, number];
 
 const P = 16;
+const TRAVEL_S = 3.6; // seconds for the whole journey
 const project = (lon: number, lat: number): Pt =>
   [((lon - 73) / (136 - 73)) * (CHINA_W - 2 * P) + P, ((54 - lat) / (54 - 17)) * (CHINA_H - 2 * P) + P];
 
-/** Catmull-Rom spline through the stops, sampled densely so footprints can be laid along it. */
-function samplePath(pts: Pt[], perSeg = 40): Pt[] {
-  const out: Pt[] = [];
+/** Catmull-Rom through the stops, emitted as cubic Béziers so the same string works for the SVG path and CSS offset-path. */
+function splinePath(pts: Pt[]) {
+  let d = `M${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
   for (let i = 0; i < pts.length - 1; i++) {
     const p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(pts.length - 1, i + 2)];
-    for (let k = 0; k < perSeg; k++) {
+    const c1: Pt = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
+    const c2: Pt = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+    d += ` C${c1[0].toFixed(1)} ${c1[1].toFixed(1)} ${c2[0].toFixed(1)} ${c2[1].toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
+  }
+  return d;
+}
+
+/** Approximate length of each segment by sampling the same spline, so pins can drop when the marker arrives. */
+function segmentLengths(pts: Pt[], perSeg = 60) {
+  const lens: number[] = [];
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(pts.length - 1, i + 2)];
+    let len = 0, prev: Pt = p1;
+    for (let k = 1; k <= perSeg; k++) {
       const t = k / perSeg, t2 = t * t, t3 = t2 * t;
       const x = 0.5 * (2 * p1[0] + (-p0[0] + p2[0]) * t + (2 * p0[0] - 5 * p1[0] + 4 * p2[0] - p3[0]) * t2 + (-p0[0] + 3 * p1[0] - 3 * p2[0] + p3[0]) * t3);
       const y = 0.5 * (2 * p1[1] + (-p0[1] + p2[1]) * t + (2 * p0[1] - 5 * p1[1] + 4 * p2[1] - p3[1]) * t2 + (-p0[1] + 3 * p1[1] - 3 * p2[1] + p3[1]) * t3);
-      out.push([x, y]);
+      len += Math.hypot(x - prev[0], y - prev[1]);
+      prev = [x, y];
     }
+    lens.push(len);
   }
-  out.push(pts[pts.length - 1]);
-  return out;
+  return lens;
 }
 
-/** Footprints every `step` px along the sampled path, alternating left/right of the line, rotated to face the way of travel. */
-function footprints(samples: Pt[], step = 22) {
-  const feet: { x: number; y: number; angle: number; side: 1 | -1 }[] = [];
-  let acc = 0, side: 1 | -1 = 1;
-  for (let i = 1; i < samples.length; i++) {
-    const [x0, y0] = samples[i - 1], [x1, y1] = samples[i];
-    const d = Math.hypot(x1 - x0, y1 - y0);
-    acc += d;
-    if (acc >= step) {
-      const angle = (Math.atan2(y1 - y0, x1 - x0) * 180) / Math.PI + 90;
-      const nx = -(y1 - y0) / d, ny = (x1 - x0) / d; // unit normal
-      feet.push({ x: x1 + nx * 4 * side, y: y1 + ny * 4 * side, angle, side });
-      side = side === 1 ? -1 : 1;
-      acc = 0;
-    }
-  }
-  return feet;
-}
-
-/** Map of China (real outline, drawn in ink); the places Alex has lived are joined by a winding trail of footprints. */
+/** Map of China (real outline) with the journey drawn as a route: the line draws itself, a marker travels it, and a pin drops at each city as the marker arrives. */
 export default function LifeMap({ title, lede, text, stops }: Props) {
   const pts = stops.map((s) => project(s.lon, s.lat));
-  const feet = footprints(samplePath(pts));
+  const d = splinePath(pts);
+  const lens = segmentLengths(pts);
+  const total = lens.reduce((a, b) => a + b, 0);
+  const arrivals = lens.reduce<number[]>((acc, l) => [...acc, acc[acc.length - 1] + l], [0]).map((v) => (v / total) * TRAVEL_S);
+
   return (
     <div className="grid md:grid-cols-[minmax(0,1fr)_320px] gap-10 md:gap-14 items-center">
       <Sketch label={`${title}: ${stops.map((s) => `${s.stage} in ${s.name}`).join(", ")}`}>
-        <svg viewBox={`0 0 ${CHINA_W} ${CHINA_H}`} width="100%" style={{ minWidth: 520 }} filter="url(#wob-map)">
-          <defs>
-            <Wobble id="wob-map" />
-            {/* one footprint: sole + heel, toes as dots; mirrored for the other foot */}
-            <g id="foot">
-              <ellipse cx="0" cy="1.5" rx="2.3" ry="3.4" />
-              <ellipse cx="0" cy="-3.6" rx="1.6" ry="1.2" />
-            </g>
-          </defs>
-          {CHINA_PATHS.map((d, i) => (
-            <path key={i} d={d} {...stroke} strokeWidth={1.2} data-draw style={{ ["--d" as string]: i * 0.3, strokeDasharray: 8000, strokeDashoffset: 8000 }} />
-          ))}
-          {feet.map((f, i) => (
-            <use
-              key={i}
-              href="#foot"
-              fill="var(--pop)"
-              transform={`translate(${f.x.toFixed(1)} ${f.y.toFixed(1)}) rotate(${f.angle.toFixed(1)}) scale(${f.side} 1)`}
-              data-fade
-              style={{ ["--d" as string]: 1.0 + i * 0.045 }}
-            />
-          ))}
+        <svg viewBox={`0 0 ${CHINA_W} ${CHINA_H}`} width="100%" style={{ minWidth: 520 }} className="overflow-visible">
+          <defs><Wobble id="wob-map" /></defs>
+          <g filter="url(#wob-map)">
+            {CHINA_PATHS.map((p, i) => (
+              <path key={i} d={p} {...stroke} strokeWidth={1.2} data-draw style={{ ["--d" as string]: i * 0.25, strokeDasharray: 8000, strokeDashoffset: 8000 }} />
+            ))}
+          </g>
+          {/* the route draws itself under the marker */}
+          <path d={d} {...stroke} stroke="var(--pop)" strokeWidth={1.6} className="travel-route" style={{ strokeDasharray: total, strokeDashoffset: total, ["--len" as string]: total, ["--travel" as string]: `${TRAVEL_S}s` }} />
+          {/* pins drop in as the marker arrives */}
           {stops.map((s, i) => {
             const [x, y] = pts[i];
             const right = s.lon > 112;
-            const dy = s.name === "hong kong" ? 16 : 4;
+            const last = i === stops.length - 1;
             return (
-              <g key={s.name}>
-                <circle cx={x} cy={y} r={4.5} fill="var(--ink)" stroke="var(--paper)" strokeWidth={2} data-fade style={{ ["--d" as string]: 0.9 + i * 0.5 }} />
-                <text x={right ? x + 11 : x - 11} y={y + dy} textAnchor={right ? "start" : "end"} style={mono} data-fade>{s.name}</text>
+              <g key={s.name} className="travel-pin" style={{ ["--at" as string]: `${arrivals[i].toFixed(2)}s`, transformOrigin: `${x}px ${y}px` }}>
+                {last && <circle cx={x} cy={y} r={5} className="travel-pulse" fill="none" stroke="var(--pop)" strokeWidth={1.5} style={{ ["--at" as string]: `${(arrivals[i] + 0.3).toFixed(2)}s`, transformOrigin: `${x}px ${y}px` }} />}
+                <path d={`M${x} ${y} c-6 -7 -7 -9 -7 -13 a7 7 0 0 1 14 0 c0 4 -1 6 -7 13z`} fill={last ? "var(--pop)" : "var(--ink)"} stroke="var(--paper)" strokeWidth={1.5} />
+                <circle cx={x} cy={y - 13} r={2.4} fill="var(--paper)" />
+                <text x={right ? x + 12 : x - 12} y={y + 4} textAnchor={right ? "start" : "end"} style={mono}>{s.name}</text>
               </g>
             );
           })}
+          {/* the traveller */}
+          <g className="travel-marker" style={{ offsetPath: `path("${d}")`, ["--travel" as string]: `${TRAVEL_S}s` }}>
+            <circle r={5.5} fill="var(--paper)" stroke="var(--pop)" strokeWidth={2} />
+            <circle r={2} fill="var(--pop)" />
+          </g>
         </svg>
       </Sketch>
       <div className="grid gap-6">
