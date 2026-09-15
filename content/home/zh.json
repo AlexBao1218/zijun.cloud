@@ -1,10 +1,11 @@
 {
   "availability": "available jan – sep 2027 for internships",
   "quote": "“one system by the end of the internship would be great.”",
-  "attribution": "— the brief, in june. by september there were four.",
-  "byline": "alex bao. engineering student at hku. i find the problem on the floor and build with coding agents; the four are below, scrubbed and live.",
+  "attribution": "— the brief, in june. halfway through, there were",
+  "byline": "alex bao. engineering student at hku. i find the problem on the floor and build with coding agents. three of the four are below as live demos — open one and click around.",
   "image": {
     "src": "/photos/hero.jpg",
     "alt": "Alex photographing himself in a mirror, camera raised to one eye"
-  }
+  },
+  "attributionEmphasis": "four."
 }

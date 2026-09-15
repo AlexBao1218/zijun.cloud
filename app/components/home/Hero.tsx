@@ -5,6 +5,7 @@ type HomeContent = {
   availability: string;
   quote: string;
   attribution: string;
+  attributionEmphasis: string;
   byline: string;
   image?: { src: string; alt: string };
 };
@@ -18,7 +19,10 @@ export default async function Hero({ locale }: { locale: string }) {
       <div className="max-w-[46ch]">
         <p className="text-[12px] md:text-[13px] tracking-[0.14em] uppercase mb-8">{c.availability}</p>
         <h1 className="font-serif font-normal text-[34px] md:text-[44px] leading-[1.1] text-balance">{c.quote}</h1>
-        <p className="mt-4 font-serif italic text-[18px] md:text-[21px] leading-snug text-ink/80">{c.attribution}</p>
+        <p className="mt-4 font-serif italic text-[18px] md:text-[21px] leading-snug text-ink/80">
+          {c.attribution}{" "}
+          <span className="not-italic text-ink text-[30px] md:text-[40px] leading-none align-baseline">{c.attributionEmphasis}</span>
+        </p>
         <p className="mt-10 text-[14px] md:text-[15px] leading-relaxed">{c.byline}</p>
       </div>
       {c.image?.src ? (
