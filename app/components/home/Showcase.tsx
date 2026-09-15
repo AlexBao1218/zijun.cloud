@@ -71,10 +71,8 @@ export default function Showcase({ items, openLabel }: { items: Item[]; openLabe
 
       {/* brief */}
       <aside className="grid gap-4 border-t md:border-t-0 md:border-l border-ink pt-6 md:pt-0 md:pl-8" aria-live="polite">
-        <p className="text-[11px] tracking-[0.14em] uppercase text-ink/60">{current.group.name} · {current.group.note}</p>
         <h3 className="font-serif text-3xl leading-none">{current.card.title}</h3>
         <p className="text-[13px] leading-relaxed">{current.card.brief}</p>
-        <p className="text-[12px] text-ink/70">{current.card.duration} · {current.card.role}</p>
         <Link href={`/projects/${current.card.slug}`} className="text-[13px] underline decoration-1 underline-offset-4 hover:decoration-2 justify-self-start">
           {openLabel}
         </Link>
