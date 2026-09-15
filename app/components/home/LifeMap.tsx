@@ -32,20 +32,21 @@ export default function LifeMap({ title, stops }: { title: string; stops: Stop[]
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 560 }} filter="url(#wob-map)">
         <defs><Wobble id="wob-map" /></defs>
         <text x={20} y={30} style={mono} data-fade>{title}</text>
-        <path d={path(OUTLINE)} {...stroke} strokeWidth={1.2} data-draw style={{ ["--d" as string]: 0 }} />
+        <path d={path(OUTLINE)} {...stroke} strokeWidth={1.2} data-draw style={{ ["--d" as string]: 0, strokeDasharray: 6000, strokeDashoffset: 6000 }} />
         <path d={path(HAINAN)} {...stroke} strokeWidth={1.2} data-draw style={{ ["--d" as string]: 0.8 }} />
         <path d={path(TAIWAN)} {...stroke} strokeWidth={1.2} data-draw style={{ ["--d" as string]: 0.9 }} />
-        <path d={route} {...stroke} stroke="var(--pop)" strokeWidth={1.8} strokeDasharray="5 4" data-draw style={{ ["--d" as string]: 1.2 }} />
+        <path d={route} {...stroke} stroke="var(--pop)" strokeWidth={1.8} data-draw style={{ ["--d" as string]: 1.2 }} />
         {stops.map((s, i) => {
           const [x, y] = pts[i];
           const right = s.lon > 112;
           const tx = right ? x + 12 : x - 12;
+          const dy = s.name === "hong kong" ? 16 : 0;
           const anchor = right ? "start" : "end";
           return (
             <g key={s.name}>
               <circle cx={x} cy={y} r={4.5} fill="var(--pop)" stroke="var(--paper)" strokeWidth={2} data-fade style={{ ["--d" as string]: 1.4 + i * 0.35 }} />
-              <text x={tx} y={y - 2} textAnchor={anchor} style={mono} data-fade>{s.name}</text>
-              <text x={tx} y={y + 12} textAnchor={anchor} style={small} data-fade>{s.stage}</text>
+              <text x={tx} y={y - 2 + dy} textAnchor={anchor} style={mono} data-fade>{s.name}</text>
+              <text x={tx} y={y + 12 + dy} textAnchor={anchor} style={small} data-fade>{s.stage}</text>
             </g>
           );
         })}
