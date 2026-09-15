@@ -42,11 +42,18 @@ export type WorkCardData = {
   cover?: string;
 };
 
+export const SKETCHES = ["insurance-loop", "fleet-0700", "minutes-two-pass"] as const;
+export type SketchKey = (typeof SKETCHES)[number];
+
+export type GuideStep = { label: string; hint?: string };
+
 export type ProjectSection = {
   heading: string;
   paragraphs: string[];
   bullets?: string[];
   quote?: string;
+  /** Key of an animated sketch rendered under the paragraphs; see app/components/project/sketches. */
+  sketch?: SketchKey;
 };
 
 export type ProjectContent = {
@@ -67,7 +74,7 @@ export type ProjectContent = {
   };
   links: { label: string; url: string }[];
   facts: { label: string; value: string }[];
-  guide?: { heading: string; steps: string[] };
+  guide?: { heading: string; steps: GuideStep[] };
   sections: ProjectSection[];
   tags: string[];
 };

@@ -4,7 +4,7 @@
   "duration": "Jun – Dec 2026",
   "role": "Industrial trainee — sole builder",
   "colour": "towngas",
-  "summary": "Vehicle changes used to arrive by email, get typed into a draft table, then re-typed into an Excel master so a macro could produce the logbook. I built a fleet workspace with plate and parking-site lookup, a change-request cart, and an admin console that approves requests and writes the new value back to the fleet record on its effective date.",
+  "summary": "One parking change used to mean an email, 37 folders and a 48-column spreadsheet, edited by hand by whoever knew where the files were. Now it is one app: look up a plate, submit the change, approve it in place, and at 07:00 the fleet list updates itself.",
   "demo": {
     "mode": "embed",
     "url": "https://fleet-demo.zijun.cloud",
@@ -29,67 +29,72 @@
     },
     {
       "label": "Role",
-      "value": "Process mapping, data model, frontend, backend, rollout"
+      "value": "Process design, data model, app, daily automation (with one teammate)"
+    },
+    {
+      "label": "Before",
+      "value": "1 email · 37 folders · 48-column sheet · edited by hand"
     },
     {
       "label": "Stack",
-      "value": "React 19 · TypeScript · Vite · Tailwind · shadcn/ui · NestJS · PostgreSQL · Drizzle · Feishu Bitable / Spark"
-    },
-    {
-      "label": "Public demo",
-      "value": "Synthetic fleet (DEMO 101–136), in-browser backend, identity fields redacted"
+      "value": "Feishu Spark · React · NestJS · PostgreSQL · cloud flow to SharePoint · Outlook"
     }
   ],
   "guide": {
-    "heading": "how to try it (2 minutes)",
+    "heading": "how to try it",
     "steps": [
-      "The demo opens on vehicle DEMO 101. Search another plate, or switch to a parking site to see its live floor plan with plates on their bays.",
-      "Add a change to the cart — pick a change type and watch the form adapt to it (a new parking bay asks different questions than a driver reassignment).",
-      "Submit the cart, then open the Admin console and approve it. The approval writes a logbook row, gates the fleet-record write-back on the effective date and reads it back to verify.",
-      "Open After Approval: copy the logbook rows as six-column TSV in the Excel macro's order, and see the follow-up queue for approved changes that still need offline action.",
-      "Use Reset data in the banner to start over — everything lives in your browser's localStorage."
+      {
+        "label": "Look up",
+        "hint": "DEMO 101 is loaded; try a parking site for its floor plan"
+      },
+      {
+        "label": "Request",
+        "hint": "pick a change type; the form pre-fills what it knows"
+      },
+      {
+        "label": "Approve",
+        "hint": "admin console, grouped by plate"
+      },
+      {
+        "label": "After approval",
+        "hint": "logbook rows copied in the macro's column order"
+      }
     ]
   },
   "sections": [
     {
-      "heading": "The problem",
+      "heading": "Three things in one place",
       "paragraphs": [
-        "Three copies of every change (email, draft table, Excel master) meant three chances to mistype a plate, and the logbook macro only worked if the columns were in exactly the right order. Rules about which changes touch the logbook and which touch the fleet record lived in five places across client and server."
+        "Look up — type a plate, the record and its floor plan come out. Request — the form pre-fills, suggests existing values so one department is not spelled three ways, and takes several changes in one submission. Approve — done in place, grouped by plate, so nothing gets batched and skipped."
       ]
     },
     {
-      "heading": "What I built",
+      "heading": "At 07:00 the fleet list updates itself",
       "paragraphs": [
-        "One registry of change types, guarded by module-load invariants, decides what every approval does. Approval is a transaction: logbook row, effective-date-gated write-back, read-back verification, plate-based record-id re-resolution, and a status bar plus drawer for changes whose date has arrived but are not yet written.",
-        "The after-approval workspace meets the team where it is: TSV copy in the macro's column order, test-row marking during rollout, and a follow-up queue for approved requests that need offline action."
+        "The master sheet still lives in SharePoint, so it still has to change — but not by hand. A cloud flow runs every morning: take the approved changes due today, run two checks, write only if both pass. Either way the coordinator gets an Outlook notice."
       ],
-      "bullets": [
-        "Change-type registry: two booleans (writes the logbook? writes the fleet record?) replace five scattered copies of the rules",
-        "Per-site floor plans with live bay assignment",
-        "Rollout with test rows so the team could dry-run without touching the master"
-      ],
-      "quote": "Built a fleet management app with change requests and admin approval, replacing manual logbook entry."
+      "sketch": "fleet-0700",
+      "quote": "It would rather not write than risk a bad write."
     },
     {
-      "heading": "Alongside it: fleet utilisation from GPS",
+      "heading": "Alongside it: a second utilisation figure from GPS",
       "paragraphs": [
-        "In the same internship I turned raw GPS pings from 548 vehicles into a quarterly utilisation index in Python, which now guides fleet allocation. That analysis (geofences, dwell time, idle detection) will get its own page with diagrams later."
+        "The logbook is filled in by the drivers it measures. GPS gives an independent number — a vehicle is in use whenever it is not at the depot it left from — and the gap between the two is what the utilisation review looks at. Its own page, with the geofence diagrams, comes later."
       ]
     },
     {
-      "heading": "Outcome",
+      "heading": "Next",
       "paragraphs": [
-        "[TO FILL: number of requests processed in the pilot / re-typing steps removed / one line from the transport team.]"
+        "Search by location, a phone layout, finer permissions."
       ]
     }
   ],
   "tags": [
-    "React 19",
-    "TypeScript",
+    "Feishu Spark",
+    "React",
     "NestJS",
     "PostgreSQL",
-    "Drizzle",
-    "Feishu Spark",
+    "Power Automate",
     "Process design"
   ]
 }

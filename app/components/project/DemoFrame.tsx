@@ -1,16 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-
-const QUERY = "(min-width: 768px)";
-const subscribe = (cb: () => void) => {
-  const m = window.matchMedia(QUERY);
-  m.addEventListener("change", cb);
-  return () => m.removeEventListener("change", cb);
-};
-const getSnapshot = () => window.matchMedia(QUERY).matches;
-const getServerSnapshot = () => false;
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   url: string;
@@ -24,46 +15,26 @@ type Props = {
   mobileNote: string;
 };
 
+/**
+ * The iframe is server-rendered (so it is in the first HTML and starts loading with the page) and shown from md up;
+ * below md a poster + link is shown instead. The iframe is lazy so a display:none frame on phones is never fetched.
+ */
 export default function DemoFrame({ url, title, height = 720, width, poster, openLabel, mobileNote }: Props) {
-  const isDesktop = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const [scale, setScale] = useState(1);
   const boxRef = useRef<HTMLDivElement>(null);
 
   // Scale the iframe down when the box is narrower than the demo's native width.
   useEffect(() => {
-    if (!isDesktop || !width || !boxRef.current) return;
+    if (!width || !boxRef.current) return;
     const el = boxRef.current;
     const update = () => setScale(Math.min(1, el.clientWidth / width));
     update();
     const ro = new ResizeObserver(update);
     ro.observe(el);
     return () => ro.disconnect();
-  }, [isDesktop, width]);
+  }, [width]);
 
   const style = { "--demo-h": `${height}px` } as React.CSSProperties;
-
-  if (!isDesktop) {
-    return (
-      <div className="min-w-0 w-full md:h-[var(--demo-h)] md:max-h-[80vh]" style={style}>
-        <div className="border border-ink">
-          <div className="relative aspect-[16/10] border-b border-ink overflow-hidden">
-            {poster ? (
-              <Image src={poster} alt="" fill sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover object-top" />
-            ) : (
-              <div className="hatch absolute inset-0" />
-            )}
-          </div>
-          <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 text-[12px]">
-            <span className="text-ink/70">{mobileNote}</span>
-            <a href={url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 font-medium">
-              {openLabel}
-            </a>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   const scaled = width !== undefined && scale < 1;
   const frameStyle: React.CSSProperties = scaled
     ? { width, height: `${100 / scale}%`, transform: `scale(${scale})`, transformOrigin: "top left" }
@@ -71,17 +42,34 @@ export default function DemoFrame({ url, title, height = 720, width, poster, ope
 
   return (
     <div className="min-w-0 w-full md:h-[var(--demo-h)] md:max-h-[80vh]" style={style}>
-      <div ref={boxRef} className="relative h-full w-full max-w-full border border-ink overflow-hidden">
+      {/* Desktop: the live demo */}
+      <div ref={boxRef} className="hidden md:block relative h-full w-full max-w-full border border-ink overflow-hidden">
         <iframe
           src={url}
           title={title}
-          loading="eager"
+          loading="lazy"
           sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
           allow=""
           referrerPolicy="strict-origin-when-cross-origin"
           style={frameStyle}
           className="block w-full h-full bg-paper"
         />
+      </div>
+      {/* Phones: poster + link out */}
+      <div className="md:hidden border border-ink">
+        <div className="relative aspect-[16/10] border-b border-ink overflow-hidden">
+          {poster ? (
+            <Image src={poster} alt="" fill sizes="100vw" className="object-cover object-top" />
+          ) : (
+            <div className="hatch absolute inset-0" />
+          )}
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 text-[12px]">
+          <span className="text-ink/70">{mobileNote}</span>
+          <a href={url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 font-medium">
+            {openLabel}
+          </a>
+        </div>
       </div>
     </div>
   );

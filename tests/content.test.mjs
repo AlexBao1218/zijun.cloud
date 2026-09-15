@@ -8,6 +8,7 @@ const ROOT = path.resolve("content");
 const LOCALES = ["en", "zh"];
 const COLOURS = ["towngas", "cathay", "neochain", "igc"];
 const DEMO_MODES = ["embed", "recording", "static"];
+const SKETCHES = ["insurance-loop", "fleet-0700", "minutes-two-pass"];
 
 const read = (rel) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), "utf8"));
 const isStr = (v) => typeof v === "string" && v.length > 0;
@@ -79,12 +80,19 @@ for (const locale of LOCALES) {
       for (const l of p.links) assert.ok(isStr(l.label) && isStr(l.url), "link");
       assert.ok(Array.isArray(p.facts) && p.facts.length >= 2 && p.facts.length % 2 === 0, "facts: even count so the 2-col grid has no orphan cell");
       for (const f of p.facts) assert.ok(isStr(f.label) && isStr(f.value), "fact");
-      if (p.guide) assert.ok(isStr(p.guide.heading) && strArray(p.guide.steps) && p.guide.steps.length >= 3, "guide");
+      if (p.guide) {
+        assert.ok(isStr(p.guide.heading) && Array.isArray(p.guide.steps) && p.guide.steps.length >= 3, "guide");
+        for (const st of p.guide.steps) {
+          assert.ok(isStr(st.label) && st.label.length <= 28, `guide label short: ${st.label}`);
+          if (st.hint) assert.ok(isStr(st.hint) && st.hint.length <= 60, `guide hint short: ${st.hint}`);
+        }
+      }
       assert.ok(Array.isArray(p.sections) && p.sections.length >= 2, "sections");
       for (const s of p.sections) {
         assert.ok(isStr(s.heading) && strArray(s.paragraphs), s.heading);
         if (s.bullets) assert.ok(strArray(s.bullets));
         if (s.quote) assert.ok(isStr(s.quote));
+        if (s.sketch) assert.ok(SKETCHES.includes(s.sketch), `sketch ${s.sketch}`);
       }
       assert.ok(strArray(p.tags) && p.tags.length > 0, "tags");
     });

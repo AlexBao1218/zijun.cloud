@@ -42,3 +42,4 @@ next-env.d.ts
 
 # raw photo originals (owner keeps these locally)
 照片/
+InternReport*.pptx

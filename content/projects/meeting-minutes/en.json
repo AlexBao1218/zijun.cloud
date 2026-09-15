@@ -4,7 +4,7 @@
   "duration": "Jun – Dec 2026",
   "role": "Industrial trainee — sole builder",
   "colour": "towngas",
-  "summary": "A secretary typed up Cantonese safety-committee meetings into a strict, years-old Word format. I chained an LLM agent and a two-page workbench so a transcript becomes a validated seven-section JSON, then a .docx cloned from the department template — two hours of work down to about a minute.",
+  "summary": "A Cantonese transcript goes in; a minutes document in the department's exact Word format comes out. Two hours of reformatting became two minutes of waiting and three of checking.",
   "demo": {
     "mode": "embed",
     "url": "https://minutes-demo.zijun.cloud/workbench",
@@ -29,59 +29,66 @@
     },
     {
       "label": "Role",
-      "value": "Prompt design, JSON contract, validator, docx generator, UI"
+      "value": "Prompt design, JSON contract, validator, Word generator (with one teammate)"
+    },
+    {
+      "label": "Before → after",
+      "value": "1–2 hours of fixing → 2 minutes + a 3-minute check"
     },
     {
       "label": "Stack",
-      "value": "React 19 · TypeScript · Vite · Tailwind · shadcn/ui · NestJS · jszip · xmldom · Feishu Spark / Aily"
-    },
-    {
-      "label": "Public demo",
-      "value": "Backend dropped; docx builder runs in the browser on a template whose every value is withheld; AI panel simulated"
+      "value": "Feishu Spark / Aily · React · NestJS · jszip · docx"
     }
   ],
   "guide": {
-    "heading": "how to try it (2 minutes)",
+    "heading": "how to try it",
     "steps": [
-      "Press 載入示例 JSON to load the sample — the seven fixed sections the Aily agent produces from a transcript, with unclear lines marked \"uncertain\" instead of guessed.",
-      "Break the JSON on purpose: the validator reports the first offending character with line, column and a plain-language reason, even when the engine's parse error has no position.",
-      "Watch the preview: sections render in order, uncertain lines are highlighted amber, and the meeting number is deliberately left as X for the secretary to confirm.",
-      "Press 生成 Word — donor rows are cloned from the template in your browser, so fonts, borders and numbering never drift from the original. The AI 助手 tab shows the static replica of the agent panel."
+      {
+        "label": "Load the sample",
+        "hint": "the seven-section JSON the agent produces"
+      },
+      {
+        "label": "Break it",
+        "hint": "the validator points at the exact character"
+      },
+      {
+        "label": "Preview",
+        "hint": "doubts in amber; meeting number left as X"
+      },
+      {
+        "label": "Generate Word",
+        "hint": "the template itself, filled in your browser"
+      }
     ]
   },
   "sections": [
     {
-      "heading": "The problem",
+      "heading": "Two passes on purpose",
       "paragraphs": [
-        "The minutes format was strict and old: numbered sections, specific fonts, a table layout nobody wanted to rebuild. Typing a 90-minute Cantonese meeting into it took about two hours, and anything misheard became a fact once it was in the document."
+        "The first LLM pass understands: it fixes transcription errors, cuts the meeting into the template's seven sections and marks anything it could not hear. The second writes: formal Chinese, official tone, no number touched. A script pours the result into the Word template."
+      ],
+      "sketch": "minutes-two-pass",
+      "quote": "Missing content → fix pass one. Wrong tone → fix pass two. Never start over."
+    },
+    {
+      "heading": "The output is the template itself",
+      "paragraphs": [
+        "Not \"like\" the template: the same file with the text swapped, formatting untouched. Unclear lines are flagged in place instead of guessed; date, time and venue are left for the secretary."
       ]
     },
     {
-      "heading": "What I built",
+      "heading": "Before → after",
       "paragraphs": [
-        "An Aily agent turns the transcript into a fixed seven-section JSON. The workbench validates it on every keystroke with line-and-column error recovery, previews the structure with amber review prompts, and generates the Word file by cloning formatted donor rows from the department template — no styles are redefined, so the output is indistinguishable from a hand-typed one."
-      ],
-      "bullets": [
-        "Word generation by donor-row cloning: only text nodes are swapped",
-        "A 150-line hand-written JSON scanner for error positions the engine omits",
-        "Honest uncertainty: 【待確認】 wraps every flagged line in the output"
-      ],
-      "quote": "Chained LLMs into a workflow drafting formatted meeting minutes, cutting 2 hours of work to 1 minute."
-    },
-    {
-      "heading": "Outcome",
-      "paragraphs": [
-        "[TO FILL: meetings processed so far / secretary's feedback / whether other committees picked it up.]"
+        "Before, the transcript was pasted into a chatbot and the output never matched the template; one to two hours of fixing. Now the file is dropped in, the Word document is back in two minutes, and checking takes three."
       ]
     }
   ],
   "tags": [
     "LLM workflow",
-    "React 19",
-    "TypeScript",
+    "Feishu Aily",
+    "React",
     "docx",
     "jszip",
-    "Feishu Aily",
     "Cantonese"
   ]
 }

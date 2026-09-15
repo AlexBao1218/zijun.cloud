@@ -41,12 +41,24 @@
     }
   ],
   "guide": {
-    "heading": "how to try it (2 minutes)",
+    "heading": "how to try it",
     "steps": [
-      "Pick a scenario at the top — Full (34 ULDs), Partial (24) or Light (16). The 747 is drawn nose-up on the left; unassigned ULDs wait on the right.",
-      "Drag a ULD onto a position. Invalid targets (over the weight limit, wrong type for a nose position) are flagged before you drop; the CG gauge and score update live.",
-      "Lock a position you want to keep, then press Solve. The MILP treats locked pairs as fixed and plans everything else around them — usually in under half a second.",
-      "Open the How-it-works drawer to see the actual variables, constraints and objective, plus the size and time of the last solve."
+      {
+        "label": "Pick a load",
+        "hint": "Full 34 · Partial 24 · Light 16 ULDs"
+      },
+      {
+        "label": "Drag a ULD",
+        "hint": "bad targets are flagged; CG moves live"
+      },
+      {
+        "label": "Lock, then Solve",
+        "hint": "the MILP plans around what you fixed"
+      },
+      {
+        "label": "How it works",
+        "hint": "the real variables and constraints"
+      }
     ]
   },
   "sections": [

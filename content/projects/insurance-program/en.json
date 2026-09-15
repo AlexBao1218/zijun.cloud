@@ -4,7 +4,7 @@
   "duration": "Jun – Dec 2026",
   "role": "Industrial trainee — sole builder",
   "colour": "towngas",
-  "summary": "Fourteen years of corporate insurance records — 34 classes of cover, 201 policies, 767 claims — lived in a broker workbook, three claims ledgers and folders of PDFs. I digitised them into a policy-linked database with dashboards, trend and loss-ratio views, and a RAG agent that answers questions in chat.",
+  "summary": "Every insurance question used to be a request to a colleague: search the share drive, count by hand, reply hours or days later. I linked fifteen years of records once, then answered the fixed questions with dashboards and everything else with an assistant. Live, in daily use.",
   "demo": {
     "mode": "embed",
     "url": "https://insurance-demo.zijun.cloud",
@@ -21,71 +21,82 @@
   "facts": [
     {
       "label": "Timeline",
-      "value": "Jun – Dec 2026"
+      "value": "Jun – Dec 2026 · live since September, handover by mid-October"
     },
     {
       "label": "Role",
-      "value": "PRD, data model, frontend, backend, AI integration"
+      "value": "Data model, dashboards, assistant, auto report, mobile layout"
+    },
+    {
+      "label": "Records",
+      "value": "15 years · 1,500+ records · 120+ policy documents · 34 classes"
     },
     {
       "label": "Stack",
-      "value": "React 19 · TypeScript · Vite · Tailwind · shadcn/ui · ECharts · NestJS · Feishu Bitable / Spark / Aily"
-    },
-    {
-      "label": "Public demo",
-      "value": "Same code on synthetic aggregates; record-level fields redacted; AI panel simulated"
+      "value": "Feishu Bitable / Spark / Aily · React · NestJS · LLM API for report drafts"
     }
   ],
   "guide": {
-    "heading": "how to try it (2 minutes)",
+    "heading": "how to try it",
     "steps": [
-      "Start on the Dashboard: annual premium, trend and loss ratio for the whole programme. The \"Synthetic data\" badge means the numbers are generated, not the company's.",
-      "Open Classes and page through the 34 classes of cover. Click one to see its policy chain — note how back-to-back 18-month policies contribute exactly one year of premium to each year.",
-      "Open Claims: every record-level field (policy number, insurer, claimant) is a grey \"Redacted for public demo\" bar — the layout is real, the values are withheld.",
-      "Open Assistant and send any message. This panel is a visual replica of the Aily agent and answers with an explicit \"not available in public demo\" notice rather than a made-up reply.",
-      "Open Reports and generate the narrative — the section structure, the re-inserted live charts and the Word / Markdown export are the real pipeline on canned text."
+      {
+        "label": "Dashboard",
+        "hint": "the questions asked every month, already answered"
+      },
+      {
+        "label": "Classes → Policies → Claims",
+        "hint": "open a class; its policies and claims come with it"
+      },
+      {
+        "label": "Assistant",
+        "hint": "ask anything the dashboard does not show"
+      },
+      {
+        "label": "Report",
+        "hint": "pick a year and sections; a four-page Word file"
+      }
     ]
   },
   "sections": [
     {
-      "heading": "The problem",
+      "heading": "The loop",
       "paragraphs": [
-        "A simple question such as \"what did we pay for property cover in 2021 and what came back in claims?\" took hours of manual arithmetic across a broker's Excel, three claims ledgers and PDFs. Nobody could see a loss ratio by class or by year without rebuilding the numbers by hand."
-      ]
+        "A manager asks. The insurance team opens the share drive, finds the files, counts by hand, writes a short reply. Hours, sometimes days. Nothing is reused, so the next question starts the loop again."
+      ],
+      "sketch": "insurance-loop"
     },
     {
-      "heading": "What I built",
+      "heading": "Link once, answer two ways",
       "paragraphs": [
-        "A Feishu Spark app that reads three Bitable tables through the platform's capabilities, joins them in the browser, caches with schema and version guards, and computes premium, trend and loss-ratio views with a pro-rata monthly rule that handles 18-month policy chains without double counting.",
-        "An Aily agent answers questions in chat. For reports, a server-side proxy calls one Aily skill per section with a pinned output structure, the client re-inserts live dashboard charts into the model's Markdown, and the result exports to Word with embedded figures, PDF or a Feishu Doc."
+        "The records were never wrong, just kept in three places that only referred to each other by number. Linking them once turned finding into clicking: open a class, its policies and claims come with it, each policy with its PDF attached.",
+        "Recurring questions became dashboards. Everything else goes to the assistant, which also drafts the report when a dashboard has to be shared."
       ],
       "bullets": [
-        "Pro-rata monthly attribution of annualised premium to policy years",
-        "Tolerant extractors for every Bitable value shape; loader falls back to a bundled dataset so every page renders outside Feishu",
-        "AI report generation that stays honest: full class names beside every code, an IBNR caveat on immature years"
+        "Scope — it answers only from our tables and the policy documents inside them",
+        "Law — legal points cite the references we specified, for a specialist to confirm",
+        "Tools — it reads the policy PDFs and draws its own charts"
       ],
-      "quote": "Digitized 14 years of insurance records into a policy-linked database with dashboards and a RAG agent."
+      "quote": "Every number can be traced back to a source record. It is computed from the database, not counted and typed in."
     },
     {
-      "heading": "Outcome",
+      "heading": "Before → after",
       "paragraphs": [
-        "[TO FILL: hours saved per query / who uses it weekly / one sentence from the department on what changed.]"
+        "Look it up or ask → open the dashboard or ask the assistant. Nothing to search: the records are already linked. Export in one click: the report writes itself from the same records. The same system is re-laid out for the phone, not shrunk."
       ]
     },
     {
       "heading": "What the public demo withholds",
       "paragraphs": [
-        "The employer is not named. Aggregates are synthetic and badged as such; claim counts, loss ratios, per-layer shares, day-level dates and broker names are withheld; charts keep axes without numeric values; record-level fields render as explicit \"Redacted\" bars. Nothing is replaced with an invented stand-in."
+        "The employer is not named. Aggregates are synthetic and badged as such; record-level fields render as explicit \"Redacted\" bars; the assistant is a visual replica that says so instead of inventing answers."
       ]
     }
   ],
   "tags": [
-    "React 19",
-    "TypeScript",
-    "NestJS",
-    "ECharts",
     "Feishu Spark",
-    "Feishu Aily",
+    "Bitable",
+    "Aily",
+    "React",
+    "NestJS",
     "RAG",
     "docx"
   ]

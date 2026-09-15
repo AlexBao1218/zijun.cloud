@@ -35,7 +35,9 @@ Scale: name 28/36px; nav links serif 20/26px; section title `text-4xl md:text-5x
 - `TopBar` — fixed, `border-b`, 64/80px tall; serif name left, serif anchor links + resume + boxed locale toggle right. No hamburger; resume hides under 640px.
 - Work card — 352px wide (`max-w-[22rem]`, full width on phones) in a `flex-wrap justify-evenly` row with `gap-x-8 gap-y-16`; rows duration / cover / title / org / kind+role, each `border-b`. The cover is a 16:10 box tinted with the project colour (`TINT_CLASS`, 22 % over paper) holding the screenshot in a slight 3-D tilt (`perspective(700px) rotateY(-16deg) rotateX(4deg)`) that runs off the right and bottom edges; no cover → hatch.
 - Skill tag — `border border-ink bg-fill px-2.5 py-1.5 text-[12px] font-medium`.
-- Demo area — `DemoFrame` (desktop iframe + click-to-interact; mobile poster + note), `DemoRecording`, `DemoStatic`.
+- Demo area — `DemoFrame` (server-rendered iframe shown from md up, live immediately, scaled down from the demo's native `width` when the column is narrower; phones get poster + link), `DemoRecording`, `DemoStatic`.
+- `GuideFlow` — the "how to try it" flowchart: bordered boxes with a small index, a mono label and an italic serif hint, joined by hairline arrows; a row on desktop, a column on phones. Labels ≤ 28 chars, hints ≤ 60.
+- Sketches (`app/components/project/sketches/*`) — hand-drawn inline SVGs (1.4px ink strokes, `feTurbulence` wobble, mono labels, italic serif asides, one accent in the project colour) that draw on when scrolled into view (`Sketch` wrapper + `[data-draw]` / `[data-fade]` in globals.css). Referenced from content by `section.sketch` key.
 - Photo strip (`PhotoRow`) — contact-sheet filmstrip: ink band with `.sprockets` rows top and bottom, frames at 220/280px height keeping their own aspect ratio, `snap-x` horizontal scroll, mono frame numbers + captions in paper; click opens the lightbox.
 - `.hatch` — diagonal placeholder wherever an image is missing.
 

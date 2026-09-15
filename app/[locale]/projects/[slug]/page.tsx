@@ -8,7 +8,9 @@ import OffsetBox from "@/app/components/OffsetBox";
 import DemoFrame from "@/app/components/project/DemoFrame";
 import DemoRecording from "@/app/components/project/DemoRecording";
 import DemoStatic from "@/app/components/project/DemoStatic";
-import GuideSteps from "@/app/components/project/GuideSteps";
+import GuideFlow from "@/app/components/project/GuideFlow";
+import Sketch from "@/app/components/project/Sketch";
+import { SKETCH_COMPONENTS } from "@/app/components/project/sketches";
 import { BG_CLASS, BORDER_CLASS, UNDERLINE_CLASS, type ProjectContent } from "@/lib/projects";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
@@ -109,7 +111,7 @@ export default async function ProjectPage({ params }: Props) {
         )}
         {p.demo.mode === "static" && <DemoStatic poster={p.demo.poster} alt={p.title} />}
 
-        {p.guide && <GuideSteps heading={p.guide.heading} steps={p.guide.steps} />}
+        {p.guide && <GuideFlow heading={p.guide.heading} steps={p.guide.steps} />}
 
         {/* Facts */}
         <dl className="grid sm:grid-cols-2 border border-ink">
@@ -122,7 +124,7 @@ export default async function ProjectPage({ params }: Props) {
         </dl>
 
         {/* Sections */}
-        <div className="grid gap-12 max-w-[70ch]">
+        <div className="grid gap-12 max-w-[820px]">
           {p.sections.map((s, i) => (
             <section key={i} className="grid gap-4">
               <h2 className="font-serif text-3xl leading-none">{s.heading}</h2>
@@ -137,6 +139,14 @@ export default async function ProjectPage({ params }: Props) {
               {s.quote && (
                 <blockquote className={`border-l-4 pl-4 py-1 text-[13px] text-ink/80 ${BORDER_CLASS[p.colour]}`}>{s.quote}</blockquote>
               )}
+              {s.sketch && (() => {
+                const { Component, label } = SKETCH_COMPONENTS[s.sketch];
+                return (
+                  <Sketch label={label}>
+                    <Component />
+                  </Sketch>
+                );
+              })()}
             </section>
           ))}
         </div>

@@ -26,7 +26,7 @@ const data = await loadContent<MyType>("work", locale);   // lib/content.ts
 | `content/contact` | `ContactSection.tsx` |
 | `content/projects/<slug>` | `app/[locale]/projects/[slug]/page.tsx` — schema in `lib/projects.ts` `ProjectContent` |
 
-Demo modes on a project: `embed` (iframe, needs `url`, optional `height`), `recording` (needs `video` mp4 or falls back to poster), `static`.
+Demo modes on a project: `embed` (iframe, needs `url`; `width` = the demo's native layout width, `height` = box height), `recording` (needs `video` mp4 or falls back to poster), `static`. `guide.steps` are `{ label, hint? }` rendered as a flowchart. A section may name a `sketch` (keys in `lib/projects.ts` SKETCHES) — an animated hand-drawn SVG from `app/components/project/sketches/`.
 
 Adding a project: create `content/projects/<slug>/{en,zh}.json`, add a card to `content/work/*.json`, drop `public/projects/<slug>/cover.png`, run `npm test`.
 
