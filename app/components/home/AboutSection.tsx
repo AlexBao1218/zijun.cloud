@@ -1,6 +1,7 @@
 import { loadContent } from "@/lib/content";
 import SectionStarter from "@/app/components/SectionStarter";
 import PhotoRow from "./PhotoRow";
+import LifeMap from "./LifeMap";
 
 type AboutContent = {
   title: string;
@@ -8,6 +9,7 @@ type AboutContent = {
   paragraphs: string[];
   photosIntro: string;
   strips: { name: string; photos: { src: string; alt: string }[] }[];
+  map?: { title: string; stops: { name: string; stage: string; lon: number; lat: number }[] };
 };
 
 export default async function AboutSection({ locale }: { locale: string }) {
@@ -21,6 +23,11 @@ export default async function AboutSection({ locale }: { locale: string }) {
             <p key={i}>{p}</p>
           ))}
         </div>
+        {c.map && (
+          <div className="max-w-[820px]">
+            <LifeMap title={c.map.title} stops={c.map.stops} />
+          </div>
+        )}
         <p className="text-[14px] text-ink/70">{c.photosIntro}</p>
         <div className="grid gap-6">
           {c.strips.map((st) => (

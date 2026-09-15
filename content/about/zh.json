@@ -2,9 +2,10 @@
   "title": "about",
   "subtitle": "a little bit more about me :)",
   "paragraphs": [
-    "I study Data and Systems Engineering at the University of Hong Kong and spend most of my time turning operational pain points into software that survives contact with real users: a warehouse system piloted on a factory floor, an insurance database that replaced fourteen years of PDFs, a load planner that solves an integer programme in your browser. [TO FILL: where you grew up, how long in Hong Kong, what you do outside work, one detail with a picture in it.]"
+    "born in inner mongolia. kindergarten in beijing, primary school in chengdu, middle and high school in shanghai, university and now work in hong kong — five cities, one habit of noticing how things are run.",
+    "off the clock: badminton and tennis, pour-over coffee, classical guitar, and a camera on most days. at home, a blue-and-white british shorthair called zai zai (崽崽) supervises all of the above."
   ],
-  "photosIntro": "coffee by hand, badminton, a camera most days — the film strips are the evidence.",
+  "photosIntro": "the film strips are the evidence.",
   "strips": [
     {
       "name": "outdoors",
@@ -77,5 +78,40 @@
         }
       ]
     }
-  ]
+  ],
+  "map": {
+    "title": "where i've lived",
+    "stops": [
+      {
+        "name": "inner mongolia",
+        "stage": "born",
+        "lon": 111.7,
+        "lat": 40.8
+      },
+      {
+        "name": "beijing",
+        "stage": "kindergarten",
+        "lon": 116.4,
+        "lat": 39.9
+      },
+      {
+        "name": "chengdu",
+        "stage": "primary school",
+        "lon": 104.1,
+        "lat": 30.6
+      },
+      {
+        "name": "shanghai",
+        "stage": "middle & high school",
+        "lon": 121.5,
+        "lat": 31.2
+      },
+      {
+        "name": "hong kong",
+        "stage": "university · work",
+        "lon": 114.2,
+        "lat": 22.3
+      }
+    ]
+  }
 }
