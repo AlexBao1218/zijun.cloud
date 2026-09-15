@@ -17,7 +17,7 @@ export default async function AboutSection({ locale }: { locale: string }) {
   return (
     <section>
       <SectionStarter id="about" title={c.title} subtitle={c.subtitle} />
-      <div className="px-6 md:px-20 py-20 md:py-32 max-w-[1400px] mx-auto grid gap-12">
+      <div className="px-6 md:px-20 xl:px-28 py-20 md:py-32 max-w-[1700px] mx-auto grid gap-12 xl:gap-16">
         {c.paragraphs.length > 0 && (
         <div className="max-w-[72ch] grid gap-6 text-[15px] md:text-[16px] leading-relaxed">
           {c.paragraphs.map((p, i) => (
@@ -30,7 +30,7 @@ export default async function AboutSection({ locale }: { locale: string }) {
             <LifeMap title={c.map.title} lede={c.map.lede} text={c.map.text} stops={c.map.stops} />
           </div>
         )}
-        <p className="text-[14px] text-ink/70">{c.photosIntro}</p>
+        <p className="text-[14px] xl:text-[16px] text-ink/70">{c.photosIntro}</p>
         <div className="grid gap-6">
           {c.strips.map((st) => (
             <PhotoRow key={st.name} photos={st.photos} />

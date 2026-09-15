@@ -7,7 +7,7 @@ import type { WorkCardData, WorkGroup } from "@/lib/projects";
 
 type Item = { group: WorkGroup; card: WorkCardData };
 
-const STEP = 250; // px between neighbouring cards on the stage
+// Card spacing on the stage comes from --step (250px, 300px from xl) set in globals.css
 const arrowClass =
   "size-11 border border-ink bg-paper flex items-center justify-center text-[18px] leading-none hover:bg-fill focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink";
 
@@ -29,10 +29,10 @@ export default function Showcase({ items, openLabel }: { items: Item[]; openLabe
   const current = items[active];
 
   return (
-    <div className="grid md:grid-cols-[minmax(0,1fr)_300px] gap-12 md:gap-16 items-center">
+    <div className="grid md:grid-cols-[minmax(0,1fr)_300px] xl:grid-cols-[minmax(0,1fr)_400px] gap-12 md:gap-16 xl:gap-24 items-center">
       {/* stage */}
       <div className="grid gap-8 justify-items-center">
-        <div className="relative w-full max-w-[880px] h-[500px] overflow-hidden">
+        <div className="relative w-full max-w-[880px] xl:max-w-[1040px] h-[500px] xl:h-[560px] overflow-hidden showcase-stage">
           {items.map((it, i) => {
             let off = i - active;
             if (off > n / 2) off -= n;
@@ -43,9 +43,9 @@ export default function Showcase({ items, openLabel }: { items: Item[]; openLabe
                 key={it.card.slug}
                 aria-hidden={!isActive}
                 onClick={() => !isActive && setActive(i)}
-                className={`absolute left-1/2 top-4 w-[352px] transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none ${isActive ? "cursor-default" : "cursor-pointer"}`}
+                className={`absolute left-1/2 top-4 w-[352px] xl:w-[416px] transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none ${isActive ? "cursor-default" : "cursor-pointer"}`}
                 style={{
-                  transform: `translateX(calc(-50% + ${off * STEP}px)) scale(${isActive ? 1 : 0.8})`,
+                  transform: `translateX(calc(-50% + ${off} * var(--step, 250px))) scale(${isActive ? 1 : 0.8})`,
                   opacity: isActive ? 1 : Math.abs(off) === 1 ? 0.45 : 0,
                   zIndex: 10 - Math.abs(off),
                   pointerEvents: Math.abs(off) > 1 ? "none" : "auto",
@@ -71,8 +71,8 @@ export default function Showcase({ items, openLabel }: { items: Item[]; openLabe
 
       {/* brief */}
       <aside className="grid gap-4 border-t md:border-t-0 md:border-l border-ink pt-6 md:pt-0 md:pl-8" aria-live="polite">
-        <h3 className="font-serif text-3xl leading-none">{current.card.title}</h3>
-        <p className="text-[13px] leading-relaxed">{current.card.brief}</p>
+        <h3 className="font-serif text-3xl xl:text-4xl leading-none">{current.card.title}</h3>
+        <p className="text-[13px] xl:text-[15px] leading-relaxed">{current.card.brief}</p>
         <Link href={`/projects/${current.card.slug}`} className="text-[13px] underline decoration-1 underline-offset-4 hover:decoration-2 justify-self-start">
           {openLabel}
         </Link>

@@ -48,12 +48,12 @@ export default function PhotoRow({ photos }: { photos: Photo[] }) {
                     alt={p.alt}
                     width={0}
                     height={0}
-                    sizes="(min-width: 768px) 420px, 300px"
-                    className="block h-[220px] md:h-[280px] w-auto border border-paper"
+                    sizes="(min-width: 1280px) 560px, (min-width: 768px) 420px, 300px"
+                    className="block h-[220px] md:h-[280px] xl:h-[360px] w-auto border border-paper"
                   />
                 </button>
               ) : (
-                <div className="hatch h-[220px] md:h-[280px] w-[176px] border border-paper" />
+                <div className="hatch h-[220px] md:h-[280px] xl:h-[360px] w-[176px] border border-paper" />
               )}
             </li>
           ))}

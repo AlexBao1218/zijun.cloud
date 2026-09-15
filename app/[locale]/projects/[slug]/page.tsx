@@ -48,7 +48,7 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <main className="pt-16 md:pt-20">
-      <div className="px-6 md:px-16 pt-10 md:pt-16 pb-20 md:pb-32 max-w-[1240px] mx-auto grid gap-12 md:gap-16">
+      <div className="px-6 md:px-16 xl:px-28 pt-10 md:pt-16 pb-20 md:pb-32 max-w-[1240px] xl:max-w-[1560px] mx-auto grid gap-12 md:gap-16 xl:gap-20">
         <Link href={{ pathname: "/", hash: "work" }} className="text-[12px] underline underline-offset-4 justify-self-start">
           {t("back")}
         </Link>
@@ -75,7 +75,7 @@ export default async function ProjectPage({ params }: Props) {
           </div>
         </OffsetBox>
 
-        <p className="max-w-[70ch] text-[16px] md:text-[17px] leading-relaxed">{p.summary}</p>
+        <p className="max-w-[70ch] text-[16px] md:text-[17px] xl:text-[19px] leading-relaxed">{p.summary}</p>
 
         {/* Links row */}
         {(demoHref || otherLinks.length > 0) && (
@@ -125,12 +125,12 @@ export default async function ProjectPage({ params }: Props) {
         </dl>
 
         {/* Sections */}
-        <div className="grid gap-12 max-w-[820px]">
+        <div className="grid gap-12 max-w-[820px] xl:max-w-[980px]">
           {p.sections.map((s, i) => (
             <section key={i} className="grid gap-4">
               <h2 className="font-serif text-3xl leading-none">{s.heading}</h2>
               {s.paragraphs.map((para, j) => (
-                <p key={j} className="text-[14px] md:text-[15px] leading-relaxed">{para}</p>
+                <p key={j} className="text-[14px] md:text-[15px] xl:text-[17px] leading-relaxed">{para}</p>
               ))}
               {s.bullets && (
                 <ul className="grid gap-1.5 pl-5 list-disc text-[14px] leading-relaxed">

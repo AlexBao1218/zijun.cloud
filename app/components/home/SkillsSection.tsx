@@ -21,14 +21,14 @@ export default async function SkillsSection({ locale }: { locale: string }) {
   return (
     <section>
       <SectionStarter id="skills" title={c.title} subtitle={c.subtitle} />
-      <div className="px-6 md:px-20 py-16 md:py-24 max-w-[1100px] mx-auto grid gap-16">
+      <div className="px-6 md:px-20 xl:px-28 py-16 md:py-24 xl:py-32 max-w-[1100px] xl:max-w-[1500px] mx-auto grid gap-16 xl:gap-24">
         {c.kits && (
           <div className="grid gap-8 justify-items-center w-full">
             <div className="grid gap-2 justify-items-center">
-              <h3 className="font-serif text-3xl leading-none">{c.kitsTitle}</h3>
+              <h3 className="font-serif text-3xl xl:text-4xl leading-none">{c.kitsTitle}</h3>
               {c.kitsSubtitle && <p className="text-[13px] text-ink/60">{c.kitsSubtitle}</p>}
             </div>
-            <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-start w-full">
+            <div className="grid md:grid-cols-2 gap-10 md:gap-14 xl:gap-20 items-start w-full">
               {c.kits.map((k, i) => (
                 <Toolbox key={k.name} name={k.name} note={k.note} items={k.items} accent={i === 0 ? "towngas" : "neochain"} />
               ))}
@@ -37,14 +37,14 @@ export default async function SkillsSection({ locale }: { locale: string }) {
         )}
         {c.ledger && (
           <div className="grid gap-5 justify-items-center">
-            <h3 className="font-serif text-3xl leading-none">{c.ledger.name}</h3>
+            <h3 className="font-serif text-3xl xl:text-4xl leading-none">{c.ledger.name}</h3>
             <p className="text-[14px] md:text-[15px] text-ink/70 -mt-2">{c.ledger.subtitle}</p>
-            <table className="w-full max-w-[640px] border border-ink text-[13px]">
+            <table className="w-full max-w-[640px] xl:max-w-[900px] border border-ink text-[13px] xl:text-[15px]">
               <tbody>
                 {c.ledger.rows.map((r) => (
                   <tr key={r.course} className="border-b border-ink last:border-b-0">
                     <td className="px-4 py-2.5">{r.course}</td>
-                    <td className="pl-6 pr-4 py-2.5 w-20 text-left font-serif text-[20px] leading-none border-l border-ink">{r.grade}</td>
+                    <td className="pl-6 pr-4 py-2.5 xl:py-3 w-20 text-left font-serif text-[20px] xl:text-[24px] leading-none border-l border-ink">{r.grade}</td>
                   </tr>
                 ))}
               </tbody>
@@ -75,7 +75,7 @@ export default async function SkillsSection({ locale }: { locale: string }) {
         ))}
         <div className="grid gap-3 justify-items-center border-t border-ink pt-10">
           <h3 className="font-serif text-3xl leading-none">{c.languagesLabel}</h3>
-          <p className="text-[14px] text-center">{c.languages}</p>
+          <p className="text-[14px] xl:text-[16px] text-center">{c.languages}</p>
         </div>
       </div>
     </section>

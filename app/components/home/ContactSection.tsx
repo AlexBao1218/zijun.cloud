@@ -15,7 +15,7 @@ export default async function ContactSection({ locale }: { locale: string }) {
   const c = await loadContent<ContactContent>("contact", locale);
   return (
     <footer className="border-t border-ink">
-      <div className="px-6 md:px-20 py-20 md:py-28 max-w-[1400px] mx-auto flex flex-wrap items-center gap-x-10 gap-y-6">
+      <div className="px-6 md:px-20 xl:px-28 py-20 md:py-28 max-w-[1700px] mx-auto flex flex-wrap items-center gap-x-10 gap-y-6">
         <OffsetBox blockClass="bg-ink" offset={8} className="inline-block">
           <a href={`mailto:${c.email}`} className="block bg-fill px-5 py-3 text-[14px] font-medium">
             {c.mailLabel} {c.email}
@@ -28,7 +28,7 @@ export default async function ContactSection({ locale }: { locale: string }) {
           {c.cvLabel}
         </a>
       </div>
-      <p className="px-6 md:px-20 pb-10 text-[12px] text-ink/60 max-w-[1400px] mx-auto">{c.footer}</p>
+      <p className="px-6 md:px-20 xl:px-28 pb-10 text-[12px] xl:text-[13px] text-ink/60 max-w-[1700px] mx-auto">{c.footer}</p>
     </footer>
   );
 }

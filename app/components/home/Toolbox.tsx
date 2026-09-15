@@ -15,7 +15,7 @@ export default function Toolbox({ name, note, items, accent }: { name: string; n
       <div className="relative w-full">
         {/* lid */}
         <figcaption className="relative flex items-center justify-between gap-4 border border-ink rounded-t-[10px] bg-fill px-5 h-11">
-          <span className="font-serif text-2xl leading-none">{name}</span>
+          <span className="font-serif text-2xl xl:text-3xl leading-none">{name}</span>
           <span className="hidden sm:inline text-[11px] tracking-[0.12em] uppercase text-ink/60">{note}</span>
           {/* hinge marks */}
           <span aria-hidden="true" className="absolute left-3 -top-px h-[3px] w-4 bg-ink" />
@@ -30,7 +30,7 @@ export default function Toolbox({ name, note, items, accent }: { name: string; n
         <div className="border border-ink border-t-0 bg-paper px-5 pt-7 pb-6">
           <ul className="flex flex-wrap gap-2.5">
             {items.map((item) => (
-              <li key={item} className="border border-ink bg-fill px-3 py-2 text-[13px] font-medium">
+              <li key={item} className="border border-ink bg-fill px-3 py-2 text-[13px] xl:text-[15px] xl:px-3.5 xl:py-2.5 font-medium">
                 {item}
               </li>
             ))}

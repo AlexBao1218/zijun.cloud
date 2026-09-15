@@ -50,7 +50,7 @@ export default function LifeMap({ title, lede, text, stops }: Props) {
   const arrivals = lens.reduce<number[]>((acc, l) => [...acc, acc[acc.length - 1] + l], [0]).map((v) => (v / total) * TRAVEL_S);
 
   return (
-    <div className="grid md:grid-cols-[minmax(0,1fr)_320px] gap-10 md:gap-14 items-center">
+    <div className="grid md:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_460px] gap-10 md:gap-14 xl:gap-24 items-center">
       <Sketch label={`${title}: ${stops.map((s) => `${s.stage} in ${s.name}`).join(", ")}`}>
         <svg viewBox={`0 0 ${CHINA_W} ${CHINA_H}`} width="100%" style={{ minWidth: 520 }} className="overflow-visible">
           <defs><Wobble id="wob-map" /></defs>
@@ -83,8 +83,8 @@ export default function LifeMap({ title, lede, text, stops }: Props) {
         </svg>
       </Sketch>
       <div className="grid gap-6">
-        <p className="font-serif italic text-[22px] md:text-[26px] leading-snug">{lede}</p>
-        <p className="text-[14px] leading-relaxed">{text}</p>
+        <p className="font-serif italic text-[22px] md:text-[26px] xl:text-[34px] leading-snug">{lede}</p>
+        <p className="text-[14px] xl:text-[17px] leading-relaxed">{text}</p>
       </div>
     </div>
   );

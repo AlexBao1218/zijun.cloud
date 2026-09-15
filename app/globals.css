@@ -116,3 +116,7 @@ body {
   .travel-pin { opacity: 1; transform: none; animation: none !important; }
   .travel-pulse { display: none; }
 }
+
+/* Showcase card spacing on the stage */
+.showcase-stage { --step: 250px; }
+@media (min-width: 1280px) { .showcase-stage { --step: 300px; } }
