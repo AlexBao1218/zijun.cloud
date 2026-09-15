@@ -3,9 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 
 export type PhotoNote = { strip: number; photo: number; side: "left" | "right"; text: string };
-type Placed = PhotoNote & { x: number; y: number; tx: number; ty: number; cx: number; cy: number };
+type Placed = PhotoNote & { x: number; y: number; tx: number; ty: number; cx: number; cy: number; gutter: number };
 
-const GUTTER = 240; // px of margin on each side where notes live (xl and up)
 
 /**
  * Handwritten notes in the gutters beside the photo strips, each with a hand-drawn arrow curving to its photo.
@@ -21,7 +20,9 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
     if (!el) return;
     const measure = () => {
       const box = el.getBoundingClientRect();
-      if (box.width < 1100) return setPlaced([]);
+      // notes live in the page's own side margin, outside the strips; need ~90px to be legible
+      const gutter = Math.min(220, Math.floor(box.left) - 12);
+      if (gutter < 90) return setPlaced([]);
       setPlaced(
         notes.flatMap((n) => {
           const frame = el.querySelector<HTMLElement>(`[data-strip="${n.strip}"][data-photo="${n.photo}"]`);
@@ -29,11 +30,11 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
           const r = frame.getBoundingClientRect();
           const tx = n.side === "left" ? r.left - box.left : r.right - box.left; // arrow tip on the frame edge
           const ty = r.top - box.top + r.height * 0.45;
-          const x = n.side === "left" ? 16 : box.width - 16; // note anchor
-          const y = ty - 56 - (n.strip % 2) * 24;
-          const cx = n.side === "left" ? (x + tx) / 2 - 30 : (x + tx) / 2 + 30; // bend the arrow
-          const cy = y + 40;
-          return [{ ...n, x, y, tx, ty, cx, cy }];
+          const x = n.side === "left" ? -gutter : box.width + gutter; // outer edge of the note
+          const y = ty - 70 - (n.strip % 2) * 20;
+          const cx = n.side === "left" ? tx - gutter * 0.35 : tx + gutter * 0.35; // bend the arrow
+          const cy = y + 50;
+          return [{ ...n, x, y, tx, ty, cx, cy, gutter }];
         }),
       );
     };
@@ -52,7 +53,7 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
   }, [notes]);
 
   return (
-    <div ref={ref} className="relative xl:px-[240px] sketch" data-visible={visible} style={{ ["--gutter" as string]: `${GUTTER}px` }}>
+    <div ref={ref} className="relative sketch" data-visible={visible}>
       {children}
       {placed.length > 0 && (
         <svg className="pointer-events-none absolute inset-0 w-full h-full overflow-visible" aria-hidden="true">
@@ -64,8 +65,8 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
           </defs>
           <g filter="url(#wob-notes)" fill="none" stroke="var(--ink)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
             {placed.map((n, i) => {
-              const sx = n.side === "left" ? n.x + 8 : n.x - 8;
-              const sy = n.y + 18;
+              const sx = n.side === "left" ? n.x + n.gutter - 10 : n.x - n.gutter + 10; // inner edge of the note
+              const sy = n.y + 24;
               const dir = n.side === "left" ? -1 : 1; // arrowhead points into the frame
               return (
                 <g key={i}>
@@ -81,10 +82,11 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
         <span
           key={i}
           data-fade
-          className="absolute max-w-[215px] font-hand text-[28px] leading-[1.05] text-ink -rotate-3"
+          className="absolute font-hand text-[26px] leading-[1.05] text-ink -rotate-3"
           style={{
             left: n.side === "left" ? n.x : undefined,
-            right: n.side === "right" ? 16 : undefined,
+            right: n.side === "right" ? -n.gutter : undefined,
+            width: n.gutter - 14,
             textAlign: n.side === "right" ? "right" : "left",
             top: n.y - 12,
             ["--d" as string]: 0.1 + i * 0.35,
