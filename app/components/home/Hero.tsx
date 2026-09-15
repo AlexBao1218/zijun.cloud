@@ -20,7 +20,6 @@ export default async function Hero({ locale }: { locale: string }) {
   return (
     <section className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24 px-6 md:px-20 pt-32 pb-20 md:pt-[calc(5rem+4rem)] md:pb-16 md:min-h-[calc(100svh-6.5rem)]">
       <div className="max-w-[46ch]">
-        <p className="text-[12px] md:text-[13px] tracking-[0.14em] uppercase mb-8">{c.availability}</p>
         <h1 className="font-serif font-normal text-[32px] md:text-[40px] leading-[1.12] text-balance">
           {c.quoteBefore}
           <span className="text-pop">{c.quoteEmphasis}</span>
@@ -32,6 +31,11 @@ export default async function Hero({ locale }: { locale: string }) {
           <span className="text-pop text-[72px] md:text-[108px] leading-[0.85] tracking-[-0.01em]">{c.punchEmphasis}</span>
         </p>
         <p className="mt-10 text-[14px] md:text-[15px] leading-relaxed max-w-[52ch]">{c.byline}</p>
+        <p className="mt-8">
+          <span className="inline-block border border-ink bg-fill px-3 py-2 text-[11px] md:text-[12px] tracking-[0.12em] uppercase">
+            {c.availability}
+          </span>
+        </p>
       </div>
       {c.image?.src ? (
         <div className="relative border border-ink aspect-[2/3] w-[260px] md:w-[340px] shrink-0 overflow-hidden">
