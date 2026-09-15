@@ -54,6 +54,7 @@ for (const locale of LOCALES) {
     assert.ok(Array.isArray(s.groups), "groups");
     if (s.kits) {
       assert.ok(Array.isArray(s.kits) && s.kits.length === 2, "two kits");
+      assert.ok(isStr(s.kitsTitle), "kitsTitle");
       for (const k of s.kits) assert.ok(isStr(k.name) && isStr(k.note) && strArray(k.items) && k.items.length >= 3, `kit ${k.name}`);
     }
     if (s.ledger) {

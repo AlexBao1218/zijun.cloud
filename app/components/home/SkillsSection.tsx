@@ -9,6 +9,8 @@ type SkillsContent = {
   ledger?: { name: string; subtitle: string; rows: { course: string; grade: string }[]; footer: string[] };
   /** Two toolboxes side by side: the new kit and the classical kit. */
   kits?: { name: string; note: string; items: string[] }[];
+  kitsTitle?: string;
+  kitsSubtitle?: string;
   groups: { name: string; items: string[]; note?: string }[];
   languagesLabel: string;
   languages: string;
@@ -20,10 +22,23 @@ export default async function SkillsSection({ locale }: { locale: string }) {
     <section>
       <SectionStarter id="skills" title={c.title} subtitle={c.subtitle} />
       <div className="px-6 md:px-20 py-16 md:py-24 max-w-[1100px] mx-auto grid gap-16">
+        {c.kits && (
+          <div className="grid gap-8 justify-items-center w-full">
+            <div className="grid gap-2 justify-items-center">
+              <h3 className="font-serif text-3xl leading-none">{c.kitsTitle}</h3>
+              {c.kitsSubtitle && <p className="text-[13px] text-ink/60">{c.kitsSubtitle}</p>}
+            </div>
+            <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-start w-full">
+              {c.kits.map((k, i) => (
+                <Toolbox key={k.name} name={k.name} note={k.note} items={k.items} accent={i === 0 ? "towngas" : "neochain"} />
+              ))}
+            </div>
+          </div>
+        )}
         {c.ledger && (
           <div className="grid gap-5 justify-items-center">
             <h3 className="font-serif text-3xl leading-none">{c.ledger.name}</h3>
-            <p className="text-[12px] text-ink/60 -mt-2">{c.ledger.subtitle}</p>
+            <p className="text-[14px] md:text-[15px] text-ink/70 -mt-2">{c.ledger.subtitle}</p>
             <table className="w-full max-w-[640px] border border-ink text-[13px]">
               <tbody>
                 {c.ledger.rows.map((r) => (
@@ -43,13 +58,6 @@ export default async function SkillsSection({ locale }: { locale: string }) {
                 </tr>
               </tfoot>
             </table>
-          </div>
-        )}
-        {c.kits && (
-          <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-start w-full">
-            {c.kits.map((k, i) => (
-              <Toolbox key={k.name} name={k.name} note={k.note} items={k.items} accent={i === 0 ? "towngas" : "neochain"} />
-            ))}
           </div>
         )}
         {c.groups.map((g) => (
