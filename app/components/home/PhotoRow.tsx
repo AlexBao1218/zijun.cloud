@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 type Photo = { src: string; alt: string };
 
 /** Contact-sheet filmstrip: an ink band with sprocket holes, frames at a fixed height that keep their own aspect ratio, horizontal scroll with snap. Click a frame to enlarge. */
-export default function PhotoRow({ photos }: { photos: Photo[] }) {
+export default function PhotoRow({ photos, strip }: { photos: Photo[]; strip?: number }) {
   const [open, setOpen] = useState<number | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const lastTrigger = useRef<HTMLElement | null>(null);
@@ -35,7 +35,7 @@ export default function PhotoRow({ photos }: { photos: Photo[] }) {
         <div className="sprockets" aria-hidden="true" />
         <ul className="flex gap-3 overflow-x-auto snap-x snap-mandatory px-3 py-2 [scrollbar-width:thin]">
           {photos.map((p, i) => (
-            <li key={`${p.src}-${i}`} className="shrink-0 snap-start w-fit">
+            <li key={`${p.src}-${i}`} className="shrink-0 snap-start w-fit" data-strip={strip} data-photo={i}>
               {p.src ? (
                 <button
                   type="button"

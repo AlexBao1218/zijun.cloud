@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Geist_Mono, Noto_Serif_SC } from "next/font/google";
+import { Caveat, Instrument_Serif, Geist_Mono, Noto_Serif_SC } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -19,6 +19,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-geist-mono",
+  display: "swap",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-caveat",
   display: "swap",
 });
 
@@ -56,7 +63,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${instrument.variable} ${geistMono.variable} ${notoSerif.variable}`}>
+    <html lang={locale} className={`${instrument.variable} ${geistMono.variable} ${notoSerif.variable} ${caveat.variable}`}>
       <body className="min-h-screen bg-paper text-ink">
         <NextIntlClientProvider messages={messages}>
           <TopBar />

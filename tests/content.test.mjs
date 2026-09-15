@@ -72,6 +72,12 @@ for (const locale of LOCALES) {
     assert.ok(isStr(a.title) && isStr(a.subtitle) && isStr(a.photosIntro));
     assert.ok(Array.isArray(a.paragraphs), "paragraphs");
     assert.ok(Array.isArray(a.strips) && a.strips.length >= 1, "strips");
+    if (a.notes) {
+      for (const n of a.notes) {
+        assert.ok(Number.isInteger(n.strip) && Number.isInteger(n.photo) && ["left", "right"].includes(n.side) && isStr(n.text), "note");
+        assert.ok(a.strips[n.strip]?.photos[n.photo], `note target ${n.strip}/${n.photo} exists`);
+      }
+    }
     if (a.map) {
       assert.ok(isStr(a.map.title) && isStr(a.map.lede) && isStr(a.map.text) && Array.isArray(a.map.stops) && a.map.stops.length >= 2, "map");
       for (const st of a.map.stops) assert.ok(isStr(st.name) && isStr(st.stage) && typeof st.lon === "number" && typeof st.lat === "number", `stop ${st.name}`);
