@@ -39,6 +39,8 @@ export type WorkCardData = {
   role: string;
   colour: ProjectColour;
   cover?: string;
+  /** One or two sentences for the showcase panel. */
+  brief?: string;
 };
 
 export type WorkGroup = { name: string; note: string; slugs: string[] };

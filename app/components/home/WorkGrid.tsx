@@ -1,9 +1,21 @@
 import { loadContent } from "@/lib/content";
 import SectionStarter from "@/app/components/SectionStarter";
 import WorkCard from "./WorkCard";
+import Showcase from "./Showcase";
 import type { WorkCardData, WorkGroup } from "@/lib/projects";
 
-type WorkContent = { title: string; subtitle: string; groups: WorkGroup[]; cards: WorkCardData[] };
+type WorkContent = {
+  title: string;
+  subtitle: string;
+  groups: WorkGroup[];
+  cards: WorkCardData[];
+  /** How single-card groups are laid out: side by side, or as a record-picker showcase. */
+  singles?: "row" | "carousel";
+  showcaseLabel?: string;
+};
+
+/** Width of three cards plus two gaps — group headings are capped to it so they align with the centred rows. */
+const ROW_MAX = "max-w-[calc(3*22rem+2*2.5rem)]";
 
 function GroupHeading({ g, compact }: { g: WorkGroup; compact?: boolean }) {
   return (
@@ -14,21 +26,24 @@ function GroupHeading({ g, compact }: { g: WorkGroup; compact?: boolean }) {
   );
 }
 
-/** Groups with several cards get a full-width block; single-card groups share one row, each with its own heading. */
 export default async function WorkGrid({ locale }: { locale: string }) {
   const c = await loadContent<WorkContent>("work", locale);
   const bySlug = new Map(c.cards.map((card) => [card.slug, card]));
   const multi = c.groups.filter((g) => g.slugs.length > 1);
   const single = c.groups.filter((g) => g.slugs.length === 1);
+  const singleItems = single.flatMap((g) => {
+    const card = bySlug.get(g.slugs[0]);
+    return card ? [{ group: g, card }] : [];
+  });
 
   return (
     <section>
       <SectionStarter id="work" title={c.title} subtitle={c.subtitle} />
-      <div className="px-6 md:px-16 py-16 md:py-24 max-w-[1400px] mx-auto grid gap-20 md:gap-24">
+      <div className="px-6 md:px-16 py-16 md:py-24 max-w-[1400px] mx-auto grid gap-20 md:gap-24 justify-items-center">
         {multi.map((g) => (
-          <div key={g.name} className="grid gap-10">
+          <div key={g.name} className={`w-full ${ROW_MAX} grid gap-10`}>
             <GroupHeading g={g} />
-            <ul className="flex flex-wrap gap-x-10 gap-y-14">
+            <ul className="flex flex-wrap justify-center gap-x-10 gap-y-14">
               {g.slugs.map((slug) => {
                 const card = bySlug.get(slug);
                 return card ? (
@@ -40,18 +55,21 @@ export default async function WorkGrid({ locale }: { locale: string }) {
             </ul>
           </div>
         ))}
-        {single.length > 0 && (
-          <ul className="flex flex-wrap gap-x-10 gap-y-14">
-            {single.map((g) => {
-              const card = bySlug.get(g.slugs[0]);
-              return card ? (
-                <li key={g.name} className="w-full max-w-[22rem] grid gap-10 content-start">
-                  <GroupHeading g={g} compact />
+        {singleItems.length > 0 && c.singles === "carousel" ? (
+          <div className="w-full max-w-[1240px]">
+            <Showcase items={singleItems} openLabel={c.showcaseLabel ?? "open →"} />
+          </div>
+        ) : (
+          singleItems.length > 0 && (
+            <ul className={`w-full ${ROW_MAX} flex flex-wrap justify-center gap-x-10 gap-y-14`}>
+              {singleItems.map(({ group, card }) => (
+                <li key={group.name} className="w-full max-w-[22rem] grid gap-10 content-start">
+                  <GroupHeading g={group} compact />
                   <WorkCard card={card} />
                 </li>
-              ) : null;
-            })}
-          </ul>
+              ))}
+            </ul>
+          )
         )}
       </div>
     </section>

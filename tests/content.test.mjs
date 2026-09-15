@@ -37,9 +37,12 @@ for (const locale of LOCALES) {
     const grouped = w.groups.flatMap((g) => g.slugs);
     assert.deepEqual([...grouped].sort(), w.cards.map((c) => c.slug).sort(), "every card in exactly one group");
     for (const g of w.groups) assert.ok(isStr(g.name) && isStr(g.note), `group ${g.name}`);
+    if (w.singles) assert.ok(["row", "carousel"].includes(w.singles), "singles layout");
+    if (w.singles === "carousel") assert.ok(isStr(w.showcaseLabel), "showcaseLabel");
     for (const c of w.cards) {
       for (const k of ["slug", "title", "org", "duration", "role"]) assert.ok(isStr(c[k]), `${c.slug}.${k}`);
       assert.ok(COLOURS.includes(c.colour), `${c.slug}.colour`);
+      if (c.brief) assert.ok(isStr(c.brief) && c.brief.length <= 220, `${c.slug}.brief short`);
       assert.ok(fs.existsSync(path.join(ROOT, "projects", c.slug, `${locale}.json`)), `${c.slug} has project json`);
       if (c.cover) assert.ok(fs.existsSync(path.join("public", c.cover)), `${c.slug} cover exists`);
     }

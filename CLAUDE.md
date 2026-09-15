@@ -20,7 +20,7 @@ const data = await loadContent<MyType>("work", locale);   // lib/content.ts
 | File | Read by |
 |------|---------|
 | `content/home` | `app/components/home/Hero.tsx` (optional `image: { src, alt }` renders in the hero slot; absent → hatch placeholder) |
-| `content/work` | `WorkGrid.tsx` (six cards; `colour` must be one of `lib/projects.ts` PROJECT_COLOURS) |
+| `content/work` | `WorkGrid.tsx` — `groups` (name, note, slugs) + `cards` (`colour` from `lib/projects.ts` PROJECT_COLOURS, optional `brief`); `singles: "row" \| "carousel"` chooses how single-card groups render |
 | `content/skills` | `SkillsSection.tsx` |
 | `content/about` | `AboutSection.tsx` (photos: `src: ""` renders a hatch placeholder) |
 | `content/contact` | `ContactSection.tsx` |
