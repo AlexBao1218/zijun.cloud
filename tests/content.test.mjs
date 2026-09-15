@@ -73,7 +73,7 @@ for (const locale of LOCALES) {
     assert.ok(Array.isArray(a.paragraphs), "paragraphs");
     assert.ok(Array.isArray(a.strips) && a.strips.length >= 1, "strips");
     if (a.map) {
-      assert.ok(isStr(a.map.title) && isStr(a.map.lede) && isStr(a.map.aside) && Array.isArray(a.map.stops) && a.map.stops.length >= 2, "map");
+      assert.ok(isStr(a.map.title) && isStr(a.map.lede) && isStr(a.map.text) && Array.isArray(a.map.stops) && a.map.stops.length >= 2, "map");
       for (const st of a.map.stops) assert.ok(isStr(st.name) && isStr(st.stage) && typeof st.lon === "number" && typeof st.lat === "number", `stop ${st.name}`);
     }
     for (const st of a.strips) {

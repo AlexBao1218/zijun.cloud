@@ -9,7 +9,7 @@ type AboutContent = {
   paragraphs: string[];
   photosIntro: string;
   strips: { name: string; photos: { src: string; alt: string }[] }[];
-  map?: { title: string; lede: string; aside: string; stops: { name: string; stage: string; lon: number; lat: number }[] };
+  map?: { title: string; lede: string; text: string; stops: { name: string; stage: string; lon: number; lat: number }[] };
 };
 
 export default async function AboutSection({ locale }: { locale: string }) {
@@ -27,7 +27,7 @@ export default async function AboutSection({ locale }: { locale: string }) {
         )}
         {c.map && (
           <div className="w-full">
-            <LifeMap title={c.map.title} lede={c.map.lede} stops={c.map.stops} aside={c.map.aside} />
+            <LifeMap title={c.map.title} lede={c.map.lede} text={c.map.text} stops={c.map.stops} />
           </div>
         )}
         <p className="text-[14px] text-ink/70">{c.photosIntro}</p>

@@ -66,7 +66,7 @@
   ],
   "map": {
     "title": "where i've lived",
-    "lede": "five cities before twenty-two. each one ran differently, and i kept notes.",
+    "lede": "five cities before twenty-two.",
     "stops": [
       {
         "name": "inner mongolia",
@@ -99,6 +99,6 @@
         "lat": 22.3
       }
     ],
-    "aside": "evenings go to badminton or tennis, mornings to a pour-over. there is a classical guitar that gets played, a camera that gets carried, and a blue-and-white british shorthair, zai zai (崽崽), who supervises all of it."
+    "text": "born in inner mongolia; raised across beijing, chengdu and shanghai; came to hong kong for university and stayed for work. moving that often teaches one thing well — land, learn the local way, and be useful fast. hong kong is where i stopped counting: it is home now, and the place i want to keep building in."
   }
 }
