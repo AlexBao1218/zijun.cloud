@@ -75,6 +75,7 @@ for (const locale of LOCALES) {
     if (a.notes) {
       for (const n of a.notes) {
         assert.ok(Number.isInteger(n.strip) && Number.isInteger(n.photo) && ["left", "right"].includes(n.side) && isStr(n.text), "note");
+        if (n.curve) assert.equal(n.curve, "under");
         assert.ok(a.strips[n.strip]?.photos[n.photo], `note target ${n.strip}/${n.photo} exists`);
       }
     }

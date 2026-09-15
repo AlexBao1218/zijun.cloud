@@ -114,19 +114,20 @@
       "strip": 0,
       "photo": 0,
       "side": "left",
-      "text": "格聶"
+      "text": "格聶\nGe'nyen Massif"
     },
     {
       "strip": 1,
       "photo": 0,
       "side": "left",
-      "text": "稻城亞丁 · 4,551 m"
+      "text": "稻城亞丁 · 4,551 m\nYading Nature Reserve"
     },
     {
       "strip": 2,
       "photo": 2,
       "side": "right",
-      "text": "崽崽 zaizai"
+      "text": "崽崽 zaizai",
+      "curve": "under"
     }
   ]
 }
