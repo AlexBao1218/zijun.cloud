@@ -15,7 +15,7 @@ export default async function Hero({ locale }: { locale: string }) {
   const list = new Intl.ListFormat(locale, { type: "conjunction", style: "narrow" }).format(c.identities);
 
   return (
-    <section className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24 px-6 md:px-20 pt-32 pb-20 md:py-0 md:min-h-[calc(100svh-5rem-6.5rem)]">
+    <section className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24 px-6 md:px-20 pt-32 pb-20 md:pt-[calc(5rem+4rem)] md:pb-16 md:min-h-[calc(100svh-6.5rem)]">
       <div className="max-w-[44ch]">
         <p className="text-[12px] md:text-[13px] tracking-[0.14em] uppercase mb-6">{c.availability}</p>
         <h1 className="text-[17px] md:text-[20px] leading-relaxed font-normal">
