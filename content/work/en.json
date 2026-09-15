@@ -2,11 +2,90 @@
   "title": "work",
   "subtitle": "internships / ventures / hackathons",
   "cards": [
-    { "slug": "insurance-program", "title": "Insurance Programme", "org": "Towngas", "duration": "Jun – Dec 2026", "role": "Dashboards + RAG agent", "kind": "Internship", "colour": "towngas", "cover": "/projects/insurance-program/cover.png" },
-    { "slug": "vehicle-parking", "title": "Fleet Management", "org": "Towngas", "duration": "Jun – Dec 2026", "role": "Change requests + approvals", "kind": "Internship", "colour": "towngas", "cover": "/projects/vehicle-parking/cover.png" },
-    { "slug": "meeting-minutes", "title": "Meeting Minutes Workbench", "org": "Towngas", "duration": "Jun – Dec 2026", "role": "LLM workflow → Word", "kind": "Internship", "colour": "towngas", "cover": "/projects/meeting-minutes/cover.png" },
-    { "slug": "cathay-hackathon", "title": "747-8F Load Planner", "org": "Cathay Hackathon 2025", "duration": "Sep – Nov 2025", "role": "Team lead / MILP in the browser", "kind": "Hackathon", "colour": "cathay", "cover": "/projects/cathay-hackathon/cover.png" },
-    { "slug": "neochain", "title": "NeoChain WMS", "org": "NeoChain Co.", "duration": "Jul 2025 – Jun 2026", "role": "PRD, architecture, on-site pilot", "kind": "Co-founder", "colour": "neochain" },
-    { "slug": "igc", "title": "BuildingOS Digital Twin", "org": "Intelli Global Corporation", "duration": "Jun – Aug 2025", "role": "PRDs + RAG knowledge bases", "kind": "Internship", "colour": "igc" }
+    {
+      "slug": "insurance-program",
+      "title": "Insurance Programme",
+      "org": "Towngas",
+      "duration": "Jun – Dec 2026",
+      "role": "Data · Dashboards · AI",
+      "colour": "towngas",
+      "cover": "/projects/insurance-program/cover.png"
+    },
+    {
+      "slug": "vehicle-parking",
+      "title": "Fleet Management",
+      "org": "Towngas",
+      "duration": "Jun – Dec 2026",
+      "role": "Lookup · Request · Approve",
+      "colour": "cathay",
+      "cover": "/projects/vehicle-parking/cover.png"
+    },
+    {
+      "slug": "meeting-minutes",
+      "title": "Meeting Minutes",
+      "org": "Towngas",
+      "duration": "Jun – Dec 2026",
+      "role": "Transcript → Word",
+      "colour": "neochain",
+      "cover": "/projects/meeting-minutes/cover.png"
+    },
+    {
+      "slug": "cathay-hackathon",
+      "title": "Air Cargo Load Planner",
+      "org": "Cathay Hackathon 2025",
+      "duration": "Sep – Nov 2025",
+      "role": "Team lead / PM & UI",
+      "colour": "cathay",
+      "cover": "/projects/cathay-hackathon/cover.png"
+    },
+    {
+      "slug": "neochain",
+      "title": "NeoChain WMS",
+      "org": "NeoChain Co.",
+      "duration": "Jul 2025 – Jun 2026",
+      "role": "Co-founder / Full-Stack",
+      "colour": "neochain",
+      "cover": "/projects/neochain/cover.png"
+    },
+    {
+      "slug": "igc",
+      "title": "BuildingOS Digital Twin",
+      "org": "Intelli Global Corporation",
+      "duration": "Jun – Aug 2025",
+      "role": "Product Intern (3 months)",
+      "colour": "igc"
+    }
+  ],
+  "groups": [
+    {
+      "name": "Towngas",
+      "note": "industrial trainee · 2026",
+      "slugs": [
+        "insurance-program",
+        "vehicle-parking",
+        "meeting-minutes"
+      ]
+    },
+    {
+      "name": "Cathay Hackathon",
+      "note": "finalist · 2025",
+      "slugs": [
+        "cathay-hackathon"
+      ]
+    },
+    {
+      "name": "NeoChain",
+      "note": "co-founder · 2025–26",
+      "slugs": [
+        "neochain"
+      ]
+    },
+    {
+      "name": "IGC",
+      "note": "product intern · 2025",
+      "slugs": [
+        "igc"
+      ]
+    }
   ]
 }

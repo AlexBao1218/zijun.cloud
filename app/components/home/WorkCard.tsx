@@ -18,9 +18,7 @@ export default function WorkCard({ card }: { card: WorkCardData }) {
         </div>
         <h3 className="px-3.5 py-3 border-b border-ink font-serif text-[26px] leading-tight">{card.title}</h3>
         <div className="px-3.5 py-3 border-b border-ink text-[13px]">{card.org}</div>
-        <div className="px-3.5 py-3 text-[13px] text-ink/70">
-          {card.kind} / {card.role}
-        </div>
+        <div className="px-3.5 py-3 text-[13px] text-ink/70">{card.role}</div>
       </Link>
     </OffsetBox>
   );

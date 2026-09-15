@@ -4,10 +4,12 @@
   "identities": [
     "an engineering student at HKU",
     "builder of operations tools",
-    "photographer",
-    "[TO FILL: two more identities, e.g. hiker / film watcher]"
+    "pour-over coffee maker",
+    "badminton player",
+    "cook",
+    "photographer"
   ],
-  "closing": ", and currently an industrial trainee at Towngas.",
+  "closing": ", and currently an industrial trainee at Towngas. I solve problems the AI-native way: find the pain on site, then let agents and I build the fix together.",
   "image": {
     "src": "/photos/hero.jpg",
     "alt": "Alex photographing himself in a mirror, camera raised to one eye"

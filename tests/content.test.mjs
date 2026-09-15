@@ -34,8 +34,12 @@ for (const locale of LOCALES) {
     const w = read(`work/${locale}.json`);
     assert.ok(isStr(w.title) && isStr(w.subtitle));
     assert.ok(Array.isArray(w.cards) && w.cards.length === 6, "six cards");
+    assert.ok(Array.isArray(w.groups) && w.groups.length >= 1, "groups");
+    const grouped = w.groups.flatMap((g) => g.slugs);
+    assert.deepEqual([...grouped].sort(), w.cards.map((c) => c.slug).sort(), "every card in exactly one group");
+    for (const g of w.groups) assert.ok(isStr(g.name) && isStr(g.note), `group ${g.name}`);
     for (const c of w.cards) {
-      for (const k of ["slug", "title", "org", "duration", "role", "kind"]) assert.ok(isStr(c[k]), `${c.slug}.${k}`);
+      for (const k of ["slug", "title", "org", "duration", "role"]) assert.ok(isStr(c[k]), `${c.slug}.${k}`);
       assert.ok(COLOURS.includes(c.colour), `${c.slug}.colour`);
       assert.ok(fs.existsSync(path.join(ROOT, "projects", c.slug, `${locale}.json`)), `${c.slug} has project json`);
       if (c.cover) assert.ok(fs.existsSync(path.join("public", c.cover)), `${c.slug} cover exists`);
@@ -53,11 +57,14 @@ for (const locale of LOCALES) {
     const a = read(`about/${locale}.json`);
     assert.ok(isStr(a.title) && isStr(a.subtitle) && isStr(a.photosIntro));
     assert.ok(strArray(a.paragraphs) && a.paragraphs.length >= 1);
-    assert.ok(Array.isArray(a.photos) && a.photos.length >= 4, "photos");
-    for (const p of a.photos) {
-      assert.equal(typeof p.src, "string");
-      assert.ok(isStr(p.alt), "alt");
-      if (p.src) assert.ok(fs.existsSync(path.join("public", p.src)), `${p.src} exists`);
+    assert.ok(Array.isArray(a.strips) && a.strips.length >= 1, "strips");
+    for (const st of a.strips) {
+      assert.ok(isStr(st.name) && Array.isArray(st.photos) && st.photos.length >= 3, `strip ${st.name}`);
+      for (const p of st.photos) {
+        assert.equal(typeof p.src, "string");
+        assert.ok(isStr(p.alt), "alt");
+        if (p.src) assert.ok(fs.existsSync(path.join("public", p.src)), `${p.src} exists`);
+      }
     }
   });
 

@@ -37,10 +37,11 @@ export type WorkCardData = {
   org: string;
   duration: string;
   role: string;
-  kind: string;
   colour: ProjectColour;
   cover?: string;
 };
+
+export type WorkGroup = { name: string; note: string; slugs: string[] };
 
 export const SKETCHES = ["insurance-loop", "fleet-0700", "minutes-two-pass"] as const;
 export type SketchKey = (typeof SKETCHES)[number];

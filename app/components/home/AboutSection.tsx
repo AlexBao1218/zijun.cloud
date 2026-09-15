@@ -7,7 +7,7 @@ type AboutContent = {
   subtitle: string;
   paragraphs: string[];
   photosIntro: string;
-  photos: { src: string; alt: string }[];
+  strips: { name: string; photos: { src: string; alt: string }[] }[];
 };
 
 export default async function AboutSection({ locale }: { locale: string }) {
@@ -22,7 +22,11 @@ export default async function AboutSection({ locale }: { locale: string }) {
           ))}
         </div>
         <p className="text-[14px] text-ink/70">{c.photosIntro}</p>
-        <PhotoRow photos={c.photos} />
+        <div className="grid gap-6">
+          {c.strips.map((st) => (
+            <PhotoRow key={st.name} photos={st.photos} />
+          ))}
+        </div>
       </div>
     </section>
   );

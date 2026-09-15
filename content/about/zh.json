@@ -5,34 +5,77 @@
     "I study Data and Systems Engineering at the University of Hong Kong and spend most of my time turning operational pain points into software that survives contact with real users: a warehouse system piloted on a factory floor, an insurance database that replaced fourteen years of PDFs, a load planner that solves an integer programme in your browser. [TO FILL: where you grew up, how long in Hong Kong, what you do outside work, one detail with a picture in it.]"
   ],
   "photosIntro": "when i'm not at a desk i'm usually behind a camera — a few frames:",
-  "photos": [
+  "strips": [
     {
-      "src": "/photos/01.jpg",
-      "alt": "Checking a shot on the camera with the Hong Kong skyline behind"
+      "name": "outdoors",
+      "photos": [
+        {
+          "src": "/photos/outdoors-01.jpg",
+          "alt": "Alone in a meadow below a snow mountain, arms out"
+        },
+        {
+          "src": "/photos/outdoors-02.jpg",
+          "alt": "A glacial valley under snow-capped peaks"
+        },
+        {
+          "src": "/photos/outdoors-03.jpg",
+          "alt": "Arms crossed in an orange shell jacket on a rocky ridge"
+        },
+        {
+          "src": "/photos/outdoors-04.jpg",
+          "alt": "Two hikers in masks and beanies, selfie against the sky"
+        },
+        {
+          "src": "/photos/outdoors-05.jpg",
+          "alt": "Two friends in front of a temple gate"
+        }
+      ]
     },
     {
-      "src": "/photos/02.jpg",
-      "alt": "Playing classical guitar on a sofa"
+      "name": "city",
+      "photos": [
+        {
+          "src": "/photos/city-01.jpg",
+          "alt": "Checking a shot on the camera with the Hong Kong skyline behind"
+        },
+        {
+          "src": "/photos/city-02.jpg",
+          "alt": "Looking back and smiling on a lit street at night"
+        },
+        {
+          "src": "/photos/city-03.jpg",
+          "alt": "Standing at a railing as a red taxi blurs past"
+        },
+        {
+          "src": "/photos/city-04.jpg",
+          "alt": "Mid-rally on a badminton court"
+        },
+        {
+          "src": "/photos/city-05.jpg",
+          "alt": "Playing classical guitar on a sofa"
+        }
+      ]
     },
     {
-      "src": "/photos/03.jpg",
-      "alt": "Mid-rally on a badminton court"
-    },
-    {
-      "src": "/photos/04.jpg",
-      "alt": "Arms crossed in an orange shell jacket and beanie on a rocky ridge"
-    },
-    {
-      "src": "/photos/05.jpg",
-      "alt": "A glacial valley under snow-capped peaks"
-    },
-    {
-      "src": "/photos/06.jpg",
-      "alt": "A grey-and-white cat lying between patterned cushions"
-    },
-    {
-      "src": "/photos/07.jpg",
-      "alt": "A print reading 'get that camera, it's worth it'"
+      "name": "home",
+      "photos": [
+        {
+          "src": "/photos/home-01.jpg",
+          "alt": "A tidy desk with a monitor, keyboard and a small clock"
+        },
+        {
+          "src": "/photos/home-02.jpg",
+          "alt": "A small living room with a grey sofa and a wooden bench"
+        },
+        {
+          "src": "/photos/home-03.jpg",
+          "alt": "A grey-and-white cat lying between patterned cushions"
+        },
+        {
+          "src": "/photos/home-04.jpg",
+          "alt": "A print reading 'get that camera, it's worth it'"
+        }
+      ]
     }
   ]
 }

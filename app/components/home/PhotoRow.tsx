@@ -55,9 +55,6 @@ export default function PhotoRow({ photos }: { photos: Photo[] }) {
               ) : (
                 <div className="hatch h-[220px] md:h-[280px] w-[176px] border border-paper" />
               )}
-              <p className="mt-1.5 w-0 min-w-full truncate text-[10px] tracking-[0.1em] uppercase text-paper/80">
-                {String(i + 1).padStart(2, "0")} · {p.alt}
-              </p>
             </li>
           ))}
         </ul>
