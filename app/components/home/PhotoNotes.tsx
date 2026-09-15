@@ -3,6 +3,18 @@
 import { useEffect, useRef, useState } from "react";
 
 export type PhotoNote = { strip: number; photo: number; side: "left" | "right" | "below"; text: string };
+/** Width of a note's first line in the handwriting face, measured with a throwaway span so the arrow can start right after it. */
+function firstLineWidth(host: HTMLElement, text: string) {
+  const probe = document.createElement("span");
+  probe.className = "font-hand text-[24px]";
+  probe.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;pointer-events:none";
+  probe.textContent = text.split("\n")[0];
+  host.appendChild(probe);
+  const w = probe.getBoundingClientRect().width;
+  probe.remove();
+  return w;
+}
+
 type Placed = PhotoNote & { nx: number; ny: number; w: number; sx: number; sy: number; ex: number; ey: number; align: "left" | "right" };
 
 /**
@@ -37,13 +49,13 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
           }
           if (gutter < 90) return [];
           const ey = top + r.height * 0.42;
-          const w = Math.round(gutter * 0.58);
+          const w = gutter - 14;
           if (n.side === "left") {
-            // text ends where the line starts; the line runs level into the photo's left edge
+            // text starts at the margin's outer edge; the line leaves the end of the first line and runs level into the photo
             const nx = -gutter, ny = ey - 16;
-            return [{ ...n, nx, ny, w, sx: nx + w + 8, sy: ey - 2, ex: left - 2, ey, align: "right" as const }];
+            return [{ ...n, nx, ny, w, sx: nx + firstLineWidth(el, n.text) + 10, sy: ey - 2, ex: left - 2, ey, align: "left" as const }];
           }
-          const nx = box.width + gutter - w, ny = ey - 16;
+          const nx = box.width + 14, ny = ey - 16;
           return [{ ...n, nx, ny, w, sx: nx - 8, sy: ey - 2, ex: right + 2, ey, align: "left" as const }];
         }),
       );
@@ -75,11 +87,14 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
           <g filter="url(#wob-notes)" fill="none" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             {placed.map((n, i) => {
               // a level line: leaves the text horizontally and arrives at the photo horizontally, with only a slight sag between
-              const dir = n.ex >= n.sx ? 1 : -1; // +1 when the photo is to the right of the text
-              const reach = Math.abs(n.ex - n.sx);
-              const c1x = n.sx + dir * reach * 0.35, c1y = n.sy + 6;
-              const c2x = n.ex - dir * reach * 0.35, c2y = n.ey;
-              const d = `M${n.sx} ${n.sy} C${c1x} ${c1y} ${c2x} ${c2y} ${n.ex} ${n.ey}`;
+              const sx = n.sx;
+              const dir = n.ex >= sx ? 1 : -1; // +1 when the photo is to the right of the text
+              const reach = Math.abs(n.ex - sx);
+              // both control points sit a little below the lower end, so the line sags like a U (open upward) and never arches
+              const sag = Math.max(n.sy, n.ey) + Math.min(16, reach * 0.12);
+              const c1x = sx + dir * reach * 0.35, c1y = sag;
+              const c2x = n.ex - dir * reach * 0.35, c2y = sag;
+              const d = `M${sx} ${n.sy} C${c1x} ${c1y} ${c2x} ${c2y} ${n.ex} ${n.ey}`;
               const hx = n.ex - dir * 9; // horizontal arrowhead
               return (
                 <g key={i}>
@@ -99,7 +114,9 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
           style={{ left: n.nx, top: n.ny, width: n.w, textAlign: n.align, ["--d" as string]: 0.1 + i * 0.3 }}
         >
           {n.text.split("\n").map((line, k) => (
-            <span key={k} className="block">{line}</span>
+            <span key={k} className={`inline-block whitespace-nowrap ${k === 0 ? "" : "text-[18px] leading-[1.15]"}`} style={{ display: "table" }}>
+              {line}
+            </span>
           ))}
         </span>
       ))}
