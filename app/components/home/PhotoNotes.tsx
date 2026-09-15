@@ -2,13 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export type PhotoNote = { strip: number; photo: number; side: "left" | "right"; text: string; /** "under": loop below the note and arrive at the frame from beneath */ curve?: "under" };
-type Placed = PhotoNote & { x: number; y: number; tx: number; ty: number; cx: number; cy: number; gutter: number; sb: number };
-
+export type PhotoNote = { strip: number; photo: number; side: "left" | "right" | "below"; text: string };
+type Placed = PhotoNote & { nx: number; ny: number; w: number; sx: number; sy: number; ex: number; ey: number; align: "left" | "right" };
 
 /**
- * Handwritten notes in the gutters beside the photo strips, each with a hand-drawn arrow curving to its photo.
- * Positions are measured from the strips' DOM (data-strip / data-photo on each frame) and re-measured on resize.
+ * Handwritten notes beside the photo strips, the way a person annotates a contact sheet:
+ * the note sits in the nearest empty space (page margin, or just under the band) and one short, gently curved line runs to the photo's edge.
+ * Positions are measured from the DOM (data-strip / data-photo on each frame) and re-measured on resize and image load.
  */
 export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -20,30 +20,36 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
     if (!el) return;
     const measure = () => {
       const box = el.getBoundingClientRect();
-      // notes live in the page's own side margin, outside the strips; need ~90px to be legible
-      const gutter = Math.min(220, Math.floor(box.left) - 12);
-      if (gutter < 90) return setPlaced([]);
+      const gutter = Math.min(220, Math.floor(box.left) - 12); // the page's own side margin
       setPlaced(
         notes.flatMap((n) => {
           const frame = el.querySelector<HTMLElement>(`[data-strip="${n.strip}"][data-photo="${n.photo}"]`);
           if (!frame) return [];
           const r = frame.getBoundingClientRect();
           const strip = frame.closest<HTMLElement>(".bg-ink");
-          const sb = strip ? strip.getBoundingClientRect().bottom - box.top : r.bottom - box.top; // bottom of the film band
-          const tx = n.side === "left" ? r.left - box.left : r.right - box.left; // arrow tip on the frame edge
-          const ty = r.top - box.top + r.height * 0.45;
-          const x = n.side === "left" ? -gutter : box.width + gutter; // outer edge of the note
-          const y = ty - 70 - (n.strip % 2) * 20;
-          const cx = n.side === "left" ? tx - gutter * 0.35 : tx + gutter * 0.35; // bend the arrow
-          const cy = y + 50;
-          return [{ ...n, x, y, tx, ty, cx, cy, gutter, sb }];
+          const sb = (strip ? strip.getBoundingClientRect().bottom : r.bottom) - box.top;
+          const left = r.left - box.left, right = r.right - box.left, top = r.top - box.top, bottom = r.bottom - box.top;
+          if (n.side === "below") {
+            // note under the band, a little right of the photo's centre; line goes straight up into the photo's bottom edge
+            // the film border is ink, so the line stops at the band's bottom edge right under the photo
+            const ex = left + r.width * 0.55, ey = sb + 3;
+            const nx = ex + 30, ny = sb + 30;
+            return [{ ...n, nx, ny, w: 220, sx: nx - 4, sy: ny + 6, ex, ey, align: "left" as const }];
+          }
+          if (gutter < 90) return [];
+          const ey = top + r.height * 0.42;
+          if (n.side === "left") {
+            const nx = -gutter, ny = ey - 58;
+            return [{ ...n, nx, ny, w: gutter - 14, sx: -12, sy: ny + 22, ex: left - 2, ey, align: "left" as const }];
+          }
+          const nx = box.width + 12, ny = ey - 58;
+          return [{ ...n, nx, ny, w: gutter - 14, sx: box.width + 12, sy: ny + 22, ex: right + 2, ey, align: "left" as const }];
         }),
       );
     };
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(el);
-    // frames change width as their images load (height fixed, width auto), so watch each target too
     el.querySelectorAll<HTMLElement>("[data-strip][data-photo]").forEach((f) => ro.observe(f));
     el.querySelectorAll("img").forEach((img) => img.addEventListener("load", measure, { once: true }));
     const io = new IntersectionObserver((es) => es.some((e) => e.isIntersecting) && setVisible(true), { threshold: 0.2 });
@@ -62,33 +68,24 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
           <defs>
             <filter id="wob-notes" x="-5%" y="-5%" width="110%" height="110%">
               <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="9" result="n" />
-              <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6" xChannelSelector="R" yChannelSelector="G" />
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" xChannelSelector="R" yChannelSelector="G" />
             </filter>
           </defs>
-          <g filter="url(#wob-notes)" fill="none" stroke="var(--ink)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <g filter="url(#wob-notes)" fill="none" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             {placed.map((n, i) => {
-              const dir = n.side === "left" ? -1 : 1; // +1 when the frame edge is to the LEFT of the note
-              const sx = n.side === "left" ? n.x + n.gutter - 10 : n.x - n.gutter + 10; // inner edge of the note
-              const ex = n.tx + dir * 6; // arrow tip just outside the frame edge
-              // the arrow always ENTERS the frame horizontally: the last control point sits level with the tip
-              const c2x = ex + dir * Math.max(60, n.gutter * 0.5), c2y = n.ty;
-              let d: string;
-              if (n.curve === "under") {
-                // leave the note downwards, run beneath the film band, come up through the gap beside the frame and hook into its edge
-                const sy = n.y + 44;
-                const under = n.sb + 28;
-                const gapX = ex + dir * 10;
-                d = `M${sx + dir * 30} ${sy} C${sx + dir * 30} ${under} ${gapX + dir * 120} ${under} ${gapX} ${under} S${gapX} ${n.ty + 40} ${ex} ${n.ty}`;
-              } else {
-                // leave the note level, dip a little, come in level
-                const sy = n.y + 22;
-                d = `M${sx} ${sy} C${sx - dir * n.gutter * 0.35} ${sy + 10} ${c2x} ${c2y} ${ex} ${n.ty}`;
-              }
-              const hx = ex + dir * 9;
+              // one gentle arc: control point sits a little off the straight line, bowed away from the strip
+              const mx = (n.sx + n.ex) / 2, my = (n.sy + n.ey) / 2;
+              const dx = n.ex - n.sx, dy = n.ey - n.sy;
+              const len = Math.hypot(dx, dy) || 1;
+              const bow = Math.min(18, len * 0.18);
+              const cx = mx - (dy / len) * bow, cy = my + (dx / len) * bow;
+              // arrowhead along the incoming tangent (from the control point)
+              const a = Math.atan2(n.ey - cy, n.ex - cx);
+              const hx = (t: number) => n.ex - 8 * Math.cos(a - t), hy = (t: number) => n.ey - 8 * Math.sin(a - t);
               return (
                 <g key={i}>
-                  <path d={d} data-draw style={{ ["--d" as string]: 0.2 + i * 0.35 }} />
-                  <path d={`M${hx} ${n.ty - 6} L${ex} ${n.ty} L${hx} ${n.ty + 6}`} data-draw style={{ ["--d" as string]: 0.9 + i * 0.35 }} />
+                  <path d={`M${n.sx} ${n.sy} Q${cx} ${cy} ${n.ex} ${n.ey}`} data-draw style={{ ["--d" as string]: 0.2 + i * 0.3 }} />
+                  <path d={`M${hx(0.55)} ${hy(0.55)} L${n.ex} ${n.ey} L${hx(-0.55)} ${hy(-0.55)}`} data-draw style={{ ["--d" as string]: 0.8 + i * 0.3 }} />
                 </g>
               );
             })}
@@ -100,14 +97,7 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
           key={i}
           data-fade
           className="absolute font-hand text-[26px] leading-[1.05] text-ink -rotate-3"
-          style={{
-            left: n.side === "left" ? n.x : undefined,
-            right: n.side === "right" ? -n.gutter : undefined,
-            width: n.gutter - 14,
-            textAlign: n.side === "right" ? "right" : "left",
-            top: n.y - 12,
-            ["--d" as string]: 0.1 + i * 0.35,
-          }}
+          style={{ left: n.nx, top: n.ny, width: n.w, textAlign: n.align, ["--d" as string]: 0.1 + i * 0.3 }}
         >
           {n.text.split("\n").map((line, k) => (
             <span key={k} className="block">{line}</span>

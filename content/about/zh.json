@@ -125,9 +125,8 @@
     {
       "strip": 2,
       "photo": 2,
-      "side": "right",
-      "text": "崽崽 zaizai",
-      "curve": "under"
+      "side": "below",
+      "text": "崽崽 zaizai"
     }
   ]
 }
