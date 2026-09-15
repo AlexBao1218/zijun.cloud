@@ -4,7 +4,7 @@ import SectionStarter from "@/app/components/SectionStarter";
 type SkillsContent = {
   title: string;
   subtitle: string;
-  groups: { name: string; items: string[] }[];
+  groups: { name: string; items: string[]; note?: string }[];
   languagesLabel: string;
   languages: string;
 };
@@ -25,6 +25,7 @@ export default async function SkillsSection({ locale }: { locale: string }) {
                 </li>
               ))}
             </ul>
+            {g.note && <p className="text-[12px] text-ink/60 text-center">{g.note}</p>}
           </div>
         ))}
         <div className="grid gap-3 justify-items-center border-t border-ink pt-10">

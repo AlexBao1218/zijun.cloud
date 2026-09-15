@@ -2,9 +2,48 @@
   "title": "skills",
   "subtitle": "in order of relevance / proficiency",
   "groups": [
-    { "name": "Methods", "items": ["Data-Driven Optimization", "MILP / Operations Research", "System Simulation", "PRD Writing", "Process Mapping", "RAG Pipeline Design", "Prompt Engineering"] },
-    { "name": "Tools", "items": ["Claude Code", "Lark (Feishu) / Spark", "Excel", "Power BI", "Power Automate", "Power Apps", "SAP", "FlexSim", "Figma", "Vercel"] },
-    { "name": "Technical", "items": ["Python", "SQL", "TypeScript", "React / Next.js", "Tailwind CSS", "Node.js", "Git"] }
+    {
+      "name": "Methods",
+      "items": [
+        "Supply Chain Management · A-",
+        "Project Management · A-",
+        "Operations Planning and Control · A+",
+        "Data-driven Optimization · A+",
+        "Mathematical Optimization · A+",
+        "Operational Research · A+",
+        "System Modeling and Simulation · A",
+        "Statistical Analysis · A+",
+        "Engineering Economics and Finance · A-"
+      ],
+      "note": "major courses at hku, beng (ielm) · gpa 3.73 / 4.3"
+    },
+    {
+      "name": "Tools",
+      "items": [
+        "Claude Code",
+        "Lark (Feishu) / Spark",
+        "Excel",
+        "Power BI",
+        "Power Automate",
+        "Power Apps",
+        "SAP",
+        "FlexSim",
+        "Figma",
+        "Vercel"
+      ]
+    },
+    {
+      "name": "Technical",
+      "items": [
+        "Python",
+        "SQL",
+        "TypeScript",
+        "React / Next.js",
+        "Tailwind CSS",
+        "Node.js",
+        "Git"
+      ]
+    }
   ],
   "languagesLabel": "Languages",
   "languages": "English (professional working) · Mandarin (native) · Cantonese (limited working)"

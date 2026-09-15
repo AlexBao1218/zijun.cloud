@@ -52,7 +52,10 @@ for (const locale of LOCALES) {
     const s = read(`skills/${locale}.json`);
     assert.ok(isStr(s.title) && isStr(s.subtitle) && isStr(s.languagesLabel) && isStr(s.languages));
     assert.ok(Array.isArray(s.groups) && s.groups.length === 3, "three groups");
-    for (const g of s.groups) assert.ok(isStr(g.name) && strArray(g.items) && g.items.length > 0, g.name);
+    for (const g of s.groups) {
+      assert.ok(isStr(g.name) && strArray(g.items) && g.items.length > 0, g.name);
+      if (g.note) assert.ok(isStr(g.note), `${g.name} note`);
+    }
   });
 
   test(`about/${locale}`, () => {
