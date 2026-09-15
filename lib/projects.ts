@@ -43,7 +43,7 @@ export type WorkCardData = {
 
 export type WorkGroup = { name: string; note: string; slugs: string[] };
 
-export const SKETCHES = ["insurance-loop", "fleet-0700", "minutes-two-pass"] as const;
+export const SKETCHES = ["insurance-link", "fleet-three", "minutes-two-pass", "cargo-lock-solve", "igc-alarm-agent"] as const;
 export type SketchKey = (typeof SKETCHES)[number];
 
 export type GuideStep = { label: string; hint?: string };
@@ -55,6 +55,8 @@ export type ProjectSection = {
   quote?: string;
   /** Key of an animated sketch rendered under the paragraphs; see app/components/project/sketches. */
   sketch?: SketchKey;
+  /** A product screenshot rendered under the paragraphs. */
+  image?: { src: string; alt: string };
 };
 
 export type ProjectContent = {

@@ -2,9 +2,9 @@
   "title": "Fleet Management",
   "org": "Towngas · Transport team",
   "duration": "Jun – Dec 2026",
-  "role": "Industrial trainee — sole builder",
+  "role": "Industrial trainee",
   "colour": "towngas",
-  "summary": "One parking change used to mean an email, 37 folders and a 48-column spreadsheet, edited by hand by whoever knew where the files were. Now it is one app: look up a plate, submit the change, approve it in place, and at 07:00 the fleet list updates itself.",
+  "summary": "One parking change used to mean an email, 37 folders and a 48-column spreadsheet. The app puts the three things behind it in one place: look up a plate, request a change, approve it.",
   "demo": {
     "mode": "embed",
     "url": "https://fleet-demo.zijun.cloud",
@@ -29,15 +29,15 @@
     },
     {
       "label": "Role",
-      "value": "Process design, data model, app, daily automation (with one teammate)"
+      "value": "Process design, data model, front end, back end"
     },
     {
-      "label": "Before",
-      "value": "1 email · 37 folders · 48-column sheet · edited by hand"
+      "label": "Scope",
+      "value": "One record per plate · a floor plan per site · several changes per request"
     },
     {
       "label": "Stack",
-      "value": "Feishu Spark · React · NestJS · PostgreSQL · cloud flow to SharePoint · Outlook"
+      "value": "Feishu Spark · React · NestJS · PostgreSQL"
     }
   ],
   "guide": {
@@ -45,7 +45,7 @@
     "steps": [
       {
         "label": "Look up",
-        "hint": "DEMO 101 is loaded; try a parking site for its floor plan"
+        "hint": "DEMO 101 is loaded; try a site for its floor plan"
       },
       {
         "label": "Request",
@@ -54,38 +54,39 @@
       {
         "label": "Approve",
         "hint": "admin console, grouped by plate"
-      },
-      {
-        "label": "After approval",
-        "hint": "logbook rows copied in the macro's column order"
       }
     ]
   },
   "sections": [
     {
-      "heading": "Three things in one place",
+      "heading": "The problem",
       "paragraphs": [
-        "Look up — type a plate, the record and its floor plan come out. Request — the form pre-fills, suggests existing values so one department is not spelled three ways, and takes several changes in one submission. Approve — done in place, grouped by plate, so nothing gets batched and skipped."
-      ]
-    },
-    {
-      "heading": "At 07:00 the fleet list updates itself",
-      "paragraphs": [
-        "The master sheet still lives in SharePoint, so it still has to change — but not by hand. A cloud flow runs every morning: take the approved changes due today, run two checks, write only if both pass. Either way the coordinator gets an Outlook notice."
+        "A vehicle changes bay. Someone emails: maybe five vehicles, old bays, new bays, in whatever layout the sender likes. The receiver checks which floor the new bay is on and whether it is free — across 37 folders — then edits a 48-column Excel by hand. Three places, three chances to mistype a plate."
       ],
-      "sketch": "fleet-0700",
-      "quote": "It would rather not write than risk a bad write."
+      "sketch": "fleet-three"
     },
     {
-      "heading": "Alongside it: a second utilisation figure from GPS",
+      "heading": "Look up",
       "paragraphs": [
-        "The logbook is filled in by the drivers it measures. GPS gives an independent number — a vehicle is in use whenever it is not at the depot it left from — and the gap between the two is what the utilisation review looks at. Its own page, with the geofence diagrams, comes later."
+        "Type a plate and the whole record comes out, the bay drawn on its floor plan. Search by site instead and the plan shows every plate on its bay."
       ]
     },
     {
-      "heading": "Next",
+      "heading": "Request",
       "paragraphs": [
-        "Search by location, a phone layout, finer permissions."
+        "Enter the plate, pick the change type, and the form pre-fills what it already knows. Existing values are suggested as you type, so one department is not spelled three ways. Several changes go in one submission."
+      ]
+    },
+    {
+      "heading": "Approve",
+      "paragraphs": [
+        "The administrator approves or returns each request in the same place, grouped by plate, so a batch cannot be half-done. Approved rows can be copied into the logbook in the column order the existing macro expects."
+      ]
+    },
+    {
+      "heading": "What the public demo withholds",
+      "paragraphs": [
+        "The employer is not named. The fleet is synthetic (DEMO 101–136, Parking Site 01–10); identity and financial fields render as explicit \"Redacted\" bars; the floor plans are schematic."
       ]
     }
   ],
@@ -94,7 +95,6 @@
     "React",
     "NestJS",
     "PostgreSQL",
-    "Power Automate",
     "Process design"
   ]
 }

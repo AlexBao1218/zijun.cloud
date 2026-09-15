@@ -1,45 +1,63 @@
 {
   "title": "NeoChain WMS",
-  "org": "NeoChain Co., Limited — industrial digital-transformation consulting for manufacturing and logistics SMEs",
+  "org": "NeoChain Co. — digital transformation for manufacturing SMEs",
   "duration": "Jul 2025 – Jun 2026",
-  "role": "Co-founder",
+  "role": "Co-founder / Full-Stack",
   "colour": "neochain",
-  "summary": "On site at an auto-parts factory in Wenzhou we found no WMS in their ERP and inventory tracked on paper. I led a seven-person team to scope and build a PDA-based warehouse system MVP, authored the PRD and the full architecture, secured client funding for barcode hardware and ran an on-site pilot in production.",
-  "demo": { "mode": "static" },
-  "links": [
-    { "label": "neochainhk.com ↗", "url": "https://neochainhk.com" }
-  ],
+  "summary": "A Wenzhou auto-parts factory ran on paper checklists; the generic ERP did not fit how goods actually moved. After a visit to the floor I built a warehouse system in two halves: a PDA app for line workers and a web admin for line managers.",
+  "demo": {
+    "mode": "static",
+    "poster": "/projects/neochain/cover.png"
+  },
+  "links": [],
   "facts": [
-    { "label": "Timeline", "value": "Jul 2025 – Jun 2026" },
-    { "label": "Role", "value": "Co-founder — PRD, system architecture, team lead of 7, client pilot" },
-    { "label": "Stack", "value": "Next.js · TypeScript · XState · Python (optimisation) · PDA hardware · Vercel" },
-    { "label": "Status", "value": "Pilot ran on the factory floor; [TO FILL: current status]" }
+    {
+      "label": "Timeline",
+      "value": "Jul 2025 – Jun 2026"
+    },
+    {
+      "label": "Role",
+      "value": "Co-founder / Full-Stack — PRD, architecture, PDA app, admin portal"
+    },
+    {
+      "label": "Scope",
+      "value": "7 floor workflows · barcode PDA · one admin overview"
+    },
+    {
+      "label": "Stack",
+      "value": "Next.js · TypeScript · XState · Python"
+    }
   ],
   "sections": [
     {
       "heading": "The problem",
       "paragraphs": [
-        "Generic ERPs from the big Chinese vendors do not fit how a 50-person parts factory actually moves goods. Paper checklists meant data gaps, blind spots, no forecasting and no reorder optimisation. The gap was found on site, not in a pitch deck."
+        "Paper checklists mean data gaps: no one knows what is on the shelf until someone walks over. Off-the-shelf ERPs model a different factory, so workers route around them and the paper comes back."
       ]
     },
     {
-      "heading": "What we built",
+      "heading": "PDA for the floor",
       "paragraphs": [
-        "A PDA-based WMS with seven modules — receiving, put-away, pick-up, line inbound, production closing, line packaging, sales outbound. Each workflow is a state machine: every step confirmed before the next, producing a complete audit trail. The UI is built for noisy floors, poor light and rushed handoffs: you cannot skip a step or misconfirm a package."
+        "Seven workflows — receiving, put-away, picking, line inbound, production closing, line packing, sales outbound — each a state machine on a handheld scanner. Every step is confirmed before the next; you cannot skip one or misconfirm a package in a noisy, rushed handoff."
       ],
-      "bullets": [
-        "PRD and full architecture authored by me; each engineer owns one end-to-end module",
-        "Client-funded barcode hardware; on-site pilot in production",
-        "AI-assisted development process: plan-mode task decomposition, shared skills/SOPs, a memory of design decisions"
-      ],
-      "quote": "Led a 7-person team to scope and build a WMS MVP, authoring the PRD and full system architecture."
+      "image": {
+        "src": "/projects/neochain/pda.png",
+        "alt": "PDA home screen with seven workflow tiles and pending counts"
+      }
     },
     {
-      "heading": "What I learned",
+      "heading": "Admin for line managers",
       "paragraphs": [
-        "Splitting work by UI versus backend failed; everyone needed end-to-end understanding of a module. Once each person owned a complete module, integration friction dropped and code consistency rose."
+        "One overview: frames waiting for put-away, line WIP utilisation, goods waiting for QC, today's yield; inbound and outbound orders with progress; the production trend; line tasks; an anomaly monitor. Master data lives here too."
       ]
     }
   ],
-  "tags": ["WMS", "Next.js", "TypeScript", "State machines", "PDA", "Field research", "Team lead"]
+  "tags": [
+    "WMS",
+    "Next.js",
+    "TypeScript",
+    "XState",
+    "PDA",
+    "Python"
+  ]
 }

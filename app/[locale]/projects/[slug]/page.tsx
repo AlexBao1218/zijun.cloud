@@ -1,3 +1,4 @@
+import Image from "next/image";
 import fs from "fs/promises";
 import path from "path";
 import { notFound } from "next/navigation";
@@ -109,7 +110,7 @@ export default async function ProjectPage({ params }: Props) {
         {p.demo.mode === "recording" && (
           <DemoRecording video={p.demo.video} poster={p.demo.poster} url={p.demo.url} note={t("recordingNote")} openLabel={t("openDemo")} />
         )}
-        {p.demo.mode === "static" && <DemoStatic poster={p.demo.poster} alt={p.title} />}
+        {p.demo.mode === "static" && p.demo.poster && <DemoStatic poster={p.demo.poster} alt={p.title} />}
 
         {p.guide && <GuideFlow heading={p.guide.heading} steps={p.guide.steps} />}
 
@@ -138,6 +139,11 @@ export default async function ProjectPage({ params }: Props) {
               )}
               {s.quote && (
                 <blockquote className={`border-l-4 pl-4 py-1 text-[13px] text-ink/80 ${BORDER_CLASS[p.colour]}`}>{s.quote}</blockquote>
+              )}
+              {s.image && (
+                <div className="relative border border-ink overflow-hidden aspect-[16/9]">
+                  <Image src={s.image.src} alt={s.image.alt} fill sizes="(min-width: 1024px) 820px, 100vw" className="object-cover object-top" />
+                </div>
               )}
               {s.sketch && (() => {
                 const { Component, label } = SKETCH_COMPONENTS[s.sketch];

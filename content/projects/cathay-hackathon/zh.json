@@ -1,10 +1,10 @@
 {
   "title": "747-8F Load Planner",
-  "org": "Cathay Hackathon 2025 · Top 50 finalist of 1,500+ teams",
+  "org": "Cathay Hackathon 2025 · finalist",
   "duration": "Sep – Nov 2025 · rebuilt 2026",
-  "role": "Team lead",
+  "role": "Team lead / PM & UI",
   "colour": "cathay",
-  "summary": "Where the containers go on a freighter decides where its centre of gravity sits, and CG drives fuel burn. In the 24-hour final at Cathay City we built a drag-and-drop ULD planner backed by a MILP. The 2026 rebuild runs that solver as WebAssembly in your browser, with weight limits, type compatibility, lateral balance and lockable positions.",
+  "summary": "Where the containers go on a freighter decides where its centre of gravity sits, and the centre of gravity drives fuel burn. This planner lets you drag ULDs onto a 747-8F, watch the CG move, lock what you want to keep, and let an optimiser place the rest — solved in your browser.",
   "demo": {
     "mode": "embed",
     "url": "https://cargo-demo.zijun.cloud",
@@ -25,19 +25,19 @@
   "facts": [
     {
       "label": "Timeline",
-      "value": "Sep – Nov 2025 (hackathon) · 2026 (rebuild)"
+      "value": "Sep – Nov 2025 · rebuilt 2026"
     },
     {
       "label": "Role",
-      "value": "Team lead — MILP research, interface, pitch"
+      "value": "Team lead / PM & UI — problem framing, interface, MILP research"
+    },
+    {
+      "label": "Scope",
+      "value": "34 positions · 3 load scenarios · weight limits · type compatibility · lateral balance"
     },
     {
       "label": "Stack",
-      "value": "Vite · React 19 · TypeScript · Tailwind v4 · zustand · dnd-kit · GLPK 5 via glpk.js (wasm, Web Worker)"
-    },
-    {
-      "label": "Data",
-      "value": "Hackathon's synthetic scenarios, re-scaled to plausible freighter magnitudes — not airline data"
+      "value": "React 19 · TypeScript · dnd-kit · GLPK via WebAssembly in a Web Worker"
     }
   ],
   "guide": {
@@ -65,31 +65,20 @@
     {
       "heading": "The problem",
       "paragraphs": [
-        "The load planning we saw during the hackathon was surprisingly informal for a decision with that much money behind it. A planner needs to see the aircraft, move things by hand, and have a machine handle the arithmetic of where the rest should go so the CG lands on target."
+        "A load plan is a decision with a lot of fuel behind it, yet the planning we saw was informal. A planner needs to see the aircraft, move things by hand, and have a machine handle the arithmetic of where the rest should go so the CG lands on target."
       ]
     },
     {
-      "heading": "What we built in 24 hours",
+      "heading": "Drag, lock, solve",
       "paragraphs": [
-        "A 2D planner that plays like a packing game: top-down aircraft on the left, weighed cargo on the right, live CG bar on top. Behind it, a MILP from the load-planning literature — binary variables for \"this ULD in that position\", each ULD placed once, each position used at most once, objective minimising CG deviation from target."
+        "Drag a ULD onto a position; invalid targets — over the weight limit, wrong type for a nose bay — are flagged before you drop, and the CG gauge updates live. Lock any position and press Solve: the model treats it as fixed and plans everything else around it."
       ],
-      "quote": "Researched MILP algorithms to compute CG-balanced ULD layouts for a Boeing 747; Top 50 Finalist out of 1,500+ teams."
+      "sketch": "cargo-lock-solve"
     },
     {
-      "heading": "What the rebuild changed",
+      "heading": "The model, in one paragraph",
       "paragraphs": [
-        "The hackathon model was smaller than the pitch implied — no weight limits, no lateral balance, no locks, and a bug that used lateral positions to compute longitudinal CG. The rebuild adds position weight limits, ULD-type compatibility, a lateral balance penalty and user locks, and shows the formulation on screen. The solver is GLPK compiled to WebAssembly in a Web Worker: nothing leaves the browser. A ±1 cm / ±200 kg dead zone was necessary for branch-and-bound to converge."
-      ],
-      "bullets": [
-        "All three scenarios solve to optimal in 40–360 ms in the browser",
-        "Lock / pin any position; the solver plans around it",
-        "Sticky CG gauge with target band, 0–100 score, per-tile capacity bar"
-      ]
-    },
-    {
-      "heading": "What we learned",
-      "paragraphs": [
-        "Going off-prompt on the final day was a risky call made on the strength of our preliminary-round work; it cost hours of discussion and left us without a dedicated cargo judge for feedback. In a 24-hour hackathon, presentation prep has to happen during the build, not after it."
+        "Every ULD–position pair that fits gets a binary variable. Each ULD is placed exactly once, each position used at most once, locked pairs are fixed. The longitudinal CG is linear because total weight is a constant; deviation from target and lateral imbalance are linearised and minimised together. The full case solves in well under a second in the browser, and the formulation is shown on screen in the How-it-works drawer."
       ]
     }
   ],

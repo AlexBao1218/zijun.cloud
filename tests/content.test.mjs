@@ -8,7 +8,7 @@ const ROOT = path.resolve("content");
 const LOCALES = ["en", "zh"];
 const COLOURS = ["towngas", "cathay", "neochain", "igc"];
 const DEMO_MODES = ["embed", "recording", "static"];
-const SKETCHES = ["insurance-loop", "fleet-0700", "minutes-two-pass"];
+const SKETCHES = ["insurance-link", "fleet-three", "minutes-two-pass", "cargo-lock-solve", "igc-alarm-agent"];
 
 const read = (rel) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), "utf8"));
 const isStr = (v) => typeof v === "string" && v.length > 0;
@@ -100,6 +100,7 @@ for (const locale of LOCALES) {
         if (s.bullets) assert.ok(strArray(s.bullets));
         if (s.quote) assert.ok(isStr(s.quote));
         if (s.sketch) assert.ok(SKETCHES.includes(s.sketch), `sketch ${s.sketch}`);
+        if (s.image) assert.ok(isStr(s.image.src) && isStr(s.image.alt) && fs.existsSync(path.join("public", s.image.src)), `image ${s.image?.src}`);
       }
       assert.ok(strArray(p.tags) && p.tags.length > 0, "tags");
     });

@@ -2,9 +2,9 @@
   "title": "Meeting Minutes Workbench",
   "org": "Towngas · Safety committee",
   "duration": "Jun – Dec 2026",
-  "role": "Industrial trainee — sole builder",
+  "role": "Industrial trainee",
   "colour": "towngas",
-  "summary": "A Cantonese transcript goes in; a minutes document in the department's exact Word format comes out. Two hours of reformatting became two minutes of waiting and three of checking.",
+  "summary": "A Cantonese transcript goes in; minutes in the department's exact Word format come out. Two language-model passes, one script, and no instructions needed from the user.",
   "demo": {
     "mode": "embed",
     "url": "https://minutes-demo.zijun.cloud/workbench",
@@ -29,11 +29,11 @@
     },
     {
       "label": "Role",
-      "value": "Prompt design, JSON contract, validator, Word generator (with one teammate)"
+      "value": "Prompt design, JSON contract, validator, Word generator"
     },
     {
-      "label": "Before → after",
-      "value": "1–2 hours of fixing → 2 minutes + a 3-minute check"
+      "label": "Scope",
+      "value": "7 fixed sections · one department template · Cantonese in, formal Chinese out"
     },
     {
       "label": "Stack",
@@ -63,9 +63,15 @@
   },
   "sections": [
     {
+      "heading": "The problem",
+      "paragraphs": [
+        "The minutes format is strict and old: numbered sections, set fonts, a table nobody wants to rebuild. Pasting a transcript into a chatbot gives text that never matches it, so the secretary spends the afternoon reformatting."
+      ]
+    },
+    {
       "heading": "Two passes on purpose",
       "paragraphs": [
-        "The first LLM pass understands: it fixes transcription errors, cuts the meeting into the template's seven sections and marks anything it could not hear. The second writes: formal Chinese, official tone, no number touched. A script pours the result into the Word template."
+        "The first pass understands: it fixes transcription errors, cuts the meeting into the template's seven sections and marks anything it could not hear. The second writes: formal Chinese, official tone, no number touched. A script then pours the result into the Word template."
       ],
       "sketch": "minutes-two-pass",
       "quote": "Missing content → fix pass one. Wrong tone → fix pass two. Never start over."
@@ -73,13 +79,7 @@
     {
       "heading": "The output is the template itself",
       "paragraphs": [
-        "Not \"like\" the template: the same file with the text swapped, formatting untouched. Unclear lines are flagged in place instead of guessed; date, time and venue are left for the secretary."
-      ]
-    },
-    {
-      "heading": "Before → after",
-      "paragraphs": [
-        "Before, the transcript was pasted into a chatbot and the output never matched the template; one to two hours of fixing. Now the file is dropped in, the Word document is back in two minutes, and checking takes three."
+        "Not \"like\" the template — the same file with the text swapped and the formatting untouched. Unclear lines are flagged in place instead of guessed; date, time and venue are left for the secretary."
       ]
     }
   ],

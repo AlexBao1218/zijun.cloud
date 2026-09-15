@@ -2,9 +2,9 @@
   "title": "Insurance Programme",
   "org": "Towngas · Corporate Supplies & Administration",
   "duration": "Jun – Dec 2026",
-  "role": "Industrial trainee — sole builder",
+  "role": "Industrial trainee",
   "colour": "towngas",
-  "summary": "Every insurance question used to be a request to a colleague: search the share drive, count by hand, reply hours or days later. I linked fifteen years of records once, then answered the fixed questions with dashboards and everything else with an assistant. Live, in daily use.",
+  "summary": "Every insurance question used to be a request to a colleague. Fifteen years of records sat in three places that only pointed at each other by number. I linked them once, then answered the recurring questions with dashboards and everything else with an assistant.",
   "demo": {
     "mode": "embed",
     "url": "https://insurance-demo.zijun.cloud",
@@ -21,19 +21,19 @@
   "facts": [
     {
       "label": "Timeline",
-      "value": "Jun – Dec 2026 · live since September, handover by mid-October"
+      "value": "Jun – Dec 2026"
     },
     {
       "label": "Role",
-      "value": "Data model, dashboards, assistant, auto report, mobile layout"
+      "value": "PRD, data model, dashboards, AI assistant, auto report, phone layout"
     },
     {
-      "label": "Records",
-      "value": "15 years · 1,500+ records · 120+ policy documents · 34 classes"
+      "label": "Scope",
+      "value": "34 classes · 1,500+ records · 120+ policy documents · 15 years"
     },
     {
       "label": "Stack",
-      "value": "Feishu Bitable / Spark / Aily · React · NestJS · LLM API for report drafts"
+      "value": "Feishu Bitable / Spark / Aily · React · NestJS · LLM API"
     }
   ],
   "guide": {
@@ -59,29 +59,28 @@
   },
   "sections": [
     {
-      "heading": "The loop",
+      "heading": "The problem",
       "paragraphs": [
-        "A manager asks. The insurance team opens the share drive, finds the files, counts by hand, writes a short reply. Hours, sometimes days. Nothing is reused, so the next question starts the loop again."
+        "A manager asks — this year's motor loss ratio, how many claims are still open. Someone opens the share drive, finds the right files, counts by hand and writes a short reply. Hours, sometimes days. The records were never wrong; they were an insurance summary, a claims list and a folder of policy PDFs that referred to each other only by number."
       ],
-      "sketch": "insurance-loop"
+      "sketch": "insurance-link"
     },
     {
       "heading": "Link once, answer two ways",
       "paragraphs": [
-        "The records were never wrong, just kept in three places that only referred to each other by number. Linking them once turned finding into clicking: open a class, its policies and claims come with it, each policy with its PDF attached.",
-        "Recurring questions became dashboards. Everything else goes to the assistant, which also drafts the report when a dashboard has to be shared."
+        "Open a class and its policies come with it, each with its PDF attached; switch to claims and filter by policy year or status — without opening another file.",
+        "The questions asked every month became dashboards: premium by class, broker share, trend, loss ratio. Anything beyond them goes to the assistant."
       ],
       "bullets": [
         "Scope — it answers only from our tables and the policy documents inside them",
         "Law — legal points cite the references we specified, for a specialist to confirm",
         "Tools — it reads the policy PDFs and draws its own charts"
-      ],
-      "quote": "Every number can be traced back to a source record. It is computed from the database, not counted and typed in."
+      ]
     },
     {
-      "heading": "Before → after",
+      "heading": "From dashboard to report",
       "paragraphs": [
-        "Look it up or ask → open the dashboard or ask the assistant. Nothing to search: the records are already linked. Export in one click: the report writes itself from the same records. The same system is re-laid out for the phone, not shrunk."
+        "When a view has to be shared, pick a year, a range and the sections: the figures come from the database and the narrative is drafted by a language model, out as a four-page Word file ready to edit. The same system is re-laid out for the phone — key fields first, details on tap."
       ]
     },
     {

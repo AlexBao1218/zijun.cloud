@@ -1,44 +1,59 @@
 {
   "title": "BuildingOS Digital Twin",
-  "org": "Intelli Global Corporation (IGC) — smart building management platform",
+  "org": "Intelli Global Corporation — BuildingOS",
   "duration": "Jun – Aug 2025",
-  "role": "Product intern",
+  "role": "Product Intern (3 months)",
   "colour": "igc",
-  "summary": "Product internship on BuildingOS, IGC's platform for property and facility operators. I authored PRDs for The Henderson's digital twin, classified 1,000+ building documents into six RAG knowledge bases, built the energy-saving model that proved the platform's ESG value for the HKICT Awards, and presented IoT proposals to the Hong Kong Housing Authority.",
-  "demo": { "mode": "static" },
+  "summary": "BuildingOS is a smart-building platform for property and facility operators. On one commercial tower I helped put six AI agents — one per building system — in front of the facility manager, each grounded in the tower's own documents.",
+  "demo": {
+    "mode": "static"
+  },
   "links": [],
   "facts": [
-    { "label": "Timeline", "value": "Jun – Aug 2025" },
-    { "label": "Role", "value": "Product intern — PRDs, API specs, RAG data pipeline, ESG model" },
-    { "label": "Stack", "value": "Python · RAG agent platform · IoT / government data APIs · Excel modelling" },
-    { "label": "Outputs", "value": "Digital-twin PRDs · 6 knowledge bases · ESG model · Housing Authority proposal" }
+    {
+      "label": "Timeline",
+      "value": "Jun – Aug 2025"
+    },
+    {
+      "label": "Role",
+      "value": "Product Intern (3 months) — PRDs, API specs, knowledge bases"
+    },
+    {
+      "label": "Scope",
+      "value": "6 agents · 1,000+ documents · MVAC, electrical, ELV, plumbing & drainage, fire services, lifts"
+    },
+    {
+      "label": "Stack",
+      "value": "BuildingOS · RAG agents · Python · IoT and open-data APIs"
+    }
   ],
   "sections": [
     {
-      "heading": "RAG knowledge bases",
+      "heading": "Alarm → specialist → sourced answer",
       "paragraphs": [
-        "Building maintenance needed a specialist engineer for even minor questions. I wrote Python scripts to scan 1,000+ documents (MVAC, electrical, plumbing, fire services, lifts), classify them by filename, organise and batch-upload them into six knowledge bases, then tested retrieval with domain questions to confirm the agent cited the right document."
+        "A manager spots an alarm on the 3-D twin — an AHU motor trip on a floor. Instead of waiting for the right engineer, they pick the matching specialist agent and ask. The answer comes back with the manual page it came from."
       ],
-      "quote": "Classified 1,000+ documents via Python into 6 RAG knowledge bases, then tuned and tested retrieval."
+      "sketch": "igc-alarm-agent"
     },
     {
-      "heading": "PRDs for The Henderson's digital twin",
+      "heading": "Building the knowledge bases",
       "paragraphs": [
-        "For each feature I specified the purpose, the API endpoints to source (IoT and government data), polling frequency, how many data points to show and where in the UI — product-manager work with an engineering spine."
+        "Python scripts scanned the 1,000+ files, classified each by filename, sorted them into six folders and batch-uploaded them. I then tested retrieval with domain questions until each agent located and cited the right document."
       ]
     },
     {
-      "heading": "ESG energy-saving model",
+      "heading": "PRDs for the digital twin",
       "paragraphs": [
-        "IGC needed convincing ESG numbers for an ICT Awards application but had no historical baseline. I designed a horizontal benchmark: theoretical consumption from EMSD benchmarks against actual bills, adjusted for a 73% occupancy rate, refined with senior PMs and defended to clients."
-      ]
-    },
-    {
-      "heading": "Public housing IoT proposal",
-      "paragraphs": [
-        "Researched NFC access, fall-detection sensors, overhead-object detection and parking monitoring for a smart-estate proposal centred on BuildingOS, and presented it to the Hong Kong Housing Authority."
+        "For each feature: its purpose, which API endpoints to source — IoT and government open data — how often to poll, how many data points to show, and where in the interface. Product-manager work with an engineering spine."
       ]
     }
   ],
-  "tags": ["PRD Writing", "RAG", "Python", "API Design", "Digital Twin", "ESG", "IoT"]
+  "tags": [
+    "PRD Writing",
+    "RAG",
+    "Python",
+    "API Design",
+    "Digital Twin",
+    "IoT"
+  ]
 }
