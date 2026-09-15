@@ -31,9 +31,9 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
           const left = r.left - box.left, right = r.right - box.left, top = r.top - box.top;
           if (n.side === "below") {
             // note under the band, off to the right; the line runs back almost level to the band edge under the photo
-            const ex = left + r.width * 0.5, ey = sb + 3;
+            const ex = left + r.width * 0.5;
             const nx = ex + 150, ny = sb + 22;
-            return [{ ...n, nx, ny, w: 220, sx: nx - 6, sy: ny + 10, ex, ey, align: "left" as const }];
+            return [{ ...n, nx, ny, w: 220, sx: nx - 8, sy: ny + 12, ex, ey: sb + 8, align: "left" as const }];
           }
           if (gutter < 90) return [];
           const ey = top + r.height * 0.42;
@@ -41,10 +41,10 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
           if (n.side === "left") {
             // text ends where the line starts; the line runs level into the photo's left edge
             const nx = -gutter, ny = ey - 16;
-            return [{ ...n, nx, ny, w, sx: nx + w + 6, sy: ey - 4, ex: left - 2, ey, align: "right" as const }];
+            return [{ ...n, nx, ny, w, sx: nx + w + 8, sy: ey - 2, ex: left - 2, ey, align: "right" as const }];
           }
           const nx = box.width + gutter - w, ny = ey - 16;
-          return [{ ...n, nx, ny, w, sx: nx - 6, sy: ey - 4, ex: right + 2, ey, align: "left" as const }];
+          return [{ ...n, nx, ny, w, sx: nx - 8, sy: ey - 2, ex: right + 2, ey, align: "left" as const }];
         }),
       );
     };
@@ -74,19 +74,17 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
           </defs>
           <g filter="url(#wob-notes)" fill="none" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             {placed.map((n, i) => {
-              // one gentle arc: control point sits a little off the straight line, bowed away from the strip
-              const mx = (n.sx + n.ex) / 2, my = (n.sy + n.ey) / 2;
-              const dx = n.ex - n.sx, dy = n.ey - n.sy;
-              const len = Math.hypot(dx, dy) || 1;
-              const bow = Math.min(10, len * 0.1);
-              const cx = mx - (dy / len) * bow, cy = my + (dx / len) * bow;
-              // arrowhead along the incoming tangent (from the control point)
-              const a = Math.atan2(n.ey - cy, n.ex - cx);
-              const hx = (t: number) => n.ex - 8 * Math.cos(a - t), hy = (t: number) => n.ey - 8 * Math.sin(a - t);
+              // a level line: leaves the text horizontally and arrives at the photo horizontally, with only a slight sag between
+              const dir = n.ex >= n.sx ? 1 : -1; // +1 when the photo is to the right of the text
+              const reach = Math.abs(n.ex - n.sx);
+              const c1x = n.sx + dir * reach * 0.35, c1y = n.sy + 6;
+              const c2x = n.ex - dir * reach * 0.35, c2y = n.ey;
+              const d = `M${n.sx} ${n.sy} C${c1x} ${c1y} ${c2x} ${c2y} ${n.ex} ${n.ey}`;
+              const hx = n.ex - dir * 9; // horizontal arrowhead
               return (
                 <g key={i}>
-                  <path d={`M${n.sx} ${n.sy} Q${cx} ${cy} ${n.ex} ${n.ey}`} data-draw style={{ ["--d" as string]: 0.2 + i * 0.3 }} />
-                  <path d={`M${hx(0.55)} ${hy(0.55)} L${n.ex} ${n.ey} L${hx(-0.55)} ${hy(-0.55)}`} data-draw style={{ ["--d" as string]: 0.8 + i * 0.3 }} />
+                  <path d={d} data-draw style={{ ["--d" as string]: 0.2 + i * 0.3 }} />
+                  <path d={`M${hx} ${n.ey - 5} L${n.ex} ${n.ey} L${hx} ${n.ey + 5}`} data-draw style={{ ["--d" as string]: 0.8 + i * 0.3 }} />
                 </g>
               );
             })}
