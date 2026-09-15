@@ -3,21 +3,6 @@
   "subtitle": "in order of relevance / proficiency",
   "groups": [
     {
-      "name": "Methods",
-      "items": [
-        "Supply Chain Management · A-",
-        "Project Management · A-",
-        "Operations Planning and Control · A+",
-        "Data-driven Optimization · A+",
-        "Mathematical Optimization · A+",
-        "Operational Research · A+",
-        "System Modeling and Simulation · A",
-        "Statistical Analysis · A+",
-        "Engineering Economics and Finance · A-"
-      ],
-      "note": "major courses at hku, beng (ielm) · gpa 3.73 / 4.3"
-    },
-    {
       "name": "Tools",
       "items": [
         "Claude Code",
@@ -46,5 +31,51 @@
     }
   ],
   "languagesLabel": "Languages",
-  "languages": "English (professional working) · Mandarin (native) · Cantonese (limited working)"
+  "languages": "English (professional working) · Mandarin (native) · Cantonese (limited working)",
+  "ledger": {
+    "name": "coursework",
+    "subtitle": "beng (ielm), the university of hong kong",
+    "rows": [
+      {
+        "course": "Operations Planning and Control",
+        "grade": "A+"
+      },
+      {
+        "course": "Data-driven Optimization",
+        "grade": "A+"
+      },
+      {
+        "course": "Mathematical Optimization",
+        "grade": "A+"
+      },
+      {
+        "course": "Operational Research",
+        "grade": "A+"
+      },
+      {
+        "course": "Statistical Analysis",
+        "grade": "A+"
+      },
+      {
+        "course": "System Modeling and Simulation",
+        "grade": "A"
+      },
+      {
+        "course": "Supply Chain Management",
+        "grade": "A-"
+      },
+      {
+        "course": "Project Management",
+        "grade": "A-"
+      },
+      {
+        "course": "Engineering Economics and Finance",
+        "grade": "A-"
+      }
+    ],
+    "footer": [
+      "GPA 3.73 / 4.3",
+      "Dean’s Honours List 2024–2025, 2025–2026"
+    ]
+  }
 }
