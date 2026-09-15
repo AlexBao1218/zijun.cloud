@@ -124,33 +124,37 @@ export default async function ProjectPage({ params }: Props) {
           ))}
         </dl>
 
-        {/* Sections */}
-        <div className="grid gap-12 max-w-[820px] xl:max-w-[980px]">
+        {/* Sections: heading in the margin from xl, prose beside it at a reading measure, figures span both columns */}
+        <div className="grid gap-12 xl:gap-20">
           {p.sections.map((s, i) => (
-            <section key={i} className="grid gap-4">
+            <section key={i} className="grid gap-4 xl:grid-cols-[300px_minmax(0,1fr)] xl:gap-x-16 xl:gap-y-10">
               <h2 className="font-serif text-3xl leading-none">{s.heading}</h2>
-              {s.paragraphs.map((para, j) => (
-                <p key={j} className="text-[14px] md:text-[15px] xl:text-[17px] leading-relaxed">{para}</p>
-              ))}
-              {s.bullets && (
-                <ul className="grid gap-1.5 pl-5 list-disc text-[14px] leading-relaxed">
-                  {s.bullets.map((b, k) => <li key={k}>{b}</li>)}
-                </ul>
-              )}
-              {s.quote && (
-                <blockquote className={`border-l-4 pl-4 py-1 text-[13px] text-ink/80 ${BORDER_CLASS[p.colour]}`}>{s.quote}</blockquote>
-              )}
+              <div className="grid gap-4 max-w-[72ch] xl:max-w-[78ch]">
+                {s.paragraphs.map((para, j) => (
+                  <p key={j} className="text-[14px] md:text-[15px] xl:text-[17px] leading-relaxed">{para}</p>
+                ))}
+                {s.bullets && (
+                  <ul className="grid gap-1.5 pl-5 list-disc text-[14px] xl:text-[15px] leading-relaxed">
+                    {s.bullets.map((b, k) => <li key={k}>{b}</li>)}
+                  </ul>
+                )}
+                {s.quote && (
+                  <blockquote className={`border-l-4 pl-4 py-1 text-[13px] text-ink/80 ${BORDER_CLASS[p.colour]}`}>{s.quote}</blockquote>
+                )}
+              </div>
               {s.image && (
-                <div className="relative border border-ink overflow-hidden aspect-[16/9]">
-                  <Image src={s.image.src} alt={s.image.alt} fill sizes="(min-width: 1024px) 820px, 100vw" className="object-cover object-top" />
+                <div className="relative border border-ink overflow-hidden aspect-[16/9] xl:col-span-2">
+                  <Image src={s.image.src} alt={s.image.alt} fill sizes="(min-width: 1280px) 1336px, 100vw" className="object-cover object-top" />
                 </div>
               )}
               {s.sketch && (() => {
                 const { Component, label } = SKETCH_COMPONENTS[s.sketch];
                 return (
-                  <Sketch label={label}>
-                    <Component />
-                  </Sketch>
+                  <div className="xl:col-span-2">
+                    <Sketch label={label}>
+                      <Component />
+                    </Sketch>
+                  </div>
                 );
               })()}
             </section>

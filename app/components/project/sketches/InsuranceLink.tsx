@@ -15,8 +15,8 @@ export default function InsuranceLink() {
 
       <Arrow x1={330} y1={172} x2={190} y2={196} d={1.6} />
       <Arrow x1={430} y1={172} x2={570} y2={196} d={1.6} />
-      <Box x={60} y={196} w={260} h={30} label="dashboard · the questions asked every month" d={1.9} />
-      <Box x={440} y={196} w={260} h={30} label="assistant · everything else, with sources" d={1.9} />
+      <Box x={30} y={196} w={320} h={30} label="dashboard · the questions asked every month" d={1.9} />
+      <Box x={410} y={196} w={320} h={30} label="assistant · everything else, with sources" d={1.9} />
     </Frame>
   );
 }
