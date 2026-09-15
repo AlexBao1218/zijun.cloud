@@ -1,10 +1,10 @@
 {
   "title": "Insurance Programme",
   "org": "Towngas · Corporate Supplies & Administration",
-  "duration": "Jun – Dec 2026",
+  "duration": "Jun – Sep 2026",
   "role": "Industrial trainee",
   "colour": "towngas",
-  "summary": "Every insurance question used to be a request to a colleague. Fifteen years of records sat in three places that only pointed at each other by number. I linked them once, then answered the recurring questions with dashboards and everything else with an assistant.",
+  "summary": "Every insurance question used to be a request to a colleague. Fifteen years of records sat in three places, linked only by reference number. I linked them once, then answered the recurring questions with dashboards and the rest with an assistant that cites its sources.",
   "demo": {
     "mode": "embed",
     "url": "https://insurance-demo.zijun.cloud",
@@ -21,19 +21,19 @@
   "facts": [
     {
       "label": "Timeline",
-      "value": "Jun – Dec 2026"
+      "value": "Jun – Sep 2026"
     },
     {
       "label": "Role",
-      "value": "PRD, data model, dashboards, AI assistant, auto report, phone layout"
+      "value": "Product & build, end to end"
     },
     {
       "label": "Scope",
-      "value": "34 classes · 1,500+ records · 120+ policy documents · 15 years"
+      "value": "2 programmes · 34 classes · 1,500+ records · 15 years"
     },
     {
       "label": "Stack",
-      "value": "Feishu Bitable / Spark / Aily · React · NestJS · LLM API"
+      "value": "Feishu Base · Spark · Aily · DeepSeek V4 Flash"
     }
   ],
   "guide": {
@@ -53,7 +53,7 @@
       },
       {
         "label": "Report",
-        "hint": "pick a year and sections; a four-page Word file"
+        "hint": "pick a year and sections; out as an editable Word file"
       }
     ]
   },
@@ -61,42 +61,54 @@
     {
       "heading": "The problem",
       "paragraphs": [
-        "A manager asks — this year's motor loss ratio, how many claims are still open. Someone opens the share drive, finds the right files, counts by hand and writes a short reply. Hours, sometimes days. The records were never wrong; they were an insurance summary, a claims list and a folder of policy PDFs that referred to each other only by number."
+        "Fifteen years of records in three places, linked only by reference number: no database, no data governance, nothing for AI to analyse. The Group's own programme and the dealer programme shared the problem."
       ],
       "sketch": "insurance-link"
     },
     {
       "heading": "Link once, answer two ways",
       "paragraphs": [
-        "Open a class and its policies come with it, each with its PDF attached; switch to claims and filter by policy year or status — without opening another file.",
-        "The questions asked every month became dashboards: premium by class, broker share, trend, loss ratio. Anything beyond them goes to the assistant."
+        "Open a class and its policies and claims come with it, each policy with its PDF attached. Both programmes sit on the same structure.",
+        "The questions asked every month became dashboards — premium by class, broker share, trend, loss ratio — so the fixed answers never depend on a model. Everything beyond them goes to the assistant."
+      ]
+    },
+    {
+      "heading": "The assistant",
+      "paragraphs": [
+        "Three choices keep its answers reliable."
       ],
       "bullets": [
-        "Scope — it answers only from our tables and the policy documents inside them",
-        "Law — legal points cite the references we specified, for a specialist to confirm",
-        "Tools — it reads the policy PDFs and draws its own charts"
+        "Scope — answers only from the tables and the policy documents in them; if the answer is not there, it says so",
+        "Sources — every answer cites where it came from; legal points cite references I specified, for a specialist to confirm",
+        "Tools — reads the policy PDFs, draws its own charts, runs the numbers: ask where a loss ratio is heading and it fits the trend on the years on record"
+      ]
+    },
+    {
+      "heading": "On the phone",
+      "paragraphs": [
+        "The same system, laid out for the phone with the assistant first — for managers out without a laptop."
       ]
     },
     {
       "heading": "From dashboard to report",
       "paragraphs": [
-        "When a view has to be shared, pick a year, a range and the sections: the figures come from the database and the narrative is drafted by a language model, out as a four-page Word file ready to edit. The same system is re-laid out for the phone — key fields first, details on tap."
+        "To share a view, pick a year, a range and the sections. Figures come from the database, the narrative from a language model that only explains the charts it is given, the layout from a script — a Word file, ready to edit. The model is DeepSeek V4 Flash: a low-stakes task gets an inexpensive one."
       ]
     },
     {
-      "heading": "What the public demo withholds",
+      "heading": "About the demo",
       "paragraphs": [
-        "The employer is not named. Aggregates are synthetic and badged as such; record-level fields render as explicit \"Redacted\" bars; the assistant is a visual replica that says so instead of inventing answers."
+        "The employer is not named. Aggregates are synthetic and badged as such; record-level fields show as \"Redacted\" bars; the assistant is a visual replica and says so. Rebuilt in React and NestJS for the public demo."
       ]
     }
   ],
   "tags": [
-    "Feishu Spark",
-    "Bitable",
+    "Feishu Base",
+    "Spark",
     "Aily",
-    "React",
-    "NestJS",
     "RAG",
-    "docx"
+    "DeepSeek",
+    "React",
+    "NestJS"
   ]
 }
