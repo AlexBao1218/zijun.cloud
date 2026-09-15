@@ -22,8 +22,7 @@ const projectSlugs = () =>
 for (const locale of LOCALES) {
   test(`home/${locale}`, () => {
     const h = read(`home/${locale}.json`);
-    for (const k of ["availability", "lead", "closing"]) assert.ok(isStr(h[k]), k);
-    assert.ok(strArray(h.identities) && h.identities.length >= 2, "identities");
+    for (const k of ["availability", "quote", "attribution", "byline"]) assert.ok(isStr(h[k]), k);
     if (h.image) {
       assert.ok(isStr(h.image.src) && isStr(h.image.alt), "image needs src and alt");
       assert.ok(fs.existsSync(path.join("public", h.image.src)), `${h.image.src} exists`);

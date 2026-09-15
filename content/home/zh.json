@@ -1,15 +1,8 @@
 {
   "availability": "available jan – sep 2027 for internships",
-  "lead": "i'm alex —",
-  "identities": [
-    "an engineering student at HKU",
-    "builder of operations tools",
-    "pour-over coffee maker",
-    "badminton player",
-    "cook",
-    "photographer"
-  ],
-  "closing": ", and currently an industrial trainee at Towngas. Most of what's below was built the AI-native way: I find the problem on the floor and decide the shape; the agents do the typing.",
+  "quote": "“that’s a six-month project.”",
+  "attribution": "— a sentence heard less often around the office since june.",
+  "byline": "alex bao. engineering student at hku. four systems in three months, no team, demos below.",
   "image": {
     "src": "/photos/hero.jpg",
     "alt": "Alex photographing himself in a mirror, camera raised to one eye"
