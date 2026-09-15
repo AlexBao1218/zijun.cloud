@@ -6,7 +6,7 @@ export type PhotoNote = { strip: number; photo: number; side: "left" | "right" |
 /** Width of a note's first line in the handwriting face, measured with a throwaway span so the arrow can start right after it. */
 function firstLineWidth(host: HTMLElement, text: string) {
   const probe = document.createElement("span");
-  probe.className = "font-hand text-[24px]";
+  probe.className = "font-hand text-[30px]";
   probe.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;pointer-events:none";
   probe.textContent = text.split("\n")[0];
   host.appendChild(probe);
@@ -45,17 +45,17 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
             // note under the band, off to the right; the line runs back almost level to the band edge under the photo
             const ex = left + r.width * 0.5;
             const nx = ex + 150, ny = sb + 22;
-            return [{ ...n, nx, ny, w: 220, sx: nx - 8, sy: ny + 12, ex, ey: sb + 8, align: "left" as const }];
+            return [{ ...n, nx, ny, w: 260, sx: nx - 8, sy: ny + 15, ex, ey: sb + 8, align: "left" as const }];
           }
           if (gutter < 90) return [];
           const ey = top + r.height * 0.42;
           const w = gutter - 14;
           if (n.side === "left") {
             // text starts at the margin's outer edge; the line leaves the end of the first line and runs level into the photo
-            const nx = -gutter, ny = ey - 16;
+            const nx = -gutter, ny = ey - 19;
             return [{ ...n, nx, ny, w, sx: nx + firstLineWidth(el, n.text) + 10, sy: ey - 2, ex: left - 2, ey, align: "left" as const }];
           }
-          const nx = box.width + 14, ny = ey - 16;
+          const nx = box.width + 14, ny = ey - 19;
           return [{ ...n, nx, ny, w, sx: nx - 8, sy: ey - 2, ex: right + 2, ey, align: "left" as const }];
         }),
       );
@@ -110,11 +110,11 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
         <span
           key={i}
           data-fade
-          className="absolute font-hand text-[24px] leading-[1.05] text-ink -rotate-2"
+          className="absolute font-hand text-[30px] leading-[1.05] text-ink -rotate-2"
           style={{ left: n.nx, top: n.ny, width: n.w, textAlign: n.align, ["--d" as string]: 0.1 + i * 0.3 }}
         >
           {n.text.split("\n").map((line, k) => (
-            <span key={k} className={`inline-block whitespace-nowrap ${k === 0 ? "" : "text-[18px] leading-[1.15]"}`} style={{ display: "table" }}>
+            <span key={k} className={`inline-block whitespace-nowrap ${k === 0 ? "" : "text-[24px] leading-[1.15]"}`} style={{ display: "table" }}>
               {line}
             </span>
           ))}
