@@ -1,11 +1,14 @@
 import { loadContent } from "@/lib/content";
 import SectionStarter from "@/app/components/SectionStarter";
+import Toolbox from "./Toolbox";
 
 type SkillsContent = {
   title: string;
   subtitle: string;
   /** A transcript excerpt: course rows with grades, then GPA / honours lines. */
   ledger?: { name: string; subtitle: string; rows: { course: string; grade: string }[]; footer: string[] };
+  /** Two toolboxes side by side: the new kit and the classical kit. */
+  kits?: { name: string; note: string; items: string[] }[];
   groups: { name: string; items: string[]; note?: string }[];
   languagesLabel: string;
   languages: string;
@@ -40,6 +43,13 @@ export default async function SkillsSection({ locale }: { locale: string }) {
                 </tr>
               </tfoot>
             </table>
+          </div>
+        )}
+        {c.kits && (
+          <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-start w-full">
+            {c.kits.map((k, i) => (
+              <Toolbox key={k.name} name={k.name} note={k.note} items={k.items} accent={i === 0 ? "towngas" : "neochain"} />
+            ))}
           </div>
         )}
         {c.groups.map((g) => (

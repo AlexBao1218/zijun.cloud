@@ -1,35 +1,7 @@
 {
   "title": "skills",
   "subtitle": "in order of relevance / proficiency",
-  "groups": [
-    {
-      "name": "Tools",
-      "items": [
-        "Claude Code",
-        "Lark (Feishu) / Spark",
-        "Excel",
-        "Power BI",
-        "Power Automate",
-        "Power Apps",
-        "SAP",
-        "FlexSim",
-        "Figma",
-        "Vercel"
-      ]
-    },
-    {
-      "name": "Technical",
-      "items": [
-        "Python",
-        "SQL",
-        "TypeScript",
-        "React / Next.js",
-        "Tailwind CSS",
-        "Node.js",
-        "Git"
-      ]
-    }
-  ],
+  "groups": [],
   "languagesLabel": "Languages",
   "languages": "English (professional working) · Mandarin (native) · Cantonese (limited working)",
   "ledger": {
@@ -77,5 +49,40 @@
       "Major GPA: 3.73 / 4.3",
       "Dean’s Honours List 2024–2025, 2025–2026"
     ]
-  }
+  },
+  "kits": [
+    {
+      "name": "the new kit",
+      "note": "what changed the maths",
+      "items": [
+        "Claude Code",
+        "Codex",
+        "Hermes",
+        "Feishu (Lark)",
+        "RAG",
+        "agent workflows",
+        "prompt design",
+        "Next.js / React",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "the classical kit",
+      "note": "what everyone expects",
+      "items": [
+        "Excel (VBA macros)",
+        "Power BI",
+        "Power Automate",
+        "Power Apps",
+        "Python (pandas)",
+        "SQL",
+        "HTML",
+        "SAP ERP",
+        "FlexSim",
+        "SolidWorks",
+        "Git",
+        "Figma"
+      ]
+    }
+  ]
 }

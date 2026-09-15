@@ -51,7 +51,11 @@ for (const locale of LOCALES) {
   test(`skills/${locale}`, () => {
     const s = read(`skills/${locale}.json`);
     assert.ok(isStr(s.title) && isStr(s.subtitle) && isStr(s.languagesLabel) && isStr(s.languages));
-    assert.ok(Array.isArray(s.groups) && s.groups.length >= 2, "groups");
+    assert.ok(Array.isArray(s.groups), "groups");
+    if (s.kits) {
+      assert.ok(Array.isArray(s.kits) && s.kits.length === 2, "two kits");
+      for (const k of s.kits) assert.ok(isStr(k.name) && isStr(k.note) && strArray(k.items) && k.items.length >= 3, `kit ${k.name}`);
+    }
     if (s.ledger) {
       assert.ok(isStr(s.ledger.name) && isStr(s.ledger.subtitle) && strArray(s.ledger.footer), "ledger");
       assert.ok(Array.isArray(s.ledger.rows) && s.ledger.rows.every((r) => isStr(r.course) && isStr(r.grade)), "ledger rows");
