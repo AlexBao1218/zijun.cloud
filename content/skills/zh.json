@@ -61,9 +61,10 @@
         "Feishu (Lark)",
         "RAG",
         "agent workflows",
-        "prompt design",
-        "Next.js / React",
-        "TypeScript"
+        "prompt engineering",
+        "context engineering",
+        "harness engineering",
+        "HTML"
       ]
     },
     {
@@ -76,7 +77,6 @@
         "Power Apps",
         "Python (pandas)",
         "SQL",
-        "HTML",
         "SAP ERP",
         "FlexSim",
         "SolidWorks",

@@ -1,35 +1,45 @@
-/** A hand-drawn open toolbox: the handle and latch in SVG, the lid as the tray's rounded top edge, tags inside the tray. */
+/**
+ * A toolbox built from the site's own vocabulary — ink rules, paper, one small accent:
+ * an arched handle, a lid that carries the label plate, two latches over the seam, a deep tray for the tags, and feet.
+ */
 export default function Toolbox({ name, note, items, accent }: { name: string; note: string; items: string[]; accent: string }) {
-  const stroke = { fill: "none", stroke: "var(--ink)", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  const accentBg = { background: `var(--proj-${accent})` } as const;
   return (
-    <figure className="m-0 grid justify-items-center w-full">
+    <figure className="m-0 w-full grid justify-items-center">
       {/* handle */}
-      <svg viewBox="0 0 120 34" width="120" height="34" aria-hidden="true" className="-mb-px">
-        <defs>
-          <filter id={`wob-${accent}`} x="-5%" y="-5%" width="110%" height="110%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="5" result="n" />
-            <feDisplacementMap in="SourceGraphic" in2="n" scale="1.2" xChannelSelector="R" yChannelSelector="G" />
-          </filter>
-        </defs>
-        <g filter={`url(#wob-${accent})`}>
-          <path d="M20 33v-14q0-8 8-8h64q8 0 8 8v14" {...stroke} />
-          <path d="M12 33h96" {...stroke} strokeWidth={2} />
-        </g>
+      <svg viewBox="0 0 120 30" width="120" height="30" aria-hidden="true" className="block -mb-px">
+        <path d="M14 30V16q0-9 9-9h74q9 0 9 9v14" fill="none" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M14 30V22M106 30V22" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" />
       </svg>
-      {/* tray with lid edge */}
-      <div className="relative w-full border border-ink border-t-2 rounded-t-[14px] bg-paper px-5 pt-6 pb-6 grid gap-4">
-        <span aria-hidden="true" className="absolute left-1/2 -translate-x-1/2 -top-[2px] h-2.5 w-6" style={{ background: `var(--proj-${accent})` }} />
-        <figcaption className="flex items-baseline justify-between gap-4 flex-wrap">
+
+      <div className="relative w-full">
+        {/* lid */}
+        <figcaption className="relative flex items-center justify-between gap-4 border border-ink rounded-t-[10px] bg-fill px-5 h-11">
           <span className="font-serif text-2xl leading-none">{name}</span>
-          <span className="text-[11px] tracking-[0.12em] uppercase text-ink/60">{note}</span>
+          <span className="hidden sm:inline text-[11px] tracking-[0.12em] uppercase text-ink/60">{note}</span>
+          {/* hinge marks */}
+          <span aria-hidden="true" className="absolute left-3 -top-px h-[3px] w-4 bg-ink" />
+          <span aria-hidden="true" className="absolute right-3 -top-px h-[3px] w-4 bg-ink" />
         </figcaption>
-        <ul className="flex flex-wrap gap-2.5">
-          {items.map((item) => (
-            <li key={item} className="border border-ink bg-fill px-3 py-2 text-[13px] font-medium">
-              {item}
-            </li>
-          ))}
-        </ul>
+
+        {/* latches over the seam */}
+        <span aria-hidden="true" className="absolute left-[22%] top-[38px] z-10 h-4 w-5 border border-ink" style={accentBg} />
+        <span aria-hidden="true" className="absolute right-[22%] top-[38px] z-10 h-4 w-5 border border-ink" style={accentBg} />
+
+        {/* tray */}
+        <div className="border border-ink border-t-0 bg-paper px-5 pt-7 pb-6">
+          <ul className="flex flex-wrap gap-2.5">
+            {items.map((item) => (
+              <li key={item} className="border border-ink bg-fill px-3 py-2 text-[13px] font-medium">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* feet */}
+        <span aria-hidden="true" className="absolute left-4 -bottom-1 h-1 w-6 bg-ink" />
+        <span aria-hidden="true" className="absolute right-4 -bottom-1 h-1 w-6 bg-ink" />
       </div>
     </figure>
   );
