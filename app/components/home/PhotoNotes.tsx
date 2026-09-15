@@ -22,7 +22,7 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
       const box = el.getBoundingClientRect();
       const gutter = Math.min(220, Math.floor(box.left) - 12); // the page's own side margin
       setPlaced(
-        notes.flatMap((n) => {
+        notes.flatMap((n): Placed[] => {
           const frame = el.querySelector<HTMLElement>(`[data-strip="${n.strip}"][data-photo="${n.photo}"]`);
           if (!frame) return [];
           const r = frame.getBoundingClientRect();
@@ -30,20 +30,21 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
           const sb = (strip ? strip.getBoundingClientRect().bottom : r.bottom) - box.top;
           const left = r.left - box.left, right = r.right - box.left, top = r.top - box.top;
           if (n.side === "below") {
-            // note under the band, a little right of the photo's centre; line goes straight up into the photo's bottom edge
-            // the film border is ink, so the line stops at the band's bottom edge right under the photo
-            const ex = left + r.width * 0.55, ey = sb + 3;
-            const nx = ex + 30, ny = sb + 30;
-            return [{ ...n, nx, ny, w: 220, sx: nx - 4, sy: ny + 6, ex, ey, align: "left" as const }];
+            // note under the band, off to the right; the line runs back almost level to the band edge under the photo
+            const ex = left + r.width * 0.5, ey = sb + 3;
+            const nx = ex + 150, ny = sb + 22;
+            return [{ ...n, nx, ny, w: 220, sx: nx - 6, sy: ny + 10, ex, ey, align: "left" as const }];
           }
           if (gutter < 90) return [];
           const ey = top + r.height * 0.42;
+          const w = Math.round(gutter * 0.58);
           if (n.side === "left") {
-            const nx = -gutter, ny = ey - 58;
-            return [{ ...n, nx, ny, w: gutter - 14, sx: -12, sy: ny + 22, ex: left - 2, ey, align: "left" as const }];
+            // text ends where the line starts; the line runs level into the photo's left edge
+            const nx = -gutter, ny = ey - 16;
+            return [{ ...n, nx, ny, w, sx: nx + w + 6, sy: ey - 4, ex: left - 2, ey, align: "right" as const }];
           }
-          const nx = box.width + 12, ny = ey - 58;
-          return [{ ...n, nx, ny, w: gutter - 14, sx: box.width + 12, sy: ny + 22, ex: right + 2, ey, align: "left" as const }];
+          const nx = box.width + gutter - w, ny = ey - 16;
+          return [{ ...n, nx, ny, w, sx: nx - 6, sy: ey - 4, ex: right + 2, ey, align: "left" as const }];
         }),
       );
     };
@@ -77,7 +78,7 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
               const mx = (n.sx + n.ex) / 2, my = (n.sy + n.ey) / 2;
               const dx = n.ex - n.sx, dy = n.ey - n.sy;
               const len = Math.hypot(dx, dy) || 1;
-              const bow = Math.min(18, len * 0.18);
+              const bow = Math.min(10, len * 0.1);
               const cx = mx - (dy / len) * bow, cy = my + (dx / len) * bow;
               // arrowhead along the incoming tangent (from the control point)
               const a = Math.atan2(n.ey - cy, n.ex - cx);
@@ -96,7 +97,7 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
         <span
           key={i}
           data-fade
-          className="absolute font-hand text-[26px] leading-[1.05] text-ink -rotate-3"
+          className="absolute font-hand text-[24px] leading-[1.05] text-ink -rotate-2"
           style={{ left: n.nx, top: n.ny, width: n.w, textAlign: n.align, ["--d" as string]: 0.1 + i * 0.3 }}
         >
           {n.text.split("\n").map((line, k) => (
