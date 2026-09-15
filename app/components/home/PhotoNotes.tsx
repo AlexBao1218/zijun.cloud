@@ -28,7 +28,7 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
           const r = frame.getBoundingClientRect();
           const strip = frame.closest<HTMLElement>(".bg-ink");
           const sb = (strip ? strip.getBoundingClientRect().bottom : r.bottom) - box.top;
-          const left = r.left - box.left, right = r.right - box.left, top = r.top - box.top, bottom = r.bottom - box.top;
+          const left = r.left - box.left, right = r.right - box.left, top = r.top - box.top;
           if (n.side === "below") {
             // note under the band, a little right of the photo's centre; line goes straight up into the photo's bottom edge
             // the film border is ink, so the line stops at the band's bottom edge right under the photo
