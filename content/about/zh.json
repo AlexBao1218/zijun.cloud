@@ -14,6 +14,10 @@
         {
           "src": "/photos/outdoors-01.jpg",
           "alt": "Alone in a meadow below a snow mountain, arms out"
+        },
+        {
+          "src": "/photos/outdoors-06.jpg",
+          "alt": "A snow peak breaking through cloud"
         }
       ]
     },
@@ -21,12 +25,8 @@
       "name": "people",
       "photos": [
         {
-          "src": "/photos/outdoors-03.jpg",
-          "alt": "Arms crossed in an orange shell jacket on a rocky ridge"
-        },
-        {
-          "src": "/photos/outdoors-04.jpg",
-          "alt": "Two hikers in masks and beanies, selfie against the sky"
+          "src": "/photos/people-01.jpg",
+          "alt": "In a beanie and face cover by a glacial lake, holding a spray can"
         },
         {
           "src": "/photos/outdoors-05.jpg",
@@ -50,8 +50,8 @@
       "name": "home",
       "photos": [
         {
-          "src": "/photos/home-01.jpg",
-          "alt": "A tidy desk with a monitor, keyboard and a small clock"
+          "src": "/photos/home-05.jpg",
+          "alt": "Two friends at a dinner table flashing peace signs, shot on film"
         },
         {
           "src": "/photos/home-02.jpg",
@@ -60,6 +60,10 @@
         {
           "src": "/photos/home-03.jpg",
           "alt": "A grey-and-white cat lying between patterned cushions"
+        },
+        {
+          "src": "/photos/home-01.jpg",
+          "alt": "A tidy desk with a monitor, keyboard and a small clock"
         }
       ]
     }
