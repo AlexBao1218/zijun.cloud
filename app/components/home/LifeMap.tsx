@@ -103,7 +103,8 @@ export default function LifeMap({ title, lede, text, stops }: Props) {
           </div>
         </div>
       </Sketch>
-      <div className="grid gap-5 xl:gap-6">
+      {/* the column is as tall as the map: heading at the top, the paragraph at the bottom, the ledger between */}
+      <div className="grid gap-5 lg:flex lg:flex-col lg:justify-between lg:self-stretch">
         <h3 className="font-serif text-3xl xl:text-4xl leading-none">{title}</h3>
         <p className="font-serif italic text-[20px] md:text-[22px] xl:text-[26px] leading-snug">{lede}</p>
         <ol className="text-[13px] xl:text-[15px] border-t border-ink/20">

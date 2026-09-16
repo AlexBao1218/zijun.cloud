@@ -5,50 +5,10 @@
   "photosIntro": "and the rest of the time:",
   "strips": [
     {
-      "name": "badminton",
-      "title": "badminton",
-      "text": "twice a week, most weeks, since school. the thing i've kept up longest that isn't work — showing up matters more than the score, and it's where i switch off.",
-      "photos": [
-        {
-          "src": "/photos/city-04.jpg",
-          "alt": "Mid-rally on a badminton court"
-        }
-      ]
-    },
-    {
-      "name": "music",
-      "title": "music",
-      "text": "classical guitar since i was a kid. slow, repeated practice with no shortcut — the same patience i bring to a long debugging session.",
-      "photos": [
-        {
-          "src": "/photos/city-05.jpg",
-          "alt": "Playing classical guitar on a sofa"
-        }
-      ]
-    },
-    {
-      "name": "cat",
-      "title": "崽崽 the cat",
-      "text": "zaizai runs the flat. she is the reason the desk stays tidy and the day has a routine — feed, work, play, repeat.",
-      "photos": [
-        {
-          "src": "/photos/home-03.jpg",
-          "alt": "A grey-and-white cat lying between patterned cushions"
-        },
-        {
-          "src": "/photos/home-02.jpg",
-          "alt": "A small living room with a grey sofa and a wooden bench"
-        },
-        {
-          "src": "/photos/home-01.jpg",
-          "alt": "A tidy desk with a monitor, keyboard and a small clock"
-        }
-      ]
-    },
-    {
       "name": "photography",
-      "title": "photography",
-      "text": "a camera comes on every trip — west sichuan's mountains, hong kong at night. it taught me to wait, notice and frame before pressing anything, which is most of product work too.",
+      "title": "photography & travel",
+      "text": "a camera on every trip — west sichuan's passes, hong kong at night. it taught me to wait, look and frame before pressing anything.",
+      "wide": true,
       "photos": [
         {
           "src": "/photos/outdoors-02.jpg",
@@ -59,20 +19,45 @@
           "alt": "In a beanie and face cover by a glacial lake, holding a spray can"
         },
         {
-          "src": "/photos/outdoors-01.jpg",
-          "alt": "Alone in a meadow below a snow mountain, arms out"
-        },
-        {
           "src": "/photos/outdoors-06.jpg",
           "alt": "A snow peak breaking through cloud"
+        }
+      ]
+    },
+    {
+      "name": "badminton",
+      "title": "badminton",
+      "text": "twice a week since school — the habit i've kept longest. showing up matters more than the score.",
+      "photos": [
+        {
+          "src": "/photos/city-04.jpg",
+          "alt": "Mid-rally on a badminton court"
+        }
+      ]
+    },
+    {
+      "name": "guitar",
+      "title": "guitar",
+      "text": "classical, since i was a kid. slow, repeated practice with no shortcut.",
+      "photos": [
+        {
+          "src": "/photos/city-05.jpg",
+          "alt": "Playing classical guitar on a sofa"
+        }
+      ]
+    },
+    {
+      "name": "home",
+      "title": "home",
+      "text": "崽崽 the cat, a tidy desk, and a routine: feed, work, play, repeat.",
+      "photos": [
+        {
+          "src": "/photos/home-03.jpg",
+          "alt": "A grey-and-white cat lying between patterned cushions"
         },
         {
-          "src": "/photos/outdoors-07.jpg",
-          "alt": "A waterfall through pine branches in the rain"
-        },
-        {
-          "src": "/photos/city-01.jpg",
-          "alt": "Checking a shot on the camera with the Hong Kong skyline behind"
+          "src": "/photos/home-01.jpg",
+          "alt": "A tidy desk with a monitor, keyboard and a small clock"
         }
       ]
     }
@@ -112,26 +97,20 @@
         "lat": 22.3
       }
     ],
-    "text": "born in inner mongolia, then home was beijing, chengdu and shanghai in turn; hong kong for university, and i never left. moving that often gave me a habit i'm grateful for: arrive curious, learn the local way of doing things, and find the people worth learning it from. hong kong is where i stopped counting cities. it is home now — and the place i want to keep building things for."
+    "text": "born in inner mongolia; grew up in beijing, chengdu and shanghai; came to hong kong for university and stayed. moving that often taught me to arrive curious and learn the local way first. hong kong is home now."
   },
   "notes": [
     {
-      "strip": 3,
+      "strip": 0,
       "photo": 0,
       "side": "left",
       "text": "格聶\nGe'nyen Massif"
     },
     {
       "strip": 3,
-      "photo": 1,
-      "side": "below",
-      "text": "稻城亞丁\nYading Nature Reserve\n4,551 m"
-    },
-    {
-      "strip": 2,
       "photo": 0,
-      "side": "below",
-      "text": "崽崽 zaizai"
+      "side": "right",
+      "text": "崽崽\nzaizai"
     }
   ]
 }

@@ -1,6 +1,6 @@
 import { loadContent } from "@/lib/content";
 import SectionStarter from "@/app/components/SectionStarter";
-import PhotoRow from "./PhotoRow";
+import PhotoBoard, { type PhotoBlock } from "./PhotoBoard";
 import PhotoNotes, { type PhotoNote } from "./PhotoNotes";
 import LifeMap from "./LifeMap";
 
@@ -9,7 +9,7 @@ type AboutContent = {
   subtitle: string;
   paragraphs: string[];
   photosIntro: string;
-  strips: { name: string; title: string; text: string; photos: { src: string; alt: string }[] }[];
+  strips: PhotoBlock[];
   notes?: PhotoNote[];
   map?: { title: string; lede: string; text: string; stops: { name: string; stage: string; lon: number; lat: number }[] };
 };
@@ -35,28 +35,15 @@ export default async function AboutSection({ locale }: { locale: string }) {
         )}
         <p className="text-[14px] xl:text-[16px] text-ink/70">{c.photosIntro}</p>
         <PhotoNotes notes={notes}>
-          <div className="grid gap-20 md:gap-28">
-            {c.strips.map((st, i) => {
-              const captions = notes.filter((n) => n.strip === i);
-              return (
-                <article key={st.name} className="grid gap-8">
-                  <header className="grid lg:grid-cols-[300px_minmax(0,1fr)] gap-4 lg:gap-16 items-baseline">
-                    <h3 className="font-serif text-3xl xl:text-4xl leading-none">{st.title}</h3>
-                    <p className="max-w-[60ch] text-[14px] xl:text-[16px] leading-relaxed text-ink/80">{st.text}</p>
-                  </header>
-                  <PhotoRow photos={st.photos} strip={i} />
-                  {/* phones have no gutter for the handwritten notes, so the place names go under the strip as captions */}
-                  {captions.length > 0 && (
-                    <ul className="md:hidden grid gap-2 font-hand text-[22px] leading-snug text-ink/80 -rotate-1 origin-left">
-                      {captions.map((n, k) => (
-                        <li key={k}>{n.text.split("\n").join(" · ")}</li>
-                      ))}
-                    </ul>
-                  )}
-                </article>
-              );
-            })}
-          </div>
+          <PhotoBoard blocks={c.strips} />
+          {/* phones have no gutter for the handwritten notes, so the place names go under the board as captions */}
+          {notes.length > 0 && (
+            <ul className="md:hidden mt-4 grid gap-2 font-hand text-[22px] leading-snug text-ink/80 -rotate-1 origin-left">
+              {notes.map((n, k) => (
+                <li key={k}>{n.text.split("\n").join(" · ")}</li>
+              ))}
+            </ul>
+          )}
         </PhotoNotes>
       </div>
     </section>
