@@ -31,9 +31,9 @@ export default function PhotoRow({ photos, strip }: { photos: Photo[]; strip?: n
 
   return (
     <>
-      <div className="bg-ink py-1.5 -mx-6 md:mx-0">
+      <div className="bg-ink py-1.5 -mx-6 md:mx-0 md:w-fit md:max-w-full">
         <div className="sprockets" aria-hidden="true" />
-        <ul className="flex gap-3 overflow-x-auto snap-x snap-mandatory px-3 py-2 [scrollbar-width:thin]">
+        <ul className="flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-pl-3 px-3 py-2 [scrollbar-width:thin]">
           {photos.map((p, i) => (
             <li key={`${p.src}-${i}`} className="shrink-0 snap-start w-fit" data-strip={strip} data-photo={i}>
               {p.src ? (

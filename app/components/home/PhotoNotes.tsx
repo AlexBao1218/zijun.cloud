@@ -15,7 +15,8 @@ function firstLineWidth(host: HTMLElement, text: string) {
   return w;
 }
 
-type Placed = PhotoNote & { nx: number; ny: number; w: number; sx: number; sy: number; ex: number; ey: number; align: "left" | "right" };
+/** A note ready to draw: text anchored at (x, y) from the wrapper's left or right edge, and a line from (sx, sy) to the photo edge at (ex, ey). */
+type Placed = PhotoNote & { x: number; y: number; w?: number; anchor: "left" | "right"; sx: number; sy: number; ex: number; ey: number };
 
 /**
  * Handwritten notes beside the photo strips, the way a person annotates a contact sheet:
@@ -31,6 +32,8 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
     const el = ref.current;
     if (!el) return;
     const measure = () => {
+      // phones have no gutter and no room under the band; AboutSection prints the notes as captions there instead
+      if (!window.matchMedia("(min-width: 768px)").matches) return setPlaced([]);
       const box = el.getBoundingClientRect();
       const gutter = Math.min(220, Math.floor(box.left) - 12); // the page's own side margin
       setPlaced(
@@ -38,25 +41,38 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
           const frame = el.querySelector<HTMLElement>(`[data-strip="${n.strip}"][data-photo="${n.photo}"]`);
           if (!frame) return [];
           const r = frame.getBoundingClientRect();
+          // the strip scrolls sideways: a note only makes sense while its frame is actually in view
+          const scroller = frame.parentElement?.getBoundingClientRect();
+          if (scroller && (r.left < scroller.left - 1 || r.right > scroller.right + 1)) return [];
           const strip = frame.closest<HTMLElement>(".bg-ink");
           const sb = (strip ? strip.getBoundingClientRect().bottom : r.bottom) - box.top;
           const left = r.left - box.left, right = r.right - box.left, top = r.top - box.top;
           if (n.side === "below") {
             // note under the band, off to the right; the line runs back almost level to the band edge under the photo
             const ex = left + r.width * 0.5;
-            const nx = ex + 150, ny = sb + 22;
-            return [{ ...n, nx, ny, w: 260, sx: nx - 8, sy: ny + 15, ex, ey: sb + 8, align: "left" as const }];
+            const x = ex + 150, y = sb + 22;
+            if (x + 260 > box.width) return [];
+            return [{ ...n, x, y, w: 260, anchor: "left" as const, sx: x - 8, sy: y + 15, ex, ey: sb + 8 }];
           }
           if (gutter < 90) return [];
           const ey = top + r.height * 0.42;
-          const w = gutter - 14;
+          const y = ey - 19;
+          const fl = firstLineWidth(el, n.text);
           if (n.side === "left") {
             // text starts at the margin's outer edge; the line leaves the end of the first line and runs level into the photo
-            const nx = -gutter, ny = ey - 19;
-            return [{ ...n, nx, ny, w, sx: nx + firstLineWidth(el, n.text) + 10, sy: ey - 2, ex: left - 2, ey, align: "left" as const }];
+            const x = -gutter;
+            return [{ ...n, x, y, w: gutter - 14, anchor: "left" as const, sx: x + fl + 10, sy: ey - 2, ex: left - 2, ey }];
           }
-          const nx = box.width + 14, ny = ey - 19;
-          return [{ ...n, nx, ny, w, sx: nx - 8, sy: ey - 2, ex: right + 2, ey, align: "left" as const }];
+          if (fl + 24 <= gutter) {
+            // mirror of "left": text ends at the margin's outer edge; the line leaves the start of the first line and runs back into the photo
+            const sx = box.width + gutter - fl - 10, ex = right + 2;
+            if (sx - ex < 24) return [];
+            return [{ ...n, x: -gutter, y, anchor: "right" as const, sx, sy: ey - 2, ex, ey }];
+          }
+          // the margin is too narrow for the first line: sit under the band instead, off to the left of the photo
+          const ex = left + r.width * 0.5, textRight = ex - 150, by = sb + 22;
+          if (textRight < 260) return [];
+          return [{ ...n, x: box.width - textRight, y: by, anchor: "right" as const, sx: textRight + 8, sy: by + 15, ex, ey: sb + 8 }];
         }),
       );
     };
@@ -65,11 +81,15 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
     ro.observe(el);
     el.querySelectorAll<HTMLElement>("[data-strip][data-photo]").forEach((f) => ro.observe(f));
     el.querySelectorAll("img").forEach((img) => img.addEventListener("load", measure, { once: true }));
+    const scrollers = new Set<HTMLElement>();
+    el.querySelectorAll<HTMLElement>("[data-strip][data-photo]").forEach((f) => f.parentElement && scrollers.add(f.parentElement));
+    scrollers.forEach((s) => s.addEventListener("scroll", measure, { passive: true }));
     const io = new IntersectionObserver((es) => es.some((e) => e.isIntersecting) && setVisible(true), { threshold: 0.2 });
     io.observe(el);
     return () => {
       ro.disconnect();
       io.disconnect();
+      scrollers.forEach((s) => s.removeEventListener("scroll", measure));
     };
   }, [notes]);
 
@@ -110,11 +130,12 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
         <span
           key={i}
           data-fade
-          className="absolute font-hand text-[30px] leading-[1.05] text-ink -rotate-2"
-          style={{ left: n.nx, top: n.ny, width: n.w, textAlign: n.align, ["--d" as string]: 0.1 + i * 0.3 }}
+          className={`absolute font-hand text-[30px] leading-[1.05] text-ink ${n.anchor === "right" ? "rotate-2 text-right" : "-rotate-2"}`}
+          style={{ [n.anchor]: n.x, top: n.y, width: n.w, ["--d" as string]: 0.1 + i * 0.3 }}
         >
+          {/* the first line stays whole (the line leaves its end); when the note has a width (gutter, below) the rest wraps to it */}
           {n.text.split("\n").map((line, k) => (
-            <span key={k} className={`inline-block whitespace-nowrap ${k === 0 ? "" : "text-[24px] leading-[1.15]"}`} style={{ display: "table" }}>
+            <span key={k} className={`inline-block ${k === 0 || !n.w ? "whitespace-nowrap" : ""} ${k === 0 ? "" : "text-[24px] leading-[1.15]"} ${n.anchor === "right" ? "ml-auto" : ""}`} style={{ display: "table" }}>
               {line}
             </span>
           ))}

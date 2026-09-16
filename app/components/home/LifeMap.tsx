@@ -1,5 +1,5 @@
 import Sketch from "@/app/components/project/Sketch";
-import { Wobble, mono, stroke } from "@/app/components/project/sketches/common";
+import { Wobble, stroke } from "@/app/components/project/sketches/common";
 import { CHINA_H, CHINA_PATHS, CHINA_W } from "@/lib/china-outline";
 
 type Stop = { name: string; stage: string; lon: number; lat: number };
@@ -50,40 +50,70 @@ export default function LifeMap({ title, lede, text, stops }: Props) {
   const arrivals = lens.reduce<number[]>((acc, l) => [...acc, acc[acc.length - 1] + l], [0]).map((v) => (v / total) * TRAVEL_S);
 
   return (
-    <div className="grid md:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_460px] gap-10 md:gap-14 xl:gap-24 items-center">
+    <div className="grid lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_460px] gap-10 lg:gap-14 xl:gap-24 items-center">
       <Sketch label={`${title}: ${stops.map((s) => `${s.stage} in ${s.name}`).join(", ")}`}>
-        <svg viewBox={`0 0 ${CHINA_W} ${CHINA_H}`} width="100%" style={{ minWidth: 520 }} className="overflow-visible">
-          <defs><Wobble id="wob-map" /></defs>
-          <g filter="url(#wob-map)">
-            {CHINA_PATHS.map((p, i) => (
-              <path key={i} d={p} {...stroke} strokeWidth={1.2} data-draw style={{ ["--d" as string]: i * 0.25, strokeDasharray: 8000, strokeDashoffset: 8000 }} />
-            ))}
-          </g>
-          {/* the route draws itself under the marker */}
-          <path d={d} {...stroke} stroke="var(--pop)" strokeWidth={1.6} className="travel-route" style={{ strokeDasharray: total, strokeDashoffset: total, ["--len" as string]: total, ["--travel" as string]: `${TRAVEL_S}s` }} />
-          {/* pins drop in as the marker arrives */}
-          {stops.map((s, i) => {
-            const [x, y] = pts[i];
-            const right = s.lon > 112;
-            const last = i === stops.length - 1;
-            return (
-              <g key={s.name} className="travel-pin" style={{ ["--at" as string]: `${arrivals[i].toFixed(2)}s`, transformOrigin: `${x}px ${y}px` }}>
-                {last && <circle cx={x} cy={y} r={5} className="travel-pulse" fill="none" stroke="var(--pop)" strokeWidth={1.5} style={{ ["--at" as string]: `${(arrivals[i] + 0.3).toFixed(2)}s`, transformOrigin: `${x}px ${y}px` }} />}
-                <path d={`M${x} ${y} c-6 -7 -7 -9 -7 -13 a7 7 0 0 1 14 0 c0 4 -1 6 -7 13z`} fill={last ? "var(--pop)" : "var(--ink)"} stroke="var(--paper)" strokeWidth={1.5} />
-                <circle cx={x} cy={y - 13} r={2.4} fill="var(--paper)" />
-                <text x={right ? x + 12 : x - 12} y={y + 4} textAnchor={right ? "start" : "end"} style={mono}>{s.name}</text>
-              </g>
-            );
-          })}
-          {/* the traveller */}
-          <g className="travel-marker" style={{ offsetPath: `path("${d}")`, ["--travel" as string]: `${TRAVEL_S}s` }}>
-            <circle r={5.5} fill="var(--paper)" stroke="var(--pop)" strokeWidth={2} />
-            <circle r={2} fill="var(--pop)" />
-          </g>
-        </svg>
+        <div className="relative">
+          <svg viewBox={`0 0 ${CHINA_W} ${CHINA_H}`} width="100%" className="block overflow-visible">
+            <defs><Wobble id="wob-map" /></defs>
+            <g filter="url(#wob-map)">
+              {CHINA_PATHS.map((p, i) => (
+                <path key={i} d={p} {...stroke} strokeWidth={1.2} data-draw style={{ ["--d" as string]: i * 0.25, strokeDasharray: 8000, strokeDashoffset: 8000 }} />
+              ))}
+            </g>
+            {/* the route draws itself under the marker */}
+            <path d={d} {...stroke} stroke="var(--pop)" strokeWidth={1.6} className="travel-route" style={{ strokeDasharray: total, strokeDashoffset: total, ["--len" as string]: total, ["--travel" as string]: `${TRAVEL_S}s` }} />
+            {/* pins drop in as the marker arrives */}
+            {stops.map((s, i) => {
+              const [x, y] = pts[i];
+              const last = i === stops.length - 1;
+              return (
+                <g key={s.name} className="travel-pin" style={{ ["--at" as string]: `${arrivals[i].toFixed(2)}s`, transformOrigin: `${x}px ${y}px` }}>
+                  {last && <circle cx={x} cy={y} r={5} className="travel-pulse" fill="none" stroke="var(--pop)" strokeWidth={1.5} style={{ ["--at" as string]: `${(arrivals[i] + 0.3).toFixed(2)}s`, transformOrigin: `${x}px ${y}px` }} />}
+                  <path d={`M${x} ${y} c-6 -7 -7 -9 -7 -13 a7 7 0 0 1 14 0 c0 4 -1 6 -7 13z`} fill={last ? "var(--pop)" : "var(--ink)"} stroke="var(--paper)" strokeWidth={1.5} />
+                  <circle cx={x} cy={y - 13} r={2.4} fill="var(--paper)" />
+                </g>
+              );
+            })}
+            {/* the traveller */}
+            <g className="travel-marker" style={{ offsetPath: `path("${d}")`, ["--travel" as string]: `${TRAVEL_S}s` }}>
+              <circle r={5.5} fill="var(--paper)" stroke="var(--pop)" strokeWidth={2} />
+              <circle r={2} fill="var(--pop)" />
+            </g>
+          </svg>
+          {/* city labels live in HTML so they keep a readable size while the map scales; each drops in with its pin */}
+          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+            {stops.map((s, i) => {
+              const [x, y] = pts[i];
+              const right = s.lon > 112; // label sits to the right of the pin (west-anchored) or to the left of it
+              const edge = (x + 12) / CHINA_W;
+              return (
+                <div
+                  key={s.name}
+                  className={`travel-pin absolute -mt-[6px] font-mono text-[11px] sm:text-[12px] leading-none ${right ? "text-left" : "text-right"}`}
+                  style={{
+                    top: `${(y / CHINA_H) * 100}%`,
+                    ...(right ? { left: `${edge * 100}%`, maxWidth: `${(1 - edge) * 100}%` } : { right: `${(1 - (x - 12) / CHINA_W) * 100}%` }),
+                    ["--at" as string]: `${arrivals[i].toFixed(2)}s`,
+                  }}
+                >
+                  <span className="block whitespace-nowrap">{s.name}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </Sketch>
-      <div className="grid gap-6">
-        <p className="font-serif italic text-[22px] md:text-[26px] xl:text-[34px] leading-snug">{lede}</p>
+      <div className="grid gap-5 xl:gap-6">
+        <h3 className="font-serif text-3xl xl:text-4xl leading-none">{title}</h3>
+        <p className="font-serif italic text-[20px] md:text-[22px] xl:text-[26px] leading-snug">{lede}</p>
+        <ol className="text-[13px] xl:text-[15px] border-t border-ink/20">
+          {stops.map((s) => (
+            <li key={s.name} className="flex justify-between gap-4 py-2 border-b border-ink/20">
+              <span>{s.name}</span>
+              <span className="text-right text-ink/60">{s.stage}</span>
+            </li>
+          ))}
+        </ol>
         <p className="text-[14px] xl:text-[17px] leading-relaxed">{text}</p>
       </div>
     </div>
