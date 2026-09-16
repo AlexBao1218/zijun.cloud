@@ -20,9 +20,9 @@ const data = await loadContent<MyType>("work", locale);   // lib/content.ts
 | File | Read by |
 |------|---------|
 | `content/home` | `app/components/home/Hero.tsx` (optional `image: { src, alt }` renders in the hero slot; absent → hatch placeholder) |
-| `content/work` | `WorkGrid.tsx` — `groups` (name, note, slugs) + `cards` (`colour` from `lib/projects.ts` PROJECT_COLOURS, optional `brief`); `singles: "row" \| "carousel"` chooses how single-card groups render |
+| `content/work` | `WorkGrid.tsx` — `groups` (name, note, slugs) + `cards` (`colour` from `lib/projects.ts` PROJECT_COLOURS, optional `brief`); `singles: "row" \| "carousel"` chooses how single-card groups render, `singlesHeading` ({ name, note }) titles the carousel; `hint` is the handwritten "click\nto open" note (`WorkHint`, first line short) |
 | `content/skills` | `SkillsSection.tsx` |
-| `content/about` | `AboutSection.tsx` (photos: `src: ""` renders a hatch placeholder) |
+| `content/about` | `AboutSection.tsx` — `map` (title, lede, text, stops with `stage`) → `LifeMap`; `strips[]` are titled photo blocks `{ name, title, text, photos }` (`src: ""` renders a hatch placeholder); `notes[]` `{ strip, photo, side, text }` are the handwritten gutter notes (`PhotoNotes`) |
 | `content/contact` | `ContactSection.tsx` |
 | `content/projects/<slug>` | `app/[locale]/projects/[slug]/page.tsx` — schema in `lib/projects.ts` `ProjectContent` |
 
@@ -32,7 +32,7 @@ Adding a project: create `content/projects/<slug>/{en,zh}.json`, add a card to `
 
 ## Conventions
 
-- Server Components by default; the only client files are `TopBar`, `PhotoRow`, `DemoFrame`
+- Server Components by default; the only client files are `TopBar`, `DemoFrame`, `Sketch`, and in `home/`: `PhotoRow`, `PhotoNotes`, `Showcase`, `WorkHint`
 - Locale: `const { locale } = await params; setRequestLocale(locale);`
 - NEVER hardcode English or Chinese in TSX — content JSON or `messages`
 - NEVER hardcode colours — Tailwind classes from DESIGN.md

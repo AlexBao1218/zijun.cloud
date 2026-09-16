@@ -150,7 +150,7 @@ export default async function ProjectPage({ params }: Props) {
               {s.sketch && (() => {
                 const { Component, label } = SKETCH_COMPONENTS[s.sketch];
                 return (
-                  <div className="xl:col-span-2">
+                  <div className="min-w-0 xl:col-span-2">
                     <Sketch label={label}>
                       <Component />
                     </Sketch>

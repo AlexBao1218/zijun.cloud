@@ -24,7 +24,7 @@ export default function Sketch({ children, label }: { children: React.ReactNode;
   }, []);
 
   return (
-    <div ref={ref} data-visible={visible} role="img" aria-label={label} className="sketch border border-ink bg-paper px-4 py-5 md:px-6 md:py-6 overflow-x-auto">
+    <div ref={ref} data-visible={visible} role="img" aria-label={label} className="sketch border border-ink bg-paper px-4 py-5 md:px-6 md:py-6 overflow-x-auto [scrollbar-width:thin]">
       {children}
     </div>
   );
