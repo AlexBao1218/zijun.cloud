@@ -32,7 +32,7 @@ Scale: name 28/36px; nav links serif 20/26px; section title `text-4xl md:text-5x
 
 - `OffsetBox` — colour block + bordered face offset 16px (the reference's 1em) for cards and header cards, 8px for buttons; hover/focus slides the face onto the block.
 - `SectionStarter` — full-width `border-y` strip, title left, mono subtitle right, carries the anchor id.
-- `TopBar` — fixed, `border-b`, 64/80px tall; serif name left, serif anchor links + resume + boxed locale toggle right. No hamburger; resume hides under 640px.
+- `TopBar` — fixed, `border-b`, 64/80px tall; serif name left, serif anchor links + resume right (no locale toggle — zh routes exist but are not linked). No hamburger; resume hides under 640px.
 - Work card — 352px wide (`max-w-[22rem]`, full width on phones) in a `flex-wrap justify-evenly` row with `gap-x-8 gap-y-16`; rows duration / cover / title / org / kind+role, each `border-b`. The cover is a 16:10 box tinted with the project colour (`TINT_CLASS`, 22 % over paper) holding the screenshot in a slight 3-D tilt (`perspective(700px) rotateY(-16deg) rotateX(4deg)`) that runs off the right and bottom edges; no cover → hatch.
 - Work rows are centred (`justify-center`) with group headings capped to the width of three cards (`ROW_MAX`). Single-card groups render either side by side (`singles: "row"`) or as `Showcase` (`singles: "carousel"`): active card centred at full size, neighbours 0.8× and 45 % opacity 250px to each side, ← → buttons and square dots, a brief panel on the right; arrow keys work.
 - Skill tag — `border border-ink bg-fill px-2.5 py-1.5 text-[12px] font-medium`.

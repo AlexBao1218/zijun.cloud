@@ -1,24 +1,15 @@
 "use client";
 
-import { Link, usePathname, useRouter } from "@/i18n/routing";
-import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 
 export default function TopBar() {
   const t = useTranslations("nav");
-  const pathname = usePathname();
-  const router = useRouter();
-  const locale = useLocale();
-
   const anchors = [
     { hash: "work", label: t("work") },
     { hash: "skills", label: t("skills") },
     { hash: "about", label: t("about") },
   ];
-
-  const toggleLocale = () => {
-    // useRouter().replace only accepts { pathname, query } as an object, so keep the hash via the string form.
-    router.replace(pathname + window.location.hash, { locale: locale === "en" ? "zh" : "en" });
-  };
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-paper border-b border-ink">
@@ -44,14 +35,6 @@ export default function TopBar() {
           >
             {t("resume")}
           </a>
-          <button
-            type="button"
-            onClick={toggleLocale}
-            className="border border-ink px-2.5 py-1.5 text-[12px] hover:bg-fill focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-            aria-label={locale === "en" ? "切换到中文" : "Switch to English"}
-          >
-            {locale === "en" ? "中文" : "EN"}
-          </button>
         </nav>
       </div>
     </header>
