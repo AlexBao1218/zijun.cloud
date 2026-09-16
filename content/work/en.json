@@ -95,5 +95,10 @@
     }
   ],
   "singles": "carousel",
-  "showcaseLabel": "open project →"
+  "singlesHeading": {
+    "name": "other projects",
+    "note": "hackathon · venture · internship · 2025"
+  },
+  "showcaseLabel": "open project →",
+  "hint": "click\nto open"
 }

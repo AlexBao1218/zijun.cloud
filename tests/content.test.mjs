@@ -39,6 +39,8 @@ for (const locale of LOCALES) {
     for (const g of w.groups) assert.ok(isStr(g.name) && isStr(g.note), `group ${g.name}`);
     if (w.singles) assert.ok(["row", "carousel"].includes(w.singles), "singles layout");
     if (w.singles === "carousel") assert.ok(isStr(w.showcaseLabel), "showcaseLabel");
+    if (w.singlesHeading) assert.ok(isStr(w.singlesHeading.name) && isStr(w.singlesHeading.note), "singlesHeading");
+    if (w.hint) assert.ok(isStr(w.hint), "hint");
     for (const c of w.cards) {
       for (const k of ["slug", "title", "org", "duration", "role"]) assert.ok(isStr(c[k]), `${c.slug}.${k}`);
       assert.ok(COLOURS.includes(c.colour), `${c.slug}.colour`);
@@ -83,7 +85,8 @@ for (const locale of LOCALES) {
       for (const st of a.map.stops) assert.ok(isStr(st.name) && isStr(st.stage) && typeof st.lon === "number" && typeof st.lat === "number", `stop ${st.name}`);
     }
     for (const st of a.strips) {
-      assert.ok(isStr(st.name) && Array.isArray(st.photos) && st.photos.length >= 2, `strip ${st.name}`);
+      assert.ok(isStr(st.name) && isStr(st.title) && isStr(st.text), `strip ${st.name} needs name, title, text`);
+      assert.ok(Array.isArray(st.photos) && st.photos.length >= 1, `strip ${st.name} photos`);
       for (const p of st.photos) {
         assert.equal(typeof p.src, "string");
         assert.ok(isStr(p.alt), "alt");

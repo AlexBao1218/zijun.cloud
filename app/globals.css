@@ -118,6 +118,9 @@ body {
   .travel-pulse { display: none; }
 }
 
-/* Showcase card spacing on the stage */
-.showcase-stage { --step: 250px; }
-@media (min-width: 1280px) { .showcase-stage { --step: 300px; } }
+/* Work section: one fluid card width for rows and the showcase; --card is declared here but only used by descendants, so cqw resolves against the section body */
+.work-scope { container-type: inline-size; --card: 22rem; --gap: 2.5rem; --step: calc(var(--card) * 0.55); }
+@media (min-width: 1024px) {
+  .work-scope { --card: min(26rem, calc(100cqw / 3.27)); --gap: calc(var(--card) * 0.135); --step: calc(var(--card) * 0.65); }
+}
+.work-scope { --row: calc(3 * var(--card) + 2 * var(--gap)); }
