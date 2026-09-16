@@ -3,56 +3,6 @@
   "subtitle": "a little bit more about me :)",
   "paragraphs": [],
   "photosIntro": "and the rest of the time:",
-  "strips": [
-    {
-      "name": "photography",
-      "title": "photography & travel",
-      "text": "west sichuan on foot, camera always packed.",
-      "photos": [
-        {
-          "src": "/photos/outdoors-02.jpg",
-          "alt": "A glacial valley under snow-capped peaks"
-        },
-        {
-          "src": "/photos/outdoors-06.jpg",
-          "alt": "A snow peak breaking through cloud"
-        }
-      ]
-    },
-    {
-      "name": "badminton",
-      "title": "badminton",
-      "text": "twice a week since school.",
-      "photos": [
-        {
-          "src": "/photos/city-04.jpg",
-          "alt": "Mid-rally on a badminton court"
-        }
-      ]
-    },
-    {
-      "name": "guitar",
-      "title": "guitar",
-      "text": "classical; slow practice, no shortcuts.",
-      "photos": [
-        {
-          "src": "/photos/city-05.jpg",
-          "alt": "Playing classical guitar on a sofa"
-        }
-      ]
-    },
-    {
-      "name": "home",
-      "title": "home",
-      "text": "a tidy desk and a cat who runs the flat.",
-      "photos": [
-        {
-          "src": "/photos/home-03.jpg",
-          "alt": "A grey-and-white cat lying between patterned cushions"
-        }
-      ]
-    }
-  ],
   "map": {
     "title": "where i've lived",
     "lede": "five cities i've actually lived in — not passed through.",
@@ -90,18 +40,63 @@
     ],
     "text": "born in inner mongolia; grew up in beijing, chengdu and shanghai; came to hong kong for university and stayed. moving that often taught me to arrive curious and learn the local way first. hong kong is home now."
   },
-  "notes": [
+  "notes": [],
+  "prints": [
     {
-      "strip": 0,
-      "photo": 0,
-      "side": "left",
-      "text": "格聶\nGe'nyen Massif"
+      "items": [
+        {
+          "src": "/photos/outdoors-02.jpg",
+          "alt": "A glacial valley under snow-capped peaks",
+          "caption": "格聶 ge'nyen",
+          "size": "lg"
+        },
+        {
+          "src": "/photos/people-01.jpg",
+          "alt": "In a beanie and face cover by a glacial lake, holding a spray can",
+          "caption": "稻城亞丁 yading",
+          "size": "md"
+        },
+        {
+          "src": "/photos/outdoors-06.jpg",
+          "alt": "A snow peak breaking through cloud",
+          "caption": "a peak in cloud",
+          "size": "md"
+        },
+        {
+          "text": "a camera comes on every trip — mostly west sichuan on foot: ge'nyen, yading, passes above 4,500 m. photography taught me to wait, look, and frame before pressing anything. hong kong after dark is the home ground."
+        },
+        {
+          "src": "/photos/city-01.jpg",
+          "alt": "Checking a shot on the camera with the Hong Kong skyline behind",
+          "caption": "hong kong, late",
+          "size": "sm"
+        }
+      ]
     },
     {
-      "strip": 3,
-      "photo": 0,
-      "side": "right",
-      "text": "崽崽\nzaizai"
+      "items": [
+        {
+          "src": "/photos/city-04.jpg",
+          "alt": "Mid-rally on a badminton court",
+          "caption": "badminton",
+          "size": "md"
+        },
+        {
+          "text": "off the trail: badminton twice a week since school — the habit i've kept longest; classical guitar, where slow practice is the only way; and 崽崽 the cat, who runs the flat and keeps the desk tidy."
+        },
+        {
+          "src": "/photos/city-05.jpg",
+          "alt": "Playing classical guitar on a sofa",
+          "caption": "classical guitar",
+          "size": "sm"
+        },
+        {
+          "src": "/photos/home-03.jpg",
+          "alt": "A grey-and-white cat lying between patterned cushions",
+          "caption": "崽崽 zaizai",
+          "size": "md"
+        }
+      ]
     }
   ]
 }

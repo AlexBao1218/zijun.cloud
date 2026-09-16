@@ -73,26 +73,28 @@ for (const locale of LOCALES) {
     const a = read(`about/${locale}.json`);
     assert.ok(isStr(a.title) && isStr(a.subtitle) && isStr(a.photosIntro));
     assert.ok(Array.isArray(a.paragraphs), "paragraphs");
-    assert.ok(Array.isArray(a.strips) && a.strips.length >= 1, "strips");
     if (a.notes) {
       for (const n of a.notes) {
         assert.ok(Number.isInteger(n.strip) && Number.isInteger(n.photo) && ["left", "right", "below"].includes(n.side) && isStr(n.text), "note");
-        assert.ok(a.strips[n.strip]?.photos[n.photo], `note target ${n.strip}/${n.photo} exists`);
+        assert.ok(a.prints[n.strip]?.items.filter((it) => "src" in it)[n.photo], `note target ${n.strip}/${n.photo} exists`);
       }
     }
     if (a.map) {
       assert.ok(isStr(a.map.title) && isStr(a.map.lede) && isStr(a.map.text) && Array.isArray(a.map.stops) && a.map.stops.length >= 2, "map");
       for (const st of a.map.stops) assert.ok(isStr(st.name) && isStr(st.stage) && typeof st.lon === "number" && typeof st.lat === "number", `stop ${st.name}`);
     }
-    for (const st of a.strips) {
-      assert.ok(isStr(st.name) && isStr(st.title) && isStr(st.text), `strip ${st.name} needs name, title, text`);
-      // a block is one portrait frame or landscape frames stacked; more than three no longer fits beside the others
-      assert.ok(Array.isArray(st.photos) && st.photos.length >= 1 && st.photos.length <= 3, `strip ${st.name} photos`);
-      assert.ok(st.text.length <= 48, `strip ${st.name} note is one line`);
-      for (const p of st.photos) {
-        assert.equal(typeof p.src, "string");
-        assert.ok(isStr(p.alt), "alt");
-        if (p.src) assert.ok(fs.existsSync(path.join("public", p.src)), `${p.src} exists`);
+    assert.ok(Array.isArray(a.prints) && a.prints.length >= 1, "prints");
+    for (const [r, row] of a.prints.entries()) {
+      assert.ok(Array.isArray(row.items) && row.items.length >= 2, `prints row ${r}`);
+      for (const it of row.items) {
+        if ("text" in it) {
+          assert.ok(isStr(it.text) && it.text.length <= 260, `prints row ${r} text short`);
+          continue;
+        }
+        assert.equal(typeof it.src, "string");
+        assert.ok(isStr(it.alt) && isStr(it.caption), `${it.src} alt + caption`);
+        assert.ok(["lg", "md", "sm"].includes(it.size), `${it.src} size`);
+        if (it.src) assert.ok(fs.existsSync(path.join("public", it.src)), `${it.src} exists`);
       }
     }
   });

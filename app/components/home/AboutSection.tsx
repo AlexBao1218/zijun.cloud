@@ -1,6 +1,6 @@
 import { loadContent } from "@/lib/content";
 import SectionStarter from "@/app/components/SectionStarter";
-import PhotoBoard, { type PhotoBlock } from "./PhotoBoard";
+import Prints, { type PrintRow } from "./Prints";
 import PhotoNotes, { type PhotoNote } from "./PhotoNotes";
 import LifeMap from "./LifeMap";
 
@@ -9,7 +9,7 @@ type AboutContent = {
   subtitle: string;
   paragraphs: string[];
   photosIntro: string;
-  strips: PhotoBlock[];
+  prints: PrintRow[];
   notes?: PhotoNote[];
   map?: { title: string; lede: string; text: string; stops: { name: string; stage: string; lon: number; lat: number }[] };
 };
@@ -33,10 +33,10 @@ export default async function AboutSection({ locale }: { locale: string }) {
             <LifeMap title={c.map.title} lede={c.map.lede} text={c.map.text} stops={c.map.stops} />
           </div>
         )}
-        <p className="w-full lg:max-w-[1180px] lg:mx-auto text-[14px] xl:text-[16px] text-ink/70">{c.photosIntro}</p>
+        <p className="text-[14px] xl:text-[16px] text-ink/70">{c.photosIntro}</p>
         <PhotoNotes notes={notes}>
-          <PhotoBoard blocks={c.strips} />
-          {/* phones have no gutter for the handwritten notes, so the place names go under the board as captions */}
+          <Prints rows={c.prints} />
+          {/* phones have no gutter for the handwritten notes, so the place names go under the prints as captions */}
           {notes.length > 0 && (
             <ul className="md:hidden mt-4 grid gap-2 font-hand text-[22px] leading-snug text-ink/80 -rotate-1 origin-left">
               {notes.map((n, k) => (
