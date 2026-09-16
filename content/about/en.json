@@ -7,16 +7,11 @@
     {
       "name": "photography",
       "title": "photography & travel",
-      "text": "a camera on every trip — west sichuan's passes, hong kong at night. it taught me to wait, look and frame before pressing anything.",
-      "wide": true,
+      "text": "west sichuan on foot, camera always packed.",
       "photos": [
         {
           "src": "/photos/outdoors-02.jpg",
           "alt": "A glacial valley under snow-capped peaks"
-        },
-        {
-          "src": "/photos/people-01.jpg",
-          "alt": "In a beanie and face cover by a glacial lake, holding a spray can"
         },
         {
           "src": "/photos/outdoors-06.jpg",
@@ -27,7 +22,7 @@
     {
       "name": "badminton",
       "title": "badminton",
-      "text": "twice a week since school — the habit i've kept longest. showing up matters more than the score.",
+      "text": "twice a week since school.",
       "photos": [
         {
           "src": "/photos/city-04.jpg",
@@ -38,7 +33,7 @@
     {
       "name": "guitar",
       "title": "guitar",
-      "text": "classical, since i was a kid. slow, repeated practice with no shortcut.",
+      "text": "classical; slow practice, no shortcuts.",
       "photos": [
         {
           "src": "/photos/city-05.jpg",
@@ -49,15 +44,11 @@
     {
       "name": "home",
       "title": "home",
-      "text": "崽崽 the cat, a tidy desk, and a routine: feed, work, play, repeat.",
+      "text": "a tidy desk and a cat who runs the flat.",
       "photos": [
         {
           "src": "/photos/home-03.jpg",
           "alt": "A grey-and-white cat lying between patterned cushions"
-        },
-        {
-          "src": "/photos/home-01.jpg",
-          "alt": "A tidy desk with a monitor, keyboard and a small clock"
         }
       ]
     }

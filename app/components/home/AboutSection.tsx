@@ -33,7 +33,7 @@ export default async function AboutSection({ locale }: { locale: string }) {
             <LifeMap title={c.map.title} lede={c.map.lede} text={c.map.text} stops={c.map.stops} />
           </div>
         )}
-        <p className="text-[14px] xl:text-[16px] text-ink/70">{c.photosIntro}</p>
+        <p className="w-full lg:max-w-[1180px] lg:mx-auto text-[14px] xl:text-[16px] text-ink/70">{c.photosIntro}</p>
         <PhotoNotes notes={notes}>
           <PhotoBoard blocks={c.strips} />
           {/* phones have no gutter for the handwritten notes, so the place names go under the board as captions */}

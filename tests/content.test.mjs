@@ -86,8 +86,9 @@ for (const locale of LOCALES) {
     }
     for (const st of a.strips) {
       assert.ok(isStr(st.name) && isStr(st.title) && isStr(st.text), `strip ${st.name} needs name, title, text`);
-      // the board tiles exactly: a wide block is one big frame over two small ones, a narrow block is one portrait or a square over a wide frame
-      assert.ok(Array.isArray(st.photos) && (st.wide ? st.photos.length === 3 : st.photos.length >= 1 && st.photos.length <= 2), `strip ${st.name} photos`);
+      // a block is one portrait frame or landscape frames stacked; more than three no longer fits beside the others
+      assert.ok(Array.isArray(st.photos) && st.photos.length >= 1 && st.photos.length <= 3, `strip ${st.name} photos`);
+      assert.ok(st.text.length <= 48, `strip ${st.name} note is one line`);
       for (const p of st.photos) {
         assert.equal(typeof p.src, "string");
         assert.ok(isStr(p.alt), "alt");

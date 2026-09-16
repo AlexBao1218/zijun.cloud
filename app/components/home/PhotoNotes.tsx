@@ -41,7 +41,7 @@ export default function PhotoNotes({ notes, children }: { notes: PhotoNote[]; ch
           const frame = el.querySelector<HTMLElement>(`[data-strip="${n.strip}"][data-photo="${n.photo}"]`);
           if (!frame) return [];
           const r = frame.getBoundingClientRect();
-          if (r.width === 0) return []; // the board renders a hidden twin for the other breakpoint
+          if (r.width === 0) return []; // not laid out at this breakpoint
           // the strip scrolls sideways: a note only makes sense while its frame is actually in view
           const scroller = frame.parentElement?.getBoundingClientRect();
           if (scroller && (r.left < scroller.left - 1 || r.right > scroller.right + 1)) return [];
