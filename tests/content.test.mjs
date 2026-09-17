@@ -32,7 +32,7 @@ for (const locale of LOCALES) {
   test(`work/${locale}`, () => {
     const w = read(`work/${locale}.json`);
     assert.ok(isStr(w.title) && isStr(w.subtitle));
-    assert.ok(Array.isArray(w.cards) && w.cards.length === 6, "six cards");
+    assert.ok(Array.isArray(w.cards) && w.cards.length === 7, "seven cards");
     assert.ok(Array.isArray(w.groups) && w.groups.length >= 1, "groups");
     const grouped = w.groups.flatMap((g) => g.slugs);
     assert.deepEqual([...grouped].sort(), w.cards.map((c) => c.slug).sort(), "every card in exactly one group");

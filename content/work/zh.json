@@ -23,6 +23,16 @@
       "brief": "Look up a plate, request a change, approve it — the three things behind a parking change, in one place instead of an email, folders and a spreadsheet."
     },
     {
+      "slug": "fleet-dashboard",
+      "title": "Fleet Dashboard",
+      "org": "Towngas",
+      "duration": "Jun – Dec 2026",
+      "role": "Upload · Check · Chart",
+      "colour": "towngas",
+      "cover": "/projects/fleet-dashboard/cover.png",
+      "brief": "Six monthly spreadsheets in, three dashboards out — every row keyed, every upload logged, so a wrong number traces back to a file."
+    },
+    {
       "slug": "meeting-minutes",
       "title": "Meeting Minutes",
       "org": "Towngas",
@@ -69,6 +79,7 @@
       "slugs": [
         "insurance-program",
         "vehicle-parking",
+        "fleet-dashboard",
         "meeting-minutes"
       ]
     },

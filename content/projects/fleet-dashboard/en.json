@@ -1,0 +1,112 @@
+{
+  "title": "Fleet Dashboard",
+  "org": "Towngas · Transport team",
+  "duration": "Jun – Dec 2026",
+  "role": "Industrial trainee",
+  "colour": "towngas",
+  "summary": "Three Power BI reports were rebuilt by hand every month from supplier spreadsheets. The app takes the spreadsheets in, checks them, and draws the same three dashboards on live data.",
+  "demo": {
+    "mode": "embed",
+    "url": "https://dashboard-demo.zijun.cloud",
+    "height": 900,
+    "poster": "/projects/fleet-dashboard/cover.png",
+    "width": 1280
+  },
+  "links": [
+    {
+      "label": "open live demo ↗",
+      "url": "https://dashboard-demo.zijun.cloud"
+    },
+    {
+      "label": "source on github ↗",
+      "url": "https://github.com/AlexBao1218/fleet-dashboard-demo"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Timeline",
+      "value": "Jun – Dec 2026"
+    },
+    {
+      "label": "Role",
+      "value": "Data model, parsers, dashboards, front end, back end"
+    },
+    {
+      "label": "Scope",
+      "value": "Six monthly sources · three dashboards · one upload log"
+    },
+    {
+      "label": "Stack",
+      "value": "Feishu Spark · React · ECharts · NestJS · PostgreSQL"
+    }
+  ],
+  "guide": {
+    "heading": "how to try it",
+    "steps": [
+      {
+        "label": "Filter",
+        "hint": "change year, month or vehicle class on any dashboard"
+      },
+      {
+        "label": "Load data",
+        "hint": "Data Management → Upload; uploads are off, the rest works"
+      },
+      {
+        "label": "Trace",
+        "hint": "History shows what each file added, updated, rejected"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "heading": "The problem",
+      "paragraphs": [
+        "Fuel, maintenance and accidents were reported in three Power BI dashboards that were not connected to anything. Each month the fuel-card file, the trip logbook, the workshop's exports and the accident register were downloaded, cleaned in Excel and pasted in by hand. A wrong number was found when a chart looked odd, and nobody could say which file had produced it."
+      ],
+      "image": {
+        "src": "/projects/fleet-dashboard/cover.png",
+        "alt": "Fuel Consumption dashboard: fleet pie, cost by vehicle type, monthly litres and kWh, nine figure cards"
+      }
+    },
+    {
+      "heading": "Every row keyed, every upload logged",
+      "paragraphs": [
+        "Each source has its own parser and a key — supplier and document number, order number, plate and month. A corrected file overwrites; it never duplicates. Every upload records rows read, added, updated and rejected, with the parser's warnings, so a bad month traces back to a file."
+      ],
+      "image": {
+        "src": "/projects/fleet-dashboard/data-management.png",
+        "alt": "Data Management history: one row per upload with counts and warnings"
+      }
+    },
+    {
+      "heading": "Reject, don't guess",
+      "paragraphs": [
+        "A fuel product that is not in the product map is rejected and counted. A plate that is not in the fleet list still counts but is charted as (Unmatched). Efficiency divides kilometres by litres only over the months where both exist, and the card says when that is fewer months than the rest."
+      ]
+    },
+    {
+      "heading": "The charts the team already knew",
+      "paragraphs": [
+        "The three dashboards reproduce the Power BI layouts with ECharts: fixed colours per fuel and vehicle type, small multiples on a shared axis, figure cards abbreviated to K and M with the exact value on hover."
+      ],
+      "image": {
+        "src": "/projects/fleet-dashboard/maintenance.png",
+        "alt": "Maintenance dashboard: availability line, orders by depot, third-party cost, stacked cost bars"
+      }
+    },
+    {
+      "heading": "What the public demo withholds",
+      "paragraphs": [
+        "The employer is not named. Every figure is generated from a fixed seed; suppliers, depots and vendors are lettered placeholders; file upload and sign-in say they are unavailable rather than pretending."
+      ]
+    }
+  ],
+  "tags": [
+    "Feishu Spark",
+    "React",
+    "ECharts",
+    "NestJS",
+    "PostgreSQL",
+    "Data pipeline"
+  ]
+}
